@@ -10,3 +10,4 @@ Environment: emulator-5556, API 35, Pixel launcher, 1080x2400, en-US. The adapte
 - Accessibility checks (ATF) run in every E2E test. Fix touch targets in the app (heightIn/sizeIn ≥ 56dp floors survive Material3 insets). Never exclude a check class.
 - Failure triage: test bug (fix the test), environment limit (prove it with evidence), APP bug (keep the test red and fix the app minimally). Never weaken or skip an assertion to get green. Production code must not gain diagnostic-only logging.
 - Commit messages describe THIS app's change. Commit a checkpoint whenever a class turns green.
+- Compose: click with semantic actions (`performSemanticsAction(SemanticsActions.OnClick)` on the node that has the click action), not coordinate taps, inside sheets/dialogs that animate or sit under the IME. Never reflect into Compose internals.
