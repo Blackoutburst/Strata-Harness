@@ -1,0 +1,1541 @@
+{
+  "started_at": "2026-10-23T10:09:11.201525+00:00",
+  "real_inference_requests": 0,
+  "real_board_calls": 0,
+  "rtk_agent": "harness-fixture",
+  "api_version": "v1",
+  "rtk_plugin_sha256": "356164874868aa58f26310fa3cb337469a83ff756d560598815fb23a09d1f61d",
+  "rtk_hook": {
+    "command": "rtk ls"
+  },
+  "stage": "creating_main_session",
+  "main_session": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+  "first_admission": {
+    "id": "msg_3165a4f8114363e58acd57fe9a863a41",
+    "http_accepted": true,
+    "applied": false
+  },
+  "ping_admission": {
+    "id": "msg_df674fb12cc8604a1535705ab6bb422d",
+    "http_accepted": true,
+    "applied": false
+  },
+  "main_requests_before_tool_release": 1,
+  "main_history": [
+    {
+      "info": {
+        "id": "msg_3165a4f8114363e58acd57fe9a863a41",
+        "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+        "role": "user",
+        "time": {
+          "created": 1792750160802
+        },
+        "summary": {
+          "diffs": []
+        },
+        "agent": "harness-fixture",
+        "model": {
+          "providerID": "fixture",
+          "modelID": "fixture"
+        }
+      },
+      "parts": [
+        {
+          "id": "prt_1683c8ba7001Wam3Dqx1fr811m",
+          "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+          "messageID": "msg_3165a4f8114363e58acd57fe9a863a41",
+          "type": "text",
+          "text": "HARNESS_MAIN: run the owned fixture tool, then inspect ls and acknowledge."
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1683c8d8f0011Yil9nxGn8YUdM",
+        "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+        "role": "assistant",
+        "time": {
+          "created": 1792750161295,
+          "completed": 1792750162221
+        },
+        "parentID": "msg_3165a4f8114363e58acd57fe9a863a41",
+        "modelID": "fixture",
+        "providerID": "fixture",
+        "mode": "harness-fixture",
+        "agent": "harness-fixture",
+        "path": {
+          "cwd": "/tmp/strata-opencode-api-431bzgf4/workspace",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 20,
+          "input": 10,
+          "output": 10,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1683c8eae0014DDIEiRsROKq6o",
+          "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+          "messageID": "msg_1683c8d8f0011Yil9nxGn8YUdM",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1683c8eb00010FZW2bKFu2rRfe",
+          "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+          "messageID": "msg_1683c8d8f0011Yil9nxGn8YUdM",
+          "type": "tool",
+          "callID": "call_fixture_1",
+          "tool": "bash",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "python3 tool_fixture.py",
+              "description": "Run owned harness fixture",
+              "timeout": 20000
+            },
+            "output": "fixture tool completed\n",
+            "title": "python3 tool_fixture.py",
+            "metadata": {
+              "output": "fixture tool completed\n",
+              "exit": 0,
+              "truncated": false
+            },
+            "time": {
+              "start": 1792750161591,
+              "end": 1792750162210
+            }
+          }
+        },
+        {
+          "id": "prt_1683c9128001ccaM4sPXVaavEu",
+          "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+          "messageID": "msg_1683c8d8f0011Yil9nxGn8YUdM",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 20,
+            "input": 10,
+            "output": 10,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_df674fb12cc8604a1535705ab6bb422d",
+        "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+        "role": "user",
+        "time": {
+          "created": 1792750161862
+        },
+        "summary": {
+          "diffs": []
+        },
+        "agent": "harness-fixture",
+        "model": {
+          "providerID": "fixture",
+          "modelID": "fixture"
+        }
+      },
+      "parts": [
+        {
+          "id": "prt_1683c8fc7001wkh1b9hwPx3Xwt",
+          "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+          "messageID": "msg_df674fb12cc8604a1535705ab6bb422d",
+          "type": "text",
+          "text": "HARNESS_PING: finish the current owned tool, then ls and HARNESS_ACK."
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1683c9130001PqQ4WyiAb0pfes",
+        "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+        "role": "assistant",
+        "time": {
+          "created": 1792750162224,
+          "completed": 1792750162377
+        },
+        "parentID": "msg_df674fb12cc8604a1535705ab6bb422d",
+        "modelID": "fixture",
+        "providerID": "fixture",
+        "mode": "harness-fixture",
+        "agent": "harness-fixture",
+        "path": {
+          "cwd": "/tmp/strata-opencode-api-431bzgf4/workspace",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 20,
+          "input": 10,
+          "output": 10,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1683c9151001Z8mboDpSFUeBIn",
+          "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+          "messageID": "msg_1683c9130001PqQ4WyiAb0pfes",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1683c915200143ZWZJedk9iIFV",
+          "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+          "messageID": "msg_1683c9130001PqQ4WyiAb0pfes",
+          "type": "tool",
+          "callID": "call_fixture_2",
+          "tool": "bash",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "rtk ls",
+              "description": "Run owned harness fixture",
+              "timeout": 20000
+            },
+            "output": "fail_fixture.py  59B\nfinished  31B\nmain_pid  6B\nrelease  25B\nstarted  13B\ntool_fixture.py  391B\ntool_stop_fixture.py  222B\n",
+            "title": "rtk ls",
+            "metadata": {
+              "output": "fail_fixture.py  59B\nfinished  31B\nmain_pid  6B\nrelease  25B\nstarted  13B\ntool_fixture.py  391B\ntool_stop_fixture.py  222B\n",
+              "exit": 0,
+              "truncated": false
+            },
+            "time": {
+              "start": 1792750162263,
+              "end": 1792750162359
+            }
+          }
+        },
+        {
+          "id": "prt_1683c91bf001B44KnoK7HmWjZN",
+          "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+          "messageID": "msg_1683c9130001PqQ4WyiAb0pfes",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 20,
+            "input": 10,
+            "output": 10,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1683c91cd001Kg2Gcd3WnOJ0Wb",
+        "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+        "role": "assistant",
+        "time": {
+          "created": 1792750162381,
+          "completed": 1792750162409
+        },
+        "parentID": "msg_df674fb12cc8604a1535705ab6bb422d",
+        "modelID": "fixture",
+        "providerID": "fixture",
+        "mode": "harness-fixture",
+        "agent": "harness-fixture",
+        "path": {
+          "cwd": "/tmp/strata-opencode-api-431bzgf4/workspace",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 20,
+          "input": 10,
+          "output": 10,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "stop"
+      },
+      "parts": [
+        {
+          "id": "prt_1683c91de001SV0CNFDEqNAdsj",
+          "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+          "messageID": "msg_1683c91cd001Kg2Gcd3WnOJ0Wb",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1683c91e10011p6Z10e77QeZUm",
+          "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+          "messageID": "msg_1683c91cd001Kg2Gcd3WnOJ0Wb",
+          "type": "text",
+          "text": "HARNESS_ACK",
+          "time": {
+            "start": 1792750162401,
+            "end": 1792750162404
+          }
+        },
+        {
+          "id": "prt_1683c91e6001vzxUuNIJ4zSe28",
+          "sessionID": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+          "messageID": "msg_1683c91cd001Kg2Gcd3WnOJ0Wb",
+          "type": "step-finish",
+          "reason": "stop",
+          "cost": 0,
+          "tokens": {
+            "total": 20,
+            "input": 10,
+            "output": 10,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "main_model_requests": 3,
+  "main_tool_finished": true,
+  "rtk_in_engine_history": true,
+  "ping_seen_by_model": true,
+  "model_waited_for_tool": true,
+  "stop_session": "ses_e97c36dffffeTlfaOgOHfSD9cR",
+  "stop_admission": {
+    "id": "msg_d26f671bfdaf339817863dd56b5ec5db",
+    "http_accepted": true,
+    "applied": false
+  },
+  "queued_admission": {
+    "id": "msg_2c3f6ff8e5a267a2a7e4460422f317a8",
+    "http_accepted": true,
+    "applied": false
+  },
+  "stop_model_requests_after_interrupt": 1,
+  "stop_tool_finished": false,
+  "stop_tool_process_exited": true,
+  "stop_history": [
+    {
+      "info": {
+        "id": "msg_d26f671bfdaf339817863dd56b5ec5db",
+        "sessionID": "ses_e97c36dffffeTlfaOgOHfSD9cR",
+        "role": "user",
+        "time": {
+          "created": 1792750162443
+        },
+        "summary": {
+          "diffs": []
+        },
+        "agent": "harness-fixture",
+        "model": {
+          "providerID": "fixture",
+          "modelID": "fixture"
+        }
+      },
+      "parts": [
+        {
+          "id": "prt_1683c920d0018JrrE5ilL962a9",
+          "sessionID": "ses_e97c36dffffeTlfaOgOHfSD9cR",
+          "messageID": "msg_d26f671bfdaf339817863dd56b5ec5db",
+          "type": "text",
+          "text": "HARNESS_STOP: run the owned stop fixture."
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1683c92110011fSoHlf3D9P79a",
+        "sessionID": "ses_e97c36dffffeTlfaOgOHfSD9cR",
+        "role": "assistant",
+        "time": {
+          "created": 1792750162449,
+          "completed": 1792750162594
+        },
+        "error": {
+          "name": "MessageAbortedError",
+          "data": {
+            "message": "Aborted"
+          }
+        },
+        "parentID": "msg_d26f671bfdaf339817863dd56b5ec5db",
+        "modelID": "fixture",
+        "providerID": "fixture",
+        "mode": "harness-fixture",
+        "agent": "harness-fixture",
+        "path": {
+          "cwd": "/tmp/strata-opencode-api-431bzgf4/workspace",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "input": 0,
+          "output": 0,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        }
+      },
+      "parts": [
+        {
+          "id": "prt_1683c9223001283owDH2E5y8h4",
+          "sessionID": "ses_e97c36dffffeTlfaOgOHfSD9cR",
+          "messageID": "msg_1683c92110011fSoHlf3D9P79a",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1683c9225001k7XcXBfBBEexnx",
+          "sessionID": "ses_e97c36dffffeTlfaOgOHfSD9cR",
+          "messageID": "msg_1683c92110011fSoHlf3D9P79a",
+          "type": "tool",
+          "callID": "call_fixture_4",
+          "tool": "bash",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "python3 tool_stop_fixture.py",
+              "description": "Run owned harness fixture",
+              "timeout": 20000
+            },
+            "output": "(no output)\n\n<shell_metadata>\nUser aborted the command\n</shell_metadata>",
+            "title": "python3 tool_stop_fixture.py",
+            "metadata": {
+              "output": "(no output)\n\n<shell_metadata>\nUser aborted the command\n</shell_metadata>",
+              "exit": null,
+              "truncated": false
+            },
+            "time": {
+              "start": 1792750162473,
+              "end": 1792750162593
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_2c3f6ff8e5a267a2a7e4460422f317a8",
+        "sessionID": "ses_e97c36dffffeTlfaOgOHfSD9cR",
+        "role": "user",
+        "time": {
+          "created": 1792750162573
+        },
+        "agent": "harness-fixture",
+        "model": {
+          "providerID": "fixture",
+          "modelID": "fixture"
+        }
+      },
+      "parts": [
+        {
+          "id": "prt_1683c928e00197YlJP0X12YOdU",
+          "sessionID": "ses_e97c36dffffeTlfaOgOHfSD9cR",
+          "messageID": "msg_2c3f6ff8e5a267a2a7e4460422f317a8",
+          "type": "text",
+          "text": "HARNESS_STOP pending guidance; must stay dormant after interrupt."
+        }
+      ]
+    }
+  ],
+  "interrupt_stayed_stopped": true,
+  "post_interrupt_observation_seconds": 0.5,
+  "failure_session": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+  "failure_history": [
+    {
+      "info": {
+        "id": "msg_7a837c47a40f71e0de32c13b23e29c6a",
+        "sessionID": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+        "role": "user",
+        "time": {
+          "created": 1792750163165
+        },
+        "summary": {
+          "diffs": []
+        },
+        "agent": "harness-fixture",
+        "model": {
+          "providerID": "fixture",
+          "modelID": "fixture"
+        }
+      },
+      "parts": [
+        {
+          "id": "prt_1683c94e2001rEfdop7X67CVtm",
+          "sessionID": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+          "messageID": "msg_7a837c47a40f71e0de32c13b23e29c6a",
+          "type": "text",
+          "text": "HARNESS_FAIL: run owned failure fixture and report the failure."
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1683c94ee001FTRzxTWk53GI1B",
+        "sessionID": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+        "role": "assistant",
+        "time": {
+          "created": 1792750163182,
+          "completed": 1792750163256
+        },
+        "parentID": "msg_7a837c47a40f71e0de32c13b23e29c6a",
+        "modelID": "fixture",
+        "providerID": "fixture",
+        "mode": "harness-fixture",
+        "agent": "harness-fixture",
+        "path": {
+          "cwd": "/tmp/strata-opencode-api-431bzgf4/workspace",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 20,
+          "input": 10,
+          "output": 10,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "tool-calls"
+      },
+      "parts": [
+        {
+          "id": "prt_1683c950e0015jMI618G3r0Bvb",
+          "sessionID": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+          "messageID": "msg_1683c94ee001FTRzxTWk53GI1B",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1683c950f001ucqR0j19piS2L4",
+          "sessionID": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+          "messageID": "msg_1683c94ee001FTRzxTWk53GI1B",
+          "type": "tool",
+          "callID": "call_fixture_5",
+          "tool": "bash",
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "python3 fail_fixture.py",
+              "description": "Run owned harness fixture",
+              "timeout": 20000
+            },
+            "output": "BUILD FAILED (owned fixture)\n",
+            "title": "python3 fail_fixture.py",
+            "metadata": {
+              "output": "BUILD FAILED (owned fixture)\n",
+              "exit": 37,
+              "truncated": false
+            },
+            "time": {
+              "start": 1792750163219,
+              "end": 1792750163252
+            }
+          }
+        },
+        {
+          "id": "prt_1683c95350013zZB0cWsEwgCH4",
+          "sessionID": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+          "messageID": "msg_1683c94ee001FTRzxTWk53GI1B",
+          "type": "step-finish",
+          "reason": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "total": 20,
+            "input": 10,
+            "output": 10,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1683c953a0010fgbj8xyPqRWli",
+        "sessionID": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+        "role": "assistant",
+        "time": {
+          "created": 1792750163258,
+          "completed": 1792750163287
+        },
+        "parentID": "msg_7a837c47a40f71e0de32c13b23e29c6a",
+        "modelID": "fixture",
+        "providerID": "fixture",
+        "mode": "harness-fixture",
+        "agent": "harness-fixture",
+        "path": {
+          "cwd": "/tmp/strata-opencode-api-431bzgf4/workspace",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 20,
+          "input": 10,
+          "output": 10,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "stop"
+      },
+      "parts": [
+        {
+          "id": "prt_1683c954e001vUWOn8PxzeGG77",
+          "sessionID": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+          "messageID": "msg_1683c953a0010fgbj8xyPqRWli",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1683c9550001Z3ZeRj4rCATv6m",
+          "sessionID": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+          "messageID": "msg_1683c953a0010fgbj8xyPqRWli",
+          "type": "text",
+          "text": "FAILURE_REPORTED",
+          "time": {
+            "start": 1792750163280,
+            "end": 1792750163281
+          }
+        },
+        {
+          "id": "prt_1683c9553001hLd78zLSiePS3a",
+          "sessionID": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+          "messageID": "msg_1683c953a0010fgbj8xyPqRWli",
+          "type": "step-finish",
+          "reason": "stop",
+          "cost": 0,
+          "tokens": {
+            "total": 20,
+            "input": 10,
+            "output": 10,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "failed_exit_preserved": true,
+  "client_exit37_receipt": true,
+  "client_admission": {
+    "engine_session": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+    "request_id": "msg_8b02b579393e3cda2ad64fcbb320bd94",
+    "observation": "http_204"
+  },
+  "client_acknowledgement": {
+    "acknowledged": true,
+    "applied": false
+  },
+  "client_reconciled": {
+    "observed": true,
+    "acknowledged": true,
+    "applied": false
+  },
+  "client_receipts": [
+    {
+      "phase": "submitted",
+      "at": "2026-10-23T10:09:23.430421+00:00",
+      "evidence": {
+        "engine_session": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+        "observation": "http_204",
+        "request_id": "msg_8b02b579393e3cda2ad64fcbb320bd94"
+      }
+    },
+    {
+      "phase": "acknowledged",
+      "at": "2026-10-23T10:09:23.520743+00:00",
+      "evidence": {
+        "assistant_id": "msg_1683c95e8001QnP4vO9titdVn6",
+        "engine_session": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+        "observation": "assistant_marker",
+        "request_id": "msg_8b02b579393e3cda2ad64fcbb320bd94"
+      }
+    }
+  ],
+  "client_history": [
+    {
+      "info": {
+        "id": "msg_8b02b579393e3cda2ad64fcbb320bd94",
+        "sessionID": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+        "role": "user",
+        "time": {
+          "created": 1792750163421
+        },
+        "summary": {
+          "diffs": []
+        },
+        "agent": "harness-fixture",
+        "model": {
+          "providerID": "fixture",
+          "modelID": "fixture"
+        }
+      },
+      "parts": [
+        {
+          "id": "prt_1683c95e0001uMACf1pnMdiz6B",
+          "sessionID": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+          "messageID": "msg_8b02b579393e3cda2ad64fcbb320bd94",
+          "type": "text",
+          "text": "Manager guidance within the current authorized task:\nHARNESS_CLIENT: retain the selected task scope and acknowledge this guidance.\n\nAcknowledge receipt with this exact line: GUIDANCE_ACK msg_8b02b579393e3cda2ad64fcbb320bd94\nThis acknowledgement records receipt, not verified application."
+        }
+      ]
+    },
+    {
+      "info": {
+        "id": "msg_1683c95e8001QnP4vO9titdVn6",
+        "sessionID": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+        "role": "assistant",
+        "time": {
+          "created": 1792750163432,
+          "completed": 1792750163472
+        },
+        "parentID": "msg_8b02b579393e3cda2ad64fcbb320bd94",
+        "modelID": "fixture",
+        "providerID": "fixture",
+        "mode": "harness-fixture",
+        "agent": "harness-fixture",
+        "path": {
+          "cwd": "/tmp/strata-opencode-api-431bzgf4/workspace",
+          "root": "/"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 20,
+          "input": 10,
+          "output": 10,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "finish": "stop"
+      },
+      "parts": [
+        {
+          "id": "prt_1683c9608001w1OGzacxnx4dUB",
+          "sessionID": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+          "messageID": "msg_1683c95e8001QnP4vO9titdVn6",
+          "type": "step-start"
+        },
+        {
+          "id": "prt_1683c960a0012KlGYCuVoXzseE",
+          "sessionID": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+          "messageID": "msg_1683c95e8001QnP4vO9titdVn6",
+          "type": "text",
+          "text": "GUIDANCE_ACK msg_8b02b579393e3cda2ad64fcbb320bd94",
+          "time": {
+            "start": 1792750163466,
+            "end": 1792750163467
+          }
+        },
+        {
+          "id": "prt_1683c960d0019zwdL8xIUFHv0Y",
+          "sessionID": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+          "messageID": "msg_1683c95e8001QnP4vO9titdVn6",
+          "type": "step-finish",
+          "reason": "stop",
+          "cost": 0,
+          "tokens": {
+            "total": 20,
+            "input": 10,
+            "output": 10,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "scoped_client_verified": true,
+  "passed": true,
+  "owned_tool_processes_exited": true,
+  "process_receipt": {
+    "checked_at": "2026-10-23T10:09:11.209173+00:00",
+    "real_inference_requests": 0,
+    "real_board_calls": 0,
+    "pure_api_inspection_only": false,
+    "default_plugins_disabled": true,
+    "project_config_disabled": true,
+    "fixture_filewatcher_disabled": true,
+    "binary_version": "1.19.3",
+    "server_pid": 316508,
+    "temporary_root": "/tmp/strata-opencode-api-431bzgf4",
+    "unauthenticated_status": 401,
+    "health": {
+      "healthy": true,
+      "version": "1.19.3"
+    },
+    "api_schema": "/home/ubuntu/.local/share/strata-board-harness-setup/openapi.json",
+    "paths": {
+      "/experimental/control-plane/move-session": [
+        "post"
+      ],
+      "/global/health": [
+        "get"
+      ],
+      "/global/event": [
+        "get"
+      ],
+      "/event": [
+        "get"
+      ],
+      "/experimental/session": [
+        "get"
+      ],
+      "/experimental/session/{sessionID}/background": [
+        "post"
+      ],
+      "/session": [
+        "get",
+        "post"
+      ],
+      "/session/status": [
+        "get"
+      ],
+      "/session/{sessionID}": [
+        "get",
+        "delete",
+        "patch"
+      ],
+      "/session/{sessionID}/children": [
+        "get"
+      ],
+      "/session/{sessionID}/todo": [
+        "get"
+      ],
+      "/session/{sessionID}/diff": [
+        "get"
+      ],
+      "/session/{sessionID}/message": [
+        "get",
+        "post"
+      ],
+      "/session/{sessionID}/message/{messageID}": [
+        "get",
+        "delete"
+      ],
+      "/session/{sessionID}/fork": [
+        "post"
+      ],
+      "/session/{sessionID}/abort": [
+        "post"
+      ],
+      "/session/{sessionID}/init": [
+        "post"
+      ],
+      "/session/{sessionID}/share": [
+        "post",
+        "delete"
+      ],
+      "/session/{sessionID}/summarize": [
+        "post"
+      ],
+      "/session/{sessionID}/prompt_async": [
+        "post"
+      ],
+      "/session/{sessionID}/command": [
+        "post"
+      ],
+      "/session/{sessionID}/shell": [
+        "post"
+      ],
+      "/session/{sessionID}/revert": [
+        "post"
+      ],
+      "/session/{sessionID}/unrevert": [
+        "post"
+      ],
+      "/session/{sessionID}/permissions/{permissionID}": [
+        "post"
+      ],
+      "/session/{sessionID}/message/{messageID}/part/{partID}": [
+        "delete",
+        "patch"
+      ],
+      "/tui/open-sessions": [
+        "post"
+      ],
+      "/tui/select-session": [
+        "post"
+      ],
+      "/api/session": [
+        "get",
+        "post"
+      ],
+      "/api/session/active": [
+        "get"
+      ],
+      "/api/session/{sessionID}": [
+        "get"
+      ],
+      "/api/session/{sessionID}/agent": [
+        "post"
+      ],
+      "/api/session/{sessionID}/model": [
+        "post"
+      ],
+      "/api/session/{sessionID}/prompt": [
+        "post"
+      ],
+      "/api/session/{sessionID}/compact": [
+        "post"
+      ],
+      "/api/session/{sessionID}/wait": [
+        "post"
+      ],
+      "/api/session/{sessionID}/revert/stage": [
+        "post"
+      ],
+      "/api/session/{sessionID}/revert/clear": [
+        "post"
+      ],
+      "/api/session/{sessionID}/revert/commit": [
+        "post"
+      ],
+      "/api/session/{sessionID}/context": [
+        "get"
+      ],
+      "/api/session/{sessionID}/history": [
+        "get"
+      ],
+      "/api/session/{sessionID}/event": [
+        "get"
+      ],
+      "/api/session/{sessionID}/interrupt": [
+        "post"
+      ],
+      "/api/session/{sessionID}/message/{messageID}": [
+        "get"
+      ],
+      "/api/session/{sessionID}/message": [
+        "get"
+      ],
+      "/api/session/{sessionID}/permission": [
+        "post",
+        "get"
+      ],
+      "/api/session/{sessionID}/permission/{requestID}": [
+        "get"
+      ],
+      "/api/session/{sessionID}/permission/{requestID}/reply": [
+        "post"
+      ],
+      "/api/session/{sessionID}/question": [
+        "get"
+      ],
+      "/api/session/{sessionID}/question/{requestID}/reply": [
+        "post"
+      ],
+      "/api/session/{sessionID}/question/{requestID}/reject": [
+        "post"
+      ]
+    },
+    "exercise": {
+      "started_at": "2026-10-23T10:09:11.201525+00:00",
+      "real_inference_requests": 0,
+      "real_board_calls": 0,
+      "rtk_agent": "harness-fixture",
+      "api_version": "v1",
+      "rtk_plugin_sha256": "356164874868aa58f26310fa3cb337469a83ff756d560598815fb23a09d1f61d",
+      "rtk_hook": {
+        "command": "rtk ls"
+      },
+      "stage": "creating_main_session",
+      "main_session": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+      "first_admission": {
+        "id": "msg_3165a4f8114363e58acd57fe9a863a41",
+        "http_accepted": true,
+        "applied": false
+      },
+      "ping_admission": {
+        "id": "msg_df674fb12cc8604a1535705ab6bb422d",
+        "http_accepted": true,
+        "applied": false
+      },
+      "main_requests_before_tool_release": 1,
+      "main_model_requests": 3,
+      "main_tool_finished": true,
+      "ping_seen_by_model": true,
+      "model_waited_for_tool": true,
+      "stop_session": "ses_e97c36dffffeTlfaOgOHfSD9cR",
+      "stop_admission": {
+        "id": "msg_d26f671bfdaf339817863dd56b5ec5db",
+        "http_accepted": true,
+        "applied": false
+      },
+      "queued_admission": {
+        "id": "msg_2c3f6ff8e5a267a2a7e4460422f317a8",
+        "http_accepted": true,
+        "applied": false
+      },
+      "stop_model_requests_after_interrupt": 1,
+      "stop_tool_finished": false,
+      "stop_tool_process_exited": true,
+      "interrupt_stayed_stopped": true,
+      "post_interrupt_observation_seconds": 0.5,
+      "failure_session": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+      "failed_exit_preserved": true,
+      "client_exit37_receipt": true,
+      "client_admission": {
+        "engine_session": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+        "request_id": "msg_8b02b579393e3cda2ad64fcbb320bd94",
+        "observation": "http_204"
+      },
+      "client_acknowledgement": {
+        "acknowledged": true,
+        "applied": false
+      },
+      "client_reconciled": {
+        "observed": true,
+        "acknowledged": true,
+        "applied": false
+      },
+      "client_receipts": [
+        {
+          "phase": "submitted",
+          "at": "2026-10-23T10:09:23.430421+00:00",
+          "evidence": {
+            "engine_session": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+            "observation": "http_204",
+            "request_id": "msg_8b02b579393e3cda2ad64fcbb320bd94"
+          }
+        },
+        {
+          "phase": "acknowledged",
+          "at": "2026-10-23T10:09:23.520743+00:00",
+          "evidence": {
+            "assistant_id": "msg_1683c95e8001QnP4vO9titdVn6",
+            "engine_session": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+            "observation": "assistant_marker",
+            "request_id": "msg_8b02b579393e3cda2ad64fcbb320bd94"
+          }
+        }
+      ],
+      "scoped_client_verified": true,
+      "passed": true
+    },
+    "fixture_server_log": "opencode server listening on http://127.0.0.1:4096\ntimestamp=2026-10-23T10:09:22.589Z level=ERROR run=a75c5f9a message=process session.id=ses_e97c36dffffeTlfaOgOHfSD9cR messageID=msg_1683c92110011fSoHlf3D9P79a error=Aborted stack=undefined\n",
+    "server_exited": true,
+    "temporary_files_removed": true,
+    "owned_worker_lock_removed": true
+  },
+  "fixture_requests": [
+    {
+      "at": 1792750161.564933,
+      "path": "/v1/chat/completions",
+      "body": {
+        "model": "fixture",
+        "max_tokens": 2048,
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are opencode, an interactive CLI tool that helps users with software engineering tasks. Use the instructions below and the tools available to you to assist the user.\n\nIMPORTANT: You must NEVER generate or guess URLs for the user unless you are confident that the URLs are for helping the user with programming. You may use URLs provided by the user in their messages or local files.\n\nIf the user asks for help or wants to give feedback inform them of the following:\n- /help: Get help with using opencode\n- To give feedback, users should report the issue at https://github.com/anomalyco/opencode/issues\n\nWhen the user directly asks about opencode (eg 'can opencode do...', 'does opencode have...') or asks in second person (eg 'are you able...', 'can you do...'), first use the WebFetch tool to gather information to answer the question from opencode docs at https://opencode.ai\n\n# Tone and style\nYou should be concise, direct, and to the point. When you run a non-trivial bash command, you should explain what the command does and why you are running it, to make sure the user understands what you are doing (this is especially important when you are running a command that will make changes to the user's system).\nRemember that your output will be displayed on a command line interface. Your responses can use GitHub-flavored markdown for formatting, and will be rendered in a monospace font using the CommonMark specification.\nOutput text to communicate with the user; all text you output outside of tool use is displayed to the user. Only use tools to complete tasks. Never use tools like Bash or code comments as means to communicate with the user during the session.\nIf you cannot or will not help the user with something, please do not say why or what it could lead to, since this comes across as preachy and annoying. Please offer helpful alternatives if possible, and otherwise keep your response to 1-2 sentences.\nOnly use emojis if the user explicitly requests it. Avoid using emojis in all communication unless asked.\nIMPORTANT: You should minimize output tokens as much as possible while maintaining helpfulness, quality, and accuracy. Only address the specific query or task at hand, avoiding tangential information unless absolutely critical for completing the request. If you can answer in 1-3 sentences or a short paragraph, please do.\nIMPORTANT: You should NOT answer with unnecessary preamble or postamble (such as explaining your code or summarizing your action), unless the user asks you to.\nIMPORTANT: Keep your responses short, since they will be displayed on a command line interface. You MUST answer concisely with fewer than 4 lines (not including tool use or code generation), unless user asks for detail. Answer the user's question directly, without elaboration, explanation, or details. One word answers are best. Avoid introductions, conclusions, and explanations. You MUST avoid text before/after your response, such as \"The answer is <answer>.\", \"Here is the content of the file...\" or \"Based on the information provided, the answer is...\" or \"Here is what I will do next...\". Here are some examples to demonstrate appropriate verbosity:\n<example>\nuser: what is 2+2?\nassistant: 4\n</example>\n\n<example>\nuser: is 11 a prime number?\nassistant: Yes\n</example>\n\n<example>\nuser: what command should I run to list files in the current directory?\nassistant: ls\n</example>\n\n<example>\nuser: what command should I run to watch files in the current directory?\nassistant: [use the ls tool to list the files in the current directory, then read docs/commands in the relevant file to find out how to watch files]\nnpm run dev\n</example>\n\n<example>\nuser: what files are in the directory src/?\nassistant: [runs ls and sees foo.c, bar.c, baz.c]\nuser: which file contains the implementation of foo?\nassistant: src/foo.c\n</example>\n\n<example>\nuser: write tests for new feature\nassistant: [uses grep and glob search tools to find where similar tests are defined, uses concurrent read file tool use blocks in one tool call to read relevant files at the same time, uses edit file tool to write new tests]\n</example>\n\n# Proactiveness\nYou are allowed to be proactive, but only when the user asks you to do something. You should strive to strike a balance between:\n1. Doing the right thing when asked, including taking actions and follow-up actions\n2. Not surprising the user with actions you take without asking\nFor example, if the user asks you how to approach something, you should do your best to answer their question first, and not immediately jump into taking actions.\n3. Do not add additional code explanation summary unless requested by the user. After working on a file, just stop, rather than providing an explanation of what you did.\n\n# Following conventions\nWhen making changes to files, first understand the file's code conventions. Mimic code style, use existing libraries and utilities, and follow existing patterns.\n- NEVER assume that a given library is available, even if it is well known. Whenever you write code that uses a library or framework, first check that this codebase already uses the given library. For example, you might look at neighboring files, or check the package.json (or cargo.toml, and so on depending on the language).\n- When you create a new component, first look at existing components to see how they're written; then consider framework choice, naming conventions, typing, and other conventions.\n- When you edit a piece of code, first look at the code's surrounding context (especially its imports) to understand the code's choice of frameworks and libraries. Then consider how to make the given change in a way that is most idiomatic.\n- Always follow security best practices. Never introduce code that exposes or logs secrets and keys. Never commit secrets or keys to the repository.\n\n# Code style\n- IMPORTANT: DO NOT ADD ***ANY*** COMMENTS unless asked\n\n# Doing tasks\nThe user will primarily request you perform software engineering tasks. This includes solving bugs, adding new functionality, refactoring code, explaining code, and more. For these tasks the following steps are recommended:\n- Use the available search tools to understand the codebase and the user's query. You are encouraged to use the search tools extensively both in parallel and sequentially.\n- Implement the solution using all tools available to you\n- Verify the solution if possible with tests. NEVER assume specific test framework or test script. Check the README or search codebase to determine the testing approach.\n- VERY IMPORTANT: When you have completed a task, you MUST run the lint and typecheck commands (e.g. npm run lint, npm run typecheck, ruff, etc.) with Bash if they were provided to you to ensure your code is correct. If you are unable to find the correct command, ask the user for the command to run and if they supply it, proactively suggest writing it to AGENTS.md so that you will know to run it next time.\nNEVER commit changes unless the user explicitly asks you to. It is VERY IMPORTANT to only commit when explicitly asked, otherwise the user will feel that you are being too proactive.\n\n- Tool results and user messages may include <system-reminder> tags. <system-reminder> tags contain useful information and reminders. They are NOT part of the user's provided input or the tool result.\n\n# Tool usage policy\n- When doing file search, prefer to use the Task tool in order to reduce context usage.\n- You have the capability to call multiple tools in a single response. When multiple independent pieces of information are requested, batch your tool calls together for optimal performance. When making multiple bash tool calls, you MUST send a single message with multiple tools calls to run the calls in parallel. For example, if you need to run \"git status\" and \"git diff\", send a single message with two tool calls to run the calls in parallel.\n\nYou MUST answer concisely with fewer than 4 lines of text (not including tool use or code generation), unless user asks for detail.\n\nIMPORTANT: Before you begin work, think about what the code you're editing is supposed to do based on the filenames directory structure.\n\n# Code References\n\nWhen referencing specific functions or pieces of code include the pattern `file_path:line_number` to allow the user to easily navigate to the source code location.\n\n<example>\nuser: Where are errors from the client handled?\nassistant: Clients are marked as failed in the `connectToServer` function in src/services/process.ts:712.\n</example>\n\nYou are powered by the model named fixture. The exact model ID is fixture/fixture\nHere is some useful information about the environment you are running in:\n<env>\n  Working directory: /tmp/strata-opencode-api-431bzgf4/workspace\n  Workspace root folder: /\n  Is directory a git repo: no\n  Platform: linux\n  Today's date: Fri Oct 23 2026\n</env>"
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_MAIN: run the owned fixture tool, then inspect ls and acknowledge."
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "bash",
+              "description": "Executes a given bash command in a persistent shell session with optional timeout, ensuring proper handling and security measures.\n\nBe aware: OS: linux, Shell: bash\n\nAll commands run in the current working directory by default. Use the `workdir` parameter if you need to run a command in a different directory. AVOID using `cd <directory> && <command>` patterns - use `workdir` instead.\n\nUse `/tmp/opencode` for temporary work outside the workspace. This directory has already been created, already exists, and is pre-approved for external directory access.\n\nIMPORTANT: This tool is for terminal operations like git, npm, docker, etc. DO NOT use it for file operations (reading, writing, editing, searching, finding files) - use the specialized tools for this instead.\n\nBefore executing the command, please follow these steps:\n\n1. Directory Verification:\n   - If the command will create new directories or files, first use `ls` to verify the parent directory exists and is the correct location\n   - For example, before running \"mkdir foo/bar\", first use `ls foo` to check that \"foo\" exists and is the intended parent directory\n\n2. Command Execution:\n   - Always quote file paths that contain spaces with double quotes (e.g., rm \"path with spaces/file.txt\")\n   - Examples of proper quoting:\n     - mkdir \"/Users/name/My Documents\" (correct)\n     - mkdir /Users/name/My Documents (incorrect - will fail)\n     - python \"/path/with spaces/script.py\" (correct)\n     - python /path/with spaces/script.py (incorrect - will fail)\n   - After ensuring proper quoting, execute the command.\n   - Capture the output of the command.\n\nUsage notes:\n  - The command argument is required.\n  - You can specify an optional timeout in milliseconds. If not specified, commands will time out after 120000ms.\n  - If the output exceeds 2000 lines or 51200 bytes, it will be truncated and the full output will be written to a file. You can use Read with offset/limit to read specific sections or Grep to search the full content. Do NOT use `head`, `tail`, or other truncation commands to limit output; the full output will already be captured to a file for more precise searching.\n\n  - Avoid using Bash with the `find`, `grep`, `cat`, `head`, `tail`, `sed`, `awk`, or `echo` commands, unless explicitly instructed or when these commands are truly necessary for the task. Instead, always prefer using the dedicated tools for these commands:\n    - File search: Use Glob (NOT find or ls)\n    - Content search: Use Grep (NOT grep or rg)\n    - Read files: Use Read (NOT cat/head/tail)\n    - Edit files: Use Edit (NOT sed/awk)\n    - Write files: Use Write (NOT echo >/cat <<EOF)\n    - Communication: Output text directly (NOT echo/printf)\n  - When issuing multiple commands:\n    - If the commands are independent and can run in parallel, make multiple bash tool calls in a single message. For example, if you need to run \"git status\" and \"git diff\", send a single message with two bash tool calls in parallel.\n    - If the commands depend on each other and must run sequentially, use a single Bash call with '&&' to chain them together (e.g., `git add . && git commit -m \"message\" && git push`). For instance, if one operation must complete before another starts (like mkdir before cp, Write before Bash for git operations, or git add before git commit), run these operations sequentially instead.\n    - Use ';' only when you need to run commands sequentially but don't care if earlier commands fail\n    - DO NOT use newlines to separate commands (newlines are ok in quoted strings)\n  - AVOID using `cd <directory> && <command>`. Use the `workdir` parameter to change directories instead.\n    <good-example>\n    Use workdir=\"/foo/bar\" with command: pytest tests\n    </good-example>\n    <bad-example>\n    cd /foo/bar && pytest tests\n    </bad-example>\n\n# Git and GitHub\n- Only commit, amend, push, or create PRs when explicitly requested.\n- Before committing, inspect `git status`, `git diff`, and `git log --oneline -10`; stage only intended files and never commit secrets.\n- Write a concise commit message that matches the repo style.\n- Do not update git config, skip hooks, use interactive `-i`, force-push, or create empty commits unless explicitly requested.\n- If a commit fails or hooks reject it, fix the issue and create a new commit; do not amend the failed commit.\n- Before creating a PR, inspect status, diff, remote tracking, recent commits, and the diff from the base branch.\n- Review all commits included in the PR, not just the latest commit.\n- Use `gh` for GitHub tasks, including PRs, issues, checks, and releases; return the PR URL when done.\n",
+              "parameters": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "The command to execute"
+                  },
+                  "timeout": {
+                    "minimum": -9007199254740991,
+                    "exclusiveMinimum": 0,
+                    "type": "integer",
+                    "maximum": 9007199254740991,
+                    "description": "Optional timeout in milliseconds"
+                  },
+                  "workdir": {
+                    "type": "string",
+                    "description": "The working directory to run the command in. Defaults to the current directory. Use this instead of 'cd' commands."
+                  }
+                },
+                "required": [
+                  "command"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "tool_finished": false
+    },
+    {
+      "at": 1792750162.2491941,
+      "path": "/v1/chat/completions",
+      "body": {
+        "model": "fixture",
+        "max_tokens": 2048,
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are opencode, an interactive CLI tool that helps users with software engineering tasks. Use the instructions below and the tools available to you to assist the user.\n\nIMPORTANT: You must NEVER generate or guess URLs for the user unless you are confident that the URLs are for helping the user with programming. You may use URLs provided by the user in their messages or local files.\n\nIf the user asks for help or wants to give feedback inform them of the following:\n- /help: Get help with using opencode\n- To give feedback, users should report the issue at https://github.com/anomalyco/opencode/issues\n\nWhen the user directly asks about opencode (eg 'can opencode do...', 'does opencode have...') or asks in second person (eg 'are you able...', 'can you do...'), first use the WebFetch tool to gather information to answer the question from opencode docs at https://opencode.ai\n\n# Tone and style\nYou should be concise, direct, and to the point. When you run a non-trivial bash command, you should explain what the command does and why you are running it, to make sure the user understands what you are doing (this is especially important when you are running a command that will make changes to the user's system).\nRemember that your output will be displayed on a command line interface. Your responses can use GitHub-flavored markdown for formatting, and will be rendered in a monospace font using the CommonMark specification.\nOutput text to communicate with the user; all text you output outside of tool use is displayed to the user. Only use tools to complete tasks. Never use tools like Bash or code comments as means to communicate with the user during the session.\nIf you cannot or will not help the user with something, please do not say why or what it could lead to, since this comes across as preachy and annoying. Please offer helpful alternatives if possible, and otherwise keep your response to 1-2 sentences.\nOnly use emojis if the user explicitly requests it. Avoid using emojis in all communication unless asked.\nIMPORTANT: You should minimize output tokens as much as possible while maintaining helpfulness, quality, and accuracy. Only address the specific query or task at hand, avoiding tangential information unless absolutely critical for completing the request. If you can answer in 1-3 sentences or a short paragraph, please do.\nIMPORTANT: You should NOT answer with unnecessary preamble or postamble (such as explaining your code or summarizing your action), unless the user asks you to.\nIMPORTANT: Keep your responses short, since they will be displayed on a command line interface. You MUST answer concisely with fewer than 4 lines (not including tool use or code generation), unless user asks for detail. Answer the user's question directly, without elaboration, explanation, or details. One word answers are best. Avoid introductions, conclusions, and explanations. You MUST avoid text before/after your response, such as \"The answer is <answer>.\", \"Here is the content of the file...\" or \"Based on the information provided, the answer is...\" or \"Here is what I will do next...\". Here are some examples to demonstrate appropriate verbosity:\n<example>\nuser: what is 2+2?\nassistant: 4\n</example>\n\n<example>\nuser: is 11 a prime number?\nassistant: Yes\n</example>\n\n<example>\nuser: what command should I run to list files in the current directory?\nassistant: ls\n</example>\n\n<example>\nuser: what command should I run to watch files in the current directory?\nassistant: [use the ls tool to list the files in the current directory, then read docs/commands in the relevant file to find out how to watch files]\nnpm run dev\n</example>\n\n<example>\nuser: what files are in the directory src/?\nassistant: [runs ls and sees foo.c, bar.c, baz.c]\nuser: which file contains the implementation of foo?\nassistant: src/foo.c\n</example>\n\n<example>\nuser: write tests for new feature\nassistant: [uses grep and glob search tools to find where similar tests are defined, uses concurrent read file tool use blocks in one tool call to read relevant files at the same time, uses edit file tool to write new tests]\n</example>\n\n# Proactiveness\nYou are allowed to be proactive, but only when the user asks you to do something. You should strive to strike a balance between:\n1. Doing the right thing when asked, including taking actions and follow-up actions\n2. Not surprising the user with actions you take without asking\nFor example, if the user asks you how to approach something, you should do your best to answer their question first, and not immediately jump into taking actions.\n3. Do not add additional code explanation summary unless requested by the user. After working on a file, just stop, rather than providing an explanation of what you did.\n\n# Following conventions\nWhen making changes to files, first understand the file's code conventions. Mimic code style, use existing libraries and utilities, and follow existing patterns.\n- NEVER assume that a given library is available, even if it is well known. Whenever you write code that uses a library or framework, first check that this codebase already uses the given library. For example, you might look at neighboring files, or check the package.json (or cargo.toml, and so on depending on the language).\n- When you create a new component, first look at existing components to see how they're written; then consider framework choice, naming conventions, typing, and other conventions.\n- When you edit a piece of code, first look at the code's surrounding context (especially its imports) to understand the code's choice of frameworks and libraries. Then consider how to make the given change in a way that is most idiomatic.\n- Always follow security best practices. Never introduce code that exposes or logs secrets and keys. Never commit secrets or keys to the repository.\n\n# Code style\n- IMPORTANT: DO NOT ADD ***ANY*** COMMENTS unless asked\n\n# Doing tasks\nThe user will primarily request you perform software engineering tasks. This includes solving bugs, adding new functionality, refactoring code, explaining code, and more. For these tasks the following steps are recommended:\n- Use the available search tools to understand the codebase and the user's query. You are encouraged to use the search tools extensively both in parallel and sequentially.\n- Implement the solution using all tools available to you\n- Verify the solution if possible with tests. NEVER assume specific test framework or test script. Check the README or search codebase to determine the testing approach.\n- VERY IMPORTANT: When you have completed a task, you MUST run the lint and typecheck commands (e.g. npm run lint, npm run typecheck, ruff, etc.) with Bash if they were provided to you to ensure your code is correct. If you are unable to find the correct command, ask the user for the command to run and if they supply it, proactively suggest writing it to AGENTS.md so that you will know to run it next time.\nNEVER commit changes unless the user explicitly asks you to. It is VERY IMPORTANT to only commit when explicitly asked, otherwise the user will feel that you are being too proactive.\n\n- Tool results and user messages may include <system-reminder> tags. <system-reminder> tags contain useful information and reminders. They are NOT part of the user's provided input or the tool result.\n\n# Tool usage policy\n- When doing file search, prefer to use the Task tool in order to reduce context usage.\n- You have the capability to call multiple tools in a single response. When multiple independent pieces of information are requested, batch your tool calls together for optimal performance. When making multiple bash tool calls, you MUST send a single message with multiple tools calls to run the calls in parallel. For example, if you need to run \"git status\" and \"git diff\", send a single message with two tool calls to run the calls in parallel.\n\nYou MUST answer concisely with fewer than 4 lines of text (not including tool use or code generation), unless user asks for detail.\n\nIMPORTANT: Before you begin work, think about what the code you're editing is supposed to do based on the filenames directory structure.\n\n# Code References\n\nWhen referencing specific functions or pieces of code include the pattern `file_path:line_number` to allow the user to easily navigate to the source code location.\n\n<example>\nuser: Where are errors from the client handled?\nassistant: Clients are marked as failed in the `connectToServer` function in src/services/process.ts:712.\n</example>\n\nYou are powered by the model named fixture. The exact model ID is fixture/fixture\nHere is some useful information about the environment you are running in:\n<env>\n  Working directory: /tmp/strata-opencode-api-431bzgf4/workspace\n  Workspace root folder: /\n  Is directory a git repo: no\n  Platform: linux\n  Today's date: Fri Oct 23 2026\n</env>"
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_MAIN: run the owned fixture tool, then inspect ls and acknowledge."
+          },
+          {
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "call_fixture_1",
+                "type": "function",
+                "function": {
+                  "name": "bash",
+                  "arguments": "{\"command\":\"python3 tool_fixture.py\",\"description\":\"Run owned harness fixture\",\"timeout\":20000}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call_fixture_1",
+            "content": "fixture tool completed\n"
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_PING: finish the current owned tool, then ls and HARNESS_ACK."
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "bash",
+              "description": "Executes a given bash command in a persistent shell session with optional timeout, ensuring proper handling and security measures.\n\nBe aware: OS: linux, Shell: bash\n\nAll commands run in the current working directory by default. Use the `workdir` parameter if you need to run a command in a different directory. AVOID using `cd <directory> && <command>` patterns - use `workdir` instead.\n\nUse `/tmp/opencode` for temporary work outside the workspace. This directory has already been created, already exists, and is pre-approved for external directory access.\n\nIMPORTANT: This tool is for terminal operations like git, npm, docker, etc. DO NOT use it for file operations (reading, writing, editing, searching, finding files) - use the specialized tools for this instead.\n\nBefore executing the command, please follow these steps:\n\n1. Directory Verification:\n   - If the command will create new directories or files, first use `ls` to verify the parent directory exists and is the correct location\n   - For example, before running \"mkdir foo/bar\", first use `ls foo` to check that \"foo\" exists and is the intended parent directory\n\n2. Command Execution:\n   - Always quote file paths that contain spaces with double quotes (e.g., rm \"path with spaces/file.txt\")\n   - Examples of proper quoting:\n     - mkdir \"/Users/name/My Documents\" (correct)\n     - mkdir /Users/name/My Documents (incorrect - will fail)\n     - python \"/path/with spaces/script.py\" (correct)\n     - python /path/with spaces/script.py (incorrect - will fail)\n   - After ensuring proper quoting, execute the command.\n   - Capture the output of the command.\n\nUsage notes:\n  - The command argument is required.\n  - You can specify an optional timeout in milliseconds. If not specified, commands will time out after 120000ms.\n  - If the output exceeds 2000 lines or 51200 bytes, it will be truncated and the full output will be written to a file. You can use Read with offset/limit to read specific sections or Grep to search the full content. Do NOT use `head`, `tail`, or other truncation commands to limit output; the full output will already be captured to a file for more precise searching.\n\n  - Avoid using Bash with the `find`, `grep`, `cat`, `head`, `tail`, `sed`, `awk`, or `echo` commands, unless explicitly instructed or when these commands are truly necessary for the task. Instead, always prefer using the dedicated tools for these commands:\n    - File search: Use Glob (NOT find or ls)\n    - Content search: Use Grep (NOT grep or rg)\n    - Read files: Use Read (NOT cat/head/tail)\n    - Edit files: Use Edit (NOT sed/awk)\n    - Write files: Use Write (NOT echo >/cat <<EOF)\n    - Communication: Output text directly (NOT echo/printf)\n  - When issuing multiple commands:\n    - If the commands are independent and can run in parallel, make multiple bash tool calls in a single message. For example, if you need to run \"git status\" and \"git diff\", send a single message with two bash tool calls in parallel.\n    - If the commands depend on each other and must run sequentially, use a single Bash call with '&&' to chain them together (e.g., `git add . && git commit -m \"message\" && git push`). For instance, if one operation must complete before another starts (like mkdir before cp, Write before Bash for git operations, or git add before git commit), run these operations sequentially instead.\n    - Use ';' only when you need to run commands sequentially but don't care if earlier commands fail\n    - DO NOT use newlines to separate commands (newlines are ok in quoted strings)\n  - AVOID using `cd <directory> && <command>`. Use the `workdir` parameter to change directories instead.\n    <good-example>\n    Use workdir=\"/foo/bar\" with command: pytest tests\n    </good-example>\n    <bad-example>\n    cd /foo/bar && pytest tests\n    </bad-example>\n\n# Git and GitHub\n- Only commit, amend, push, or create PRs when explicitly requested.\n- Before committing, inspect `git status`, `git diff`, and `git log --oneline -10`; stage only intended files and never commit secrets.\n- Write a concise commit message that matches the repo style.\n- Do not update git config, skip hooks, use interactive `-i`, force-push, or create empty commits unless explicitly requested.\n- If a commit fails or hooks reject it, fix the issue and create a new commit; do not amend the failed commit.\n- Before creating a PR, inspect status, diff, remote tracking, recent commits, and the diff from the base branch.\n- Review all commits included in the PR, not just the latest commit.\n- Use `gh` for GitHub tasks, including PRs, issues, checks, and releases; return the PR URL when done.\n",
+              "parameters": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "The command to execute"
+                  },
+                  "timeout": {
+                    "minimum": -9007199254740991,
+                    "exclusiveMinimum": 0,
+                    "type": "integer",
+                    "maximum": 9007199254740991,
+                    "description": "Optional timeout in milliseconds"
+                  },
+                  "workdir": {
+                    "type": "string",
+                    "description": "The working directory to run the command in. Defaults to the current directory. Use this instead of 'cd' commands."
+                  }
+                },
+                "required": [
+                  "command"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "tool_finished": true
+    },
+    {
+      "at": 1792750162.3972654,
+      "path": "/v1/chat/completions",
+      "body": {
+        "model": "fixture",
+        "max_tokens": 2048,
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are opencode, an interactive CLI tool that helps users with software engineering tasks. Use the instructions below and the tools available to you to assist the user.\n\nIMPORTANT: You must NEVER generate or guess URLs for the user unless you are confident that the URLs are for helping the user with programming. You may use URLs provided by the user in their messages or local files.\n\nIf the user asks for help or wants to give feedback inform them of the following:\n- /help: Get help with using opencode\n- To give feedback, users should report the issue at https://github.com/anomalyco/opencode/issues\n\nWhen the user directly asks about opencode (eg 'can opencode do...', 'does opencode have...') or asks in second person (eg 'are you able...', 'can you do...'), first use the WebFetch tool to gather information to answer the question from opencode docs at https://opencode.ai\n\n# Tone and style\nYou should be concise, direct, and to the point. When you run a non-trivial bash command, you should explain what the command does and why you are running it, to make sure the user understands what you are doing (this is especially important when you are running a command that will make changes to the user's system).\nRemember that your output will be displayed on a command line interface. Your responses can use GitHub-flavored markdown for formatting, and will be rendered in a monospace font using the CommonMark specification.\nOutput text to communicate with the user; all text you output outside of tool use is displayed to the user. Only use tools to complete tasks. Never use tools like Bash or code comments as means to communicate with the user during the session.\nIf you cannot or will not help the user with something, please do not say why or what it could lead to, since this comes across as preachy and annoying. Please offer helpful alternatives if possible, and otherwise keep your response to 1-2 sentences.\nOnly use emojis if the user explicitly requests it. Avoid using emojis in all communication unless asked.\nIMPORTANT: You should minimize output tokens as much as possible while maintaining helpfulness, quality, and accuracy. Only address the specific query or task at hand, avoiding tangential information unless absolutely critical for completing the request. If you can answer in 1-3 sentences or a short paragraph, please do.\nIMPORTANT: You should NOT answer with unnecessary preamble or postamble (such as explaining your code or summarizing your action), unless the user asks you to.\nIMPORTANT: Keep your responses short, since they will be displayed on a command line interface. You MUST answer concisely with fewer than 4 lines (not including tool use or code generation), unless user asks for detail. Answer the user's question directly, without elaboration, explanation, or details. One word answers are best. Avoid introductions, conclusions, and explanations. You MUST avoid text before/after your response, such as \"The answer is <answer>.\", \"Here is the content of the file...\" or \"Based on the information provided, the answer is...\" or \"Here is what I will do next...\". Here are some examples to demonstrate appropriate verbosity:\n<example>\nuser: what is 2+2?\nassistant: 4\n</example>\n\n<example>\nuser: is 11 a prime number?\nassistant: Yes\n</example>\n\n<example>\nuser: what command should I run to list files in the current directory?\nassistant: ls\n</example>\n\n<example>\nuser: what command should I run to watch files in the current directory?\nassistant: [use the ls tool to list the files in the current directory, then read docs/commands in the relevant file to find out how to watch files]\nnpm run dev\n</example>\n\n<example>\nuser: what files are in the directory src/?\nassistant: [runs ls and sees foo.c, bar.c, baz.c]\nuser: which file contains the implementation of foo?\nassistant: src/foo.c\n</example>\n\n<example>\nuser: write tests for new feature\nassistant: [uses grep and glob search tools to find where similar tests are defined, uses concurrent read file tool use blocks in one tool call to read relevant files at the same time, uses edit file tool to write new tests]\n</example>\n\n# Proactiveness\nYou are allowed to be proactive, but only when the user asks you to do something. You should strive to strike a balance between:\n1. Doing the right thing when asked, including taking actions and follow-up actions\n2. Not surprising the user with actions you take without asking\nFor example, if the user asks you how to approach something, you should do your best to answer their question first, and not immediately jump into taking actions.\n3. Do not add additional code explanation summary unless requested by the user. After working on a file, just stop, rather than providing an explanation of what you did.\n\n# Following conventions\nWhen making changes to files, first understand the file's code conventions. Mimic code style, use existing libraries and utilities, and follow existing patterns.\n- NEVER assume that a given library is available, even if it is well known. Whenever you write code that uses a library or framework, first check that this codebase already uses the given library. For example, you might look at neighboring files, or check the package.json (or cargo.toml, and so on depending on the language).\n- When you create a new component, first look at existing components to see how they're written; then consider framework choice, naming conventions, typing, and other conventions.\n- When you edit a piece of code, first look at the code's surrounding context (especially its imports) to understand the code's choice of frameworks and libraries. Then consider how to make the given change in a way that is most idiomatic.\n- Always follow security best practices. Never introduce code that exposes or logs secrets and keys. Never commit secrets or keys to the repository.\n\n# Code style\n- IMPORTANT: DO NOT ADD ***ANY*** COMMENTS unless asked\n\n# Doing tasks\nThe user will primarily request you perform software engineering tasks. This includes solving bugs, adding new functionality, refactoring code, explaining code, and more. For these tasks the following steps are recommended:\n- Use the available search tools to understand the codebase and the user's query. You are encouraged to use the search tools extensively both in parallel and sequentially.\n- Implement the solution using all tools available to you\n- Verify the solution if possible with tests. NEVER assume specific test framework or test script. Check the README or search codebase to determine the testing approach.\n- VERY IMPORTANT: When you have completed a task, you MUST run the lint and typecheck commands (e.g. npm run lint, npm run typecheck, ruff, etc.) with Bash if they were provided to you to ensure your code is correct. If you are unable to find the correct command, ask the user for the command to run and if they supply it, proactively suggest writing it to AGENTS.md so that you will know to run it next time.\nNEVER commit changes unless the user explicitly asks you to. It is VERY IMPORTANT to only commit when explicitly asked, otherwise the user will feel that you are being too proactive.\n\n- Tool results and user messages may include <system-reminder> tags. <system-reminder> tags contain useful information and reminders. They are NOT part of the user's provided input or the tool result.\n\n# Tool usage policy\n- When doing file search, prefer to use the Task tool in order to reduce context usage.\n- You have the capability to call multiple tools in a single response. When multiple independent pieces of information are requested, batch your tool calls together for optimal performance. When making multiple bash tool calls, you MUST send a single message with multiple tools calls to run the calls in parallel. For example, if you need to run \"git status\" and \"git diff\", send a single message with two tool calls to run the calls in parallel.\n\nYou MUST answer concisely with fewer than 4 lines of text (not including tool use or code generation), unless user asks for detail.\n\nIMPORTANT: Before you begin work, think about what the code you're editing is supposed to do based on the filenames directory structure.\n\n# Code References\n\nWhen referencing specific functions or pieces of code include the pattern `file_path:line_number` to allow the user to easily navigate to the source code location.\n\n<example>\nuser: Where are errors from the client handled?\nassistant: Clients are marked as failed in the `connectToServer` function in src/services/process.ts:712.\n</example>\n\nYou are powered by the model named fixture. The exact model ID is fixture/fixture\nHere is some useful information about the environment you are running in:\n<env>\n  Working directory: /tmp/strata-opencode-api-431bzgf4/workspace\n  Workspace root folder: /\n  Is directory a git repo: no\n  Platform: linux\n  Today's date: Fri Oct 23 2026\n</env>"
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_MAIN: run the owned fixture tool, then inspect ls and acknowledge."
+          },
+          {
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "call_fixture_1",
+                "type": "function",
+                "function": {
+                  "name": "bash",
+                  "arguments": "{\"command\":\"python3 tool_fixture.py\",\"description\":\"Run owned harness fixture\",\"timeout\":20000}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call_fixture_1",
+            "content": "fixture tool completed\n"
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_PING: finish the current owned tool, then ls and HARNESS_ACK."
+          },
+          {
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "call_fixture_2",
+                "type": "function",
+                "function": {
+                  "name": "bash",
+                  "arguments": "{\"command\":\"rtk ls\",\"description\":\"Run owned harness fixture\",\"timeout\":20000}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call_fixture_2",
+            "content": "fail_fixture.py  59B\nfinished  31B\nmain_pid  6B\nrelease  25B\nstarted  13B\ntool_fixture.py  391B\ntool_stop_fixture.py  222B\n"
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "bash",
+              "description": "Executes a given bash command in a persistent shell session with optional timeout, ensuring proper handling and security measures.\n\nBe aware: OS: linux, Shell: bash\n\nAll commands run in the current working directory by default. Use the `workdir` parameter if you need to run a command in a different directory. AVOID using `cd <directory> && <command>` patterns - use `workdir` instead.\n\nUse `/tmp/opencode` for temporary work outside the workspace. This directory has already been created, already exists, and is pre-approved for external directory access.\n\nIMPORTANT: This tool is for terminal operations like git, npm, docker, etc. DO NOT use it for file operations (reading, writing, editing, searching, finding files) - use the specialized tools for this instead.\n\nBefore executing the command, please follow these steps:\n\n1. Directory Verification:\n   - If the command will create new directories or files, first use `ls` to verify the parent directory exists and is the correct location\n   - For example, before running \"mkdir foo/bar\", first use `ls foo` to check that \"foo\" exists and is the intended parent directory\n\n2. Command Execution:\n   - Always quote file paths that contain spaces with double quotes (e.g., rm \"path with spaces/file.txt\")\n   - Examples of proper quoting:\n     - mkdir \"/Users/name/My Documents\" (correct)\n     - mkdir /Users/name/My Documents (incorrect - will fail)\n     - python \"/path/with spaces/script.py\" (correct)\n     - python /path/with spaces/script.py (incorrect - will fail)\n   - After ensuring proper quoting, execute the command.\n   - Capture the output of the command.\n\nUsage notes:\n  - The command argument is required.\n  - You can specify an optional timeout in milliseconds. If not specified, commands will time out after 120000ms.\n  - If the output exceeds 2000 lines or 51200 bytes, it will be truncated and the full output will be written to a file. You can use Read with offset/limit to read specific sections or Grep to search the full content. Do NOT use `head`, `tail`, or other truncation commands to limit output; the full output will already be captured to a file for more precise searching.\n\n  - Avoid using Bash with the `find`, `grep`, `cat`, `head`, `tail`, `sed`, `awk`, or `echo` commands, unless explicitly instructed or when these commands are truly necessary for the task. Instead, always prefer using the dedicated tools for these commands:\n    - File search: Use Glob (NOT find or ls)\n    - Content search: Use Grep (NOT grep or rg)\n    - Read files: Use Read (NOT cat/head/tail)\n    - Edit files: Use Edit (NOT sed/awk)\n    - Write files: Use Write (NOT echo >/cat <<EOF)\n    - Communication: Output text directly (NOT echo/printf)\n  - When issuing multiple commands:\n    - If the commands are independent and can run in parallel, make multiple bash tool calls in a single message. For example, if you need to run \"git status\" and \"git diff\", send a single message with two bash tool calls in parallel.\n    - If the commands depend on each other and must run sequentially, use a single Bash call with '&&' to chain them together (e.g., `git add . && git commit -m \"message\" && git push`). For instance, if one operation must complete before another starts (like mkdir before cp, Write before Bash for git operations, or git add before git commit), run these operations sequentially instead.\n    - Use ';' only when you need to run commands sequentially but don't care if earlier commands fail\n    - DO NOT use newlines to separate commands (newlines are ok in quoted strings)\n  - AVOID using `cd <directory> && <command>`. Use the `workdir` parameter to change directories instead.\n    <good-example>\n    Use workdir=\"/foo/bar\" with command: pytest tests\n    </good-example>\n    <bad-example>\n    cd /foo/bar && pytest tests\n    </bad-example>\n\n# Git and GitHub\n- Only commit, amend, push, or create PRs when explicitly requested.\n- Before committing, inspect `git status`, `git diff`, and `git log --oneline -10`; stage only intended files and never commit secrets.\n- Write a concise commit message that matches the repo style.\n- Do not update git config, skip hooks, use interactive `-i`, force-push, or create empty commits unless explicitly requested.\n- If a commit fails or hooks reject it, fix the issue and create a new commit; do not amend the failed commit.\n- Before creating a PR, inspect status, diff, remote tracking, recent commits, and the diff from the base branch.\n- Review all commits included in the PR, not just the latest commit.\n- Use `gh` for GitHub tasks, including PRs, issues, checks, and releases; return the PR URL when done.\n",
+              "parameters": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "The command to execute"
+                  },
+                  "timeout": {
+                    "minimum": -9007199254740991,
+                    "exclusiveMinimum": 0,
+                    "type": "integer",
+                    "maximum": 9007199254740991,
+                    "description": "Optional timeout in milliseconds"
+                  },
+                  "workdir": {
+                    "type": "string",
+                    "description": "The working directory to run the command in. Defaults to the current directory. Use this instead of 'cd' commands."
+                  }
+                },
+                "required": [
+                  "command"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "tool_finished": true
+    },
+    {
+      "at": 1792750162.4660668,
+      "path": "/v1/chat/completions",
+      "body": {
+        "model": "fixture",
+        "max_tokens": 2048,
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are opencode, an interactive CLI tool that helps users with software engineering tasks. Use the instructions below and the tools available to you to assist the user.\n\nIMPORTANT: You must NEVER generate or guess URLs for the user unless you are confident that the URLs are for helping the user with programming. You may use URLs provided by the user in their messages or local files.\n\nIf the user asks for help or wants to give feedback inform them of the following:\n- /help: Get help with using opencode\n- To give feedback, users should report the issue at https://github.com/anomalyco/opencode/issues\n\nWhen the user directly asks about opencode (eg 'can opencode do...', 'does opencode have...') or asks in second person (eg 'are you able...', 'can you do...'), first use the WebFetch tool to gather information to answer the question from opencode docs at https://opencode.ai\n\n# Tone and style\nYou should be concise, direct, and to the point. When you run a non-trivial bash command, you should explain what the command does and why you are running it, to make sure the user understands what you are doing (this is especially important when you are running a command that will make changes to the user's system).\nRemember that your output will be displayed on a command line interface. Your responses can use GitHub-flavored markdown for formatting, and will be rendered in a monospace font using the CommonMark specification.\nOutput text to communicate with the user; all text you output outside of tool use is displayed to the user. Only use tools to complete tasks. Never use tools like Bash or code comments as means to communicate with the user during the session.\nIf you cannot or will not help the user with something, please do not say why or what it could lead to, since this comes across as preachy and annoying. Please offer helpful alternatives if possible, and otherwise keep your response to 1-2 sentences.\nOnly use emojis if the user explicitly requests it. Avoid using emojis in all communication unless asked.\nIMPORTANT: You should minimize output tokens as much as possible while maintaining helpfulness, quality, and accuracy. Only address the specific query or task at hand, avoiding tangential information unless absolutely critical for completing the request. If you can answer in 1-3 sentences or a short paragraph, please do.\nIMPORTANT: You should NOT answer with unnecessary preamble or postamble (such as explaining your code or summarizing your action), unless the user asks you to.\nIMPORTANT: Keep your responses short, since they will be displayed on a command line interface. You MUST answer concisely with fewer than 4 lines (not including tool use or code generation), unless user asks for detail. Answer the user's question directly, without elaboration, explanation, or details. One word answers are best. Avoid introductions, conclusions, and explanations. You MUST avoid text before/after your response, such as \"The answer is <answer>.\", \"Here is the content of the file...\" or \"Based on the information provided, the answer is...\" or \"Here is what I will do next...\". Here are some examples to demonstrate appropriate verbosity:\n<example>\nuser: what is 2+2?\nassistant: 4\n</example>\n\n<example>\nuser: is 11 a prime number?\nassistant: Yes\n</example>\n\n<example>\nuser: what command should I run to list files in the current directory?\nassistant: ls\n</example>\n\n<example>\nuser: what command should I run to watch files in the current directory?\nassistant: [use the ls tool to list the files in the current directory, then read docs/commands in the relevant file to find out how to watch files]\nnpm run dev\n</example>\n\n<example>\nuser: what files are in the directory src/?\nassistant: [runs ls and sees foo.c, bar.c, baz.c]\nuser: which file contains the implementation of foo?\nassistant: src/foo.c\n</example>\n\n<example>\nuser: write tests for new feature\nassistant: [uses grep and glob search tools to find where similar tests are defined, uses concurrent read file tool use blocks in one tool call to read relevant files at the same time, uses edit file tool to write new tests]\n</example>\n\n# Proactiveness\nYou are allowed to be proactive, but only when the user asks you to do something. You should strive to strike a balance between:\n1. Doing the right thing when asked, including taking actions and follow-up actions\n2. Not surprising the user with actions you take without asking\nFor example, if the user asks you how to approach something, you should do your best to answer their question first, and not immediately jump into taking actions.\n3. Do not add additional code explanation summary unless requested by the user. After working on a file, just stop, rather than providing an explanation of what you did.\n\n# Following conventions\nWhen making changes to files, first understand the file's code conventions. Mimic code style, use existing libraries and utilities, and follow existing patterns.\n- NEVER assume that a given library is available, even if it is well known. Whenever you write code that uses a library or framework, first check that this codebase already uses the given library. For example, you might look at neighboring files, or check the package.json (or cargo.toml, and so on depending on the language).\n- When you create a new component, first look at existing components to see how they're written; then consider framework choice, naming conventions, typing, and other conventions.\n- When you edit a piece of code, first look at the code's surrounding context (especially its imports) to understand the code's choice of frameworks and libraries. Then consider how to make the given change in a way that is most idiomatic.\n- Always follow security best practices. Never introduce code that exposes or logs secrets and keys. Never commit secrets or keys to the repository.\n\n# Code style\n- IMPORTANT: DO NOT ADD ***ANY*** COMMENTS unless asked\n\n# Doing tasks\nThe user will primarily request you perform software engineering tasks. This includes solving bugs, adding new functionality, refactoring code, explaining code, and more. For these tasks the following steps are recommended:\n- Use the available search tools to understand the codebase and the user's query. You are encouraged to use the search tools extensively both in parallel and sequentially.\n- Implement the solution using all tools available to you\n- Verify the solution if possible with tests. NEVER assume specific test framework or test script. Check the README or search codebase to determine the testing approach.\n- VERY IMPORTANT: When you have completed a task, you MUST run the lint and typecheck commands (e.g. npm run lint, npm run typecheck, ruff, etc.) with Bash if they were provided to you to ensure your code is correct. If you are unable to find the correct command, ask the user for the command to run and if they supply it, proactively suggest writing it to AGENTS.md so that you will know to run it next time.\nNEVER commit changes unless the user explicitly asks you to. It is VERY IMPORTANT to only commit when explicitly asked, otherwise the user will feel that you are being too proactive.\n\n- Tool results and user messages may include <system-reminder> tags. <system-reminder> tags contain useful information and reminders. They are NOT part of the user's provided input or the tool result.\n\n# Tool usage policy\n- When doing file search, prefer to use the Task tool in order to reduce context usage.\n- You have the capability to call multiple tools in a single response. When multiple independent pieces of information are requested, batch your tool calls together for optimal performance. When making multiple bash tool calls, you MUST send a single message with multiple tools calls to run the calls in parallel. For example, if you need to run \"git status\" and \"git diff\", send a single message with two tool calls to run the calls in parallel.\n\nYou MUST answer concisely with fewer than 4 lines of text (not including tool use or code generation), unless user asks for detail.\n\nIMPORTANT: Before you begin work, think about what the code you're editing is supposed to do based on the filenames directory structure.\n\n# Code References\n\nWhen referencing specific functions or pieces of code include the pattern `file_path:line_number` to allow the user to easily navigate to the source code location.\n\n<example>\nuser: Where are errors from the client handled?\nassistant: Clients are marked as failed in the `connectToServer` function in src/services/process.ts:712.\n</example>\n\nYou are powered by the model named fixture. The exact model ID is fixture/fixture\nHere is some useful information about the environment you are running in:\n<env>\n  Working directory: /tmp/strata-opencode-api-431bzgf4/workspace\n  Workspace root folder: /\n  Is directory a git repo: no\n  Platform: linux\n  Today's date: Fri Oct 23 2026\n</env>"
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_STOP: run the owned stop fixture."
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "bash",
+              "description": "Executes a given bash command in a persistent shell session with optional timeout, ensuring proper handling and security measures.\n\nBe aware: OS: linux, Shell: bash\n\nAll commands run in the current working directory by default. Use the `workdir` parameter if you need to run a command in a different directory. AVOID using `cd <directory> && <command>` patterns - use `workdir` instead.\n\nUse `/tmp/opencode` for temporary work outside the workspace. This directory has already been created, already exists, and is pre-approved for external directory access.\n\nIMPORTANT: This tool is for terminal operations like git, npm, docker, etc. DO NOT use it for file operations (reading, writing, editing, searching, finding files) - use the specialized tools for this instead.\n\nBefore executing the command, please follow these steps:\n\n1. Directory Verification:\n   - If the command will create new directories or files, first use `ls` to verify the parent directory exists and is the correct location\n   - For example, before running \"mkdir foo/bar\", first use `ls foo` to check that \"foo\" exists and is the intended parent directory\n\n2. Command Execution:\n   - Always quote file paths that contain spaces with double quotes (e.g., rm \"path with spaces/file.txt\")\n   - Examples of proper quoting:\n     - mkdir \"/Users/name/My Documents\" (correct)\n     - mkdir /Users/name/My Documents (incorrect - will fail)\n     - python \"/path/with spaces/script.py\" (correct)\n     - python /path/with spaces/script.py (incorrect - will fail)\n   - After ensuring proper quoting, execute the command.\n   - Capture the output of the command.\n\nUsage notes:\n  - The command argument is required.\n  - You can specify an optional timeout in milliseconds. If not specified, commands will time out after 120000ms.\n  - If the output exceeds 2000 lines or 51200 bytes, it will be truncated and the full output will be written to a file. You can use Read with offset/limit to read specific sections or Grep to search the full content. Do NOT use `head`, `tail`, or other truncation commands to limit output; the full output will already be captured to a file for more precise searching.\n\n  - Avoid using Bash with the `find`, `grep`, `cat`, `head`, `tail`, `sed`, `awk`, or `echo` commands, unless explicitly instructed or when these commands are truly necessary for the task. Instead, always prefer using the dedicated tools for these commands:\n    - File search: Use Glob (NOT find or ls)\n    - Content search: Use Grep (NOT grep or rg)\n    - Read files: Use Read (NOT cat/head/tail)\n    - Edit files: Use Edit (NOT sed/awk)\n    - Write files: Use Write (NOT echo >/cat <<EOF)\n    - Communication: Output text directly (NOT echo/printf)\n  - When issuing multiple commands:\n    - If the commands are independent and can run in parallel, make multiple bash tool calls in a single message. For example, if you need to run \"git status\" and \"git diff\", send a single message with two bash tool calls in parallel.\n    - If the commands depend on each other and must run sequentially, use a single Bash call with '&&' to chain them together (e.g., `git add . && git commit -m \"message\" && git push`). For instance, if one operation must complete before another starts (like mkdir before cp, Write before Bash for git operations, or git add before git commit), run these operations sequentially instead.\n    - Use ';' only when you need to run commands sequentially but don't care if earlier commands fail\n    - DO NOT use newlines to separate commands (newlines are ok in quoted strings)\n  - AVOID using `cd <directory> && <command>`. Use the `workdir` parameter to change directories instead.\n    <good-example>\n    Use workdir=\"/foo/bar\" with command: pytest tests\n    </good-example>\n    <bad-example>\n    cd /foo/bar && pytest tests\n    </bad-example>\n\n# Git and GitHub\n- Only commit, amend, push, or create PRs when explicitly requested.\n- Before committing, inspect `git status`, `git diff`, and `git log --oneline -10`; stage only intended files and never commit secrets.\n- Write a concise commit message that matches the repo style.\n- Do not update git config, skip hooks, use interactive `-i`, force-push, or create empty commits unless explicitly requested.\n- If a commit fails or hooks reject it, fix the issue and create a new commit; do not amend the failed commit.\n- Before creating a PR, inspect status, diff, remote tracking, recent commits, and the diff from the base branch.\n- Review all commits included in the PR, not just the latest commit.\n- Use `gh` for GitHub tasks, including PRs, issues, checks, and releases; return the PR URL when done.\n",
+              "parameters": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "The command to execute"
+                  },
+                  "timeout": {
+                    "minimum": -9007199254740991,
+                    "exclusiveMinimum": 0,
+                    "type": "integer",
+                    "maximum": 9007199254740991,
+                    "description": "Optional timeout in milliseconds"
+                  },
+                  "workdir": {
+                    "type": "string",
+                    "description": "The working directory to run the command in. Defaults to the current directory. Use this instead of 'cd' commands."
+                  }
+                },
+                "required": [
+                  "command"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "tool_finished": true
+    },
+    {
+      "at": 1792750163.2071776,
+      "path": "/v1/chat/completions",
+      "body": {
+        "model": "fixture",
+        "max_tokens": 2048,
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are opencode, an interactive CLI tool that helps users with software engineering tasks. Use the instructions below and the tools available to you to assist the user.\n\nIMPORTANT: You must NEVER generate or guess URLs for the user unless you are confident that the URLs are for helping the user with programming. You may use URLs provided by the user in their messages or local files.\n\nIf the user asks for help or wants to give feedback inform them of the following:\n- /help: Get help with using opencode\n- To give feedback, users should report the issue at https://github.com/anomalyco/opencode/issues\n\nWhen the user directly asks about opencode (eg 'can opencode do...', 'does opencode have...') or asks in second person (eg 'are you able...', 'can you do...'), first use the WebFetch tool to gather information to answer the question from opencode docs at https://opencode.ai\n\n# Tone and style\nYou should be concise, direct, and to the point. When you run a non-trivial bash command, you should explain what the command does and why you are running it, to make sure the user understands what you are doing (this is especially important when you are running a command that will make changes to the user's system).\nRemember that your output will be displayed on a command line interface. Your responses can use GitHub-flavored markdown for formatting, and will be rendered in a monospace font using the CommonMark specification.\nOutput text to communicate with the user; all text you output outside of tool use is displayed to the user. Only use tools to complete tasks. Never use tools like Bash or code comments as means to communicate with the user during the session.\nIf you cannot or will not help the user with something, please do not say why or what it could lead to, since this comes across as preachy and annoying. Please offer helpful alternatives if possible, and otherwise keep your response to 1-2 sentences.\nOnly use emojis if the user explicitly requests it. Avoid using emojis in all communication unless asked.\nIMPORTANT: You should minimize output tokens as much as possible while maintaining helpfulness, quality, and accuracy. Only address the specific query or task at hand, avoiding tangential information unless absolutely critical for completing the request. If you can answer in 1-3 sentences or a short paragraph, please do.\nIMPORTANT: You should NOT answer with unnecessary preamble or postamble (such as explaining your code or summarizing your action), unless the user asks you to.\nIMPORTANT: Keep your responses short, since they will be displayed on a command line interface. You MUST answer concisely with fewer than 4 lines (not including tool use or code generation), unless user asks for detail. Answer the user's question directly, without elaboration, explanation, or details. One word answers are best. Avoid introductions, conclusions, and explanations. You MUST avoid text before/after your response, such as \"The answer is <answer>.\", \"Here is the content of the file...\" or \"Based on the information provided, the answer is...\" or \"Here is what I will do next...\". Here are some examples to demonstrate appropriate verbosity:\n<example>\nuser: what is 2+2?\nassistant: 4\n</example>\n\n<example>\nuser: is 11 a prime number?\nassistant: Yes\n</example>\n\n<example>\nuser: what command should I run to list files in the current directory?\nassistant: ls\n</example>\n\n<example>\nuser: what command should I run to watch files in the current directory?\nassistant: [use the ls tool to list the files in the current directory, then read docs/commands in the relevant file to find out how to watch files]\nnpm run dev\n</example>\n\n<example>\nuser: what files are in the directory src/?\nassistant: [runs ls and sees foo.c, bar.c, baz.c]\nuser: which file contains the implementation of foo?\nassistant: src/foo.c\n</example>\n\n<example>\nuser: write tests for new feature\nassistant: [uses grep and glob search tools to find where similar tests are defined, uses concurrent read file tool use blocks in one tool call to read relevant files at the same time, uses edit file tool to write new tests]\n</example>\n\n# Proactiveness\nYou are allowed to be proactive, but only when the user asks you to do something. You should strive to strike a balance between:\n1. Doing the right thing when asked, including taking actions and follow-up actions\n2. Not surprising the user with actions you take without asking\nFor example, if the user asks you how to approach something, you should do your best to answer their question first, and not immediately jump into taking actions.\n3. Do not add additional code explanation summary unless requested by the user. After working on a file, just stop, rather than providing an explanation of what you did.\n\n# Following conventions\nWhen making changes to files, first understand the file's code conventions. Mimic code style, use existing libraries and utilities, and follow existing patterns.\n- NEVER assume that a given library is available, even if it is well known. Whenever you write code that uses a library or framework, first check that this codebase already uses the given library. For example, you might look at neighboring files, or check the package.json (or cargo.toml, and so on depending on the language).\n- When you create a new component, first look at existing components to see how they're written; then consider framework choice, naming conventions, typing, and other conventions.\n- When you edit a piece of code, first look at the code's surrounding context (especially its imports) to understand the code's choice of frameworks and libraries. Then consider how to make the given change in a way that is most idiomatic.\n- Always follow security best practices. Never introduce code that exposes or logs secrets and keys. Never commit secrets or keys to the repository.\n\n# Code style\n- IMPORTANT: DO NOT ADD ***ANY*** COMMENTS unless asked\n\n# Doing tasks\nThe user will primarily request you perform software engineering tasks. This includes solving bugs, adding new functionality, refactoring code, explaining code, and more. For these tasks the following steps are recommended:\n- Use the available search tools to understand the codebase and the user's query. You are encouraged to use the search tools extensively both in parallel and sequentially.\n- Implement the solution using all tools available to you\n- Verify the solution if possible with tests. NEVER assume specific test framework or test script. Check the README or search codebase to determine the testing approach.\n- VERY IMPORTANT: When you have completed a task, you MUST run the lint and typecheck commands (e.g. npm run lint, npm run typecheck, ruff, etc.) with Bash if they were provided to you to ensure your code is correct. If you are unable to find the correct command, ask the user for the command to run and if they supply it, proactively suggest writing it to AGENTS.md so that you will know to run it next time.\nNEVER commit changes unless the user explicitly asks you to. It is VERY IMPORTANT to only commit when explicitly asked, otherwise the user will feel that you are being too proactive.\n\n- Tool results and user messages may include <system-reminder> tags. <system-reminder> tags contain useful information and reminders. They are NOT part of the user's provided input or the tool result.\n\n# Tool usage policy\n- When doing file search, prefer to use the Task tool in order to reduce context usage.\n- You have the capability to call multiple tools in a single response. When multiple independent pieces of information are requested, batch your tool calls together for optimal performance. When making multiple bash tool calls, you MUST send a single message with multiple tools calls to run the calls in parallel. For example, if you need to run \"git status\" and \"git diff\", send a single message with two tool calls to run the calls in parallel.\n\nYou MUST answer concisely with fewer than 4 lines of text (not including tool use or code generation), unless user asks for detail.\n\nIMPORTANT: Before you begin work, think about what the code you're editing is supposed to do based on the filenames directory structure.\n\n# Code References\n\nWhen referencing specific functions or pieces of code include the pattern `file_path:line_number` to allow the user to easily navigate to the source code location.\n\n<example>\nuser: Where are errors from the client handled?\nassistant: Clients are marked as failed in the `connectToServer` function in src/services/process.ts:712.\n</example>\n\nYou are powered by the model named fixture. The exact model ID is fixture/fixture\nHere is some useful information about the environment you are running in:\n<env>\n  Working directory: /tmp/strata-opencode-api-431bzgf4/workspace\n  Workspace root folder: /\n  Is directory a git repo: no\n  Platform: linux\n  Today's date: Fri Oct 23 2026\n</env>"
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_FAIL: run owned failure fixture and report the failure."
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "bash",
+              "description": "Executes a given bash command in a persistent shell session with optional timeout, ensuring proper handling and security measures.\n\nBe aware: OS: linux, Shell: bash\n\nAll commands run in the current working directory by default. Use the `workdir` parameter if you need to run a command in a different directory. AVOID using `cd <directory> && <command>` patterns - use `workdir` instead.\n\nUse `/tmp/opencode` for temporary work outside the workspace. This directory has already been created, already exists, and is pre-approved for external directory access.\n\nIMPORTANT: This tool is for terminal operations like git, npm, docker, etc. DO NOT use it for file operations (reading, writing, editing, searching, finding files) - use the specialized tools for this instead.\n\nBefore executing the command, please follow these steps:\n\n1. Directory Verification:\n   - If the command will create new directories or files, first use `ls` to verify the parent directory exists and is the correct location\n   - For example, before running \"mkdir foo/bar\", first use `ls foo` to check that \"foo\" exists and is the intended parent directory\n\n2. Command Execution:\n   - Always quote file paths that contain spaces with double quotes (e.g., rm \"path with spaces/file.txt\")\n   - Examples of proper quoting:\n     - mkdir \"/Users/name/My Documents\" (correct)\n     - mkdir /Users/name/My Documents (incorrect - will fail)\n     - python \"/path/with spaces/script.py\" (correct)\n     - python /path/with spaces/script.py (incorrect - will fail)\n   - After ensuring proper quoting, execute the command.\n   - Capture the output of the command.\n\nUsage notes:\n  - The command argument is required.\n  - You can specify an optional timeout in milliseconds. If not specified, commands will time out after 120000ms.\n  - If the output exceeds 2000 lines or 51200 bytes, it will be truncated and the full output will be written to a file. You can use Read with offset/limit to read specific sections or Grep to search the full content. Do NOT use `head`, `tail`, or other truncation commands to limit output; the full output will already be captured to a file for more precise searching.\n\n  - Avoid using Bash with the `find`, `grep`, `cat`, `head`, `tail`, `sed`, `awk`, or `echo` commands, unless explicitly instructed or when these commands are truly necessary for the task. Instead, always prefer using the dedicated tools for these commands:\n    - File search: Use Glob (NOT find or ls)\n    - Content search: Use Grep (NOT grep or rg)\n    - Read files: Use Read (NOT cat/head/tail)\n    - Edit files: Use Edit (NOT sed/awk)\n    - Write files: Use Write (NOT echo >/cat <<EOF)\n    - Communication: Output text directly (NOT echo/printf)\n  - When issuing multiple commands:\n    - If the commands are independent and can run in parallel, make multiple bash tool calls in a single message. For example, if you need to run \"git status\" and \"git diff\", send a single message with two bash tool calls in parallel.\n    - If the commands depend on each other and must run sequentially, use a single Bash call with '&&' to chain them together (e.g., `git add . && git commit -m \"message\" && git push`). For instance, if one operation must complete before another starts (like mkdir before cp, Write before Bash for git operations, or git add before git commit), run these operations sequentially instead.\n    - Use ';' only when you need to run commands sequentially but don't care if earlier commands fail\n    - DO NOT use newlines to separate commands (newlines are ok in quoted strings)\n  - AVOID using `cd <directory> && <command>`. Use the `workdir` parameter to change directories instead.\n    <good-example>\n    Use workdir=\"/foo/bar\" with command: pytest tests\n    </good-example>\n    <bad-example>\n    cd /foo/bar && pytest tests\n    </bad-example>\n\n# Git and GitHub\n- Only commit, amend, push, or create PRs when explicitly requested.\n- Before committing, inspect `git status`, `git diff`, and `git log --oneline -10`; stage only intended files and never commit secrets.\n- Write a concise commit message that matches the repo style.\n- Do not update git config, skip hooks, use interactive `-i`, force-push, or create empty commits unless explicitly requested.\n- If a commit fails or hooks reject it, fix the issue and create a new commit; do not amend the failed commit.\n- Before creating a PR, inspect status, diff, remote tracking, recent commits, and the diff from the base branch.\n- Review all commits included in the PR, not just the latest commit.\n- Use `gh` for GitHub tasks, including PRs, issues, checks, and releases; return the PR URL when done.\n",
+              "parameters": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "The command to execute"
+                  },
+                  "timeout": {
+                    "minimum": -9007199254740991,
+                    "exclusiveMinimum": 0,
+                    "type": "integer",
+                    "maximum": 9007199254740991,
+                    "description": "Optional timeout in milliseconds"
+                  },
+                  "workdir": {
+                    "type": "string",
+                    "description": "The working directory to run the command in. Defaults to the current directory. Use this instead of 'cd' commands."
+                  }
+                },
+                "required": [
+                  "command"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "tool_finished": true
+    },
+    {
+      "at": 1792750163.2765515,
+      "path": "/v1/chat/completions",
+      "body": {
+        "model": "fixture",
+        "max_tokens": 2048,
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are opencode, an interactive CLI tool that helps users with software engineering tasks. Use the instructions below and the tools available to you to assist the user.\n\nIMPORTANT: You must NEVER generate or guess URLs for the user unless you are confident that the URLs are for helping the user with programming. You may use URLs provided by the user in their messages or local files.\n\nIf the user asks for help or wants to give feedback inform them of the following:\n- /help: Get help with using opencode\n- To give feedback, users should report the issue at https://github.com/anomalyco/opencode/issues\n\nWhen the user directly asks about opencode (eg 'can opencode do...', 'does opencode have...') or asks in second person (eg 'are you able...', 'can you do...'), first use the WebFetch tool to gather information to answer the question from opencode docs at https://opencode.ai\n\n# Tone and style\nYou should be concise, direct, and to the point. When you run a non-trivial bash command, you should explain what the command does and why you are running it, to make sure the user understands what you are doing (this is especially important when you are running a command that will make changes to the user's system).\nRemember that your output will be displayed on a command line interface. Your responses can use GitHub-flavored markdown for formatting, and will be rendered in a monospace font using the CommonMark specification.\nOutput text to communicate with the user; all text you output outside of tool use is displayed to the user. Only use tools to complete tasks. Never use tools like Bash or code comments as means to communicate with the user during the session.\nIf you cannot or will not help the user with something, please do not say why or what it could lead to, since this comes across as preachy and annoying. Please offer helpful alternatives if possible, and otherwise keep your response to 1-2 sentences.\nOnly use emojis if the user explicitly requests it. Avoid using emojis in all communication unless asked.\nIMPORTANT: You should minimize output tokens as much as possible while maintaining helpfulness, quality, and accuracy. Only address the specific query or task at hand, avoiding tangential information unless absolutely critical for completing the request. If you can answer in 1-3 sentences or a short paragraph, please do.\nIMPORTANT: You should NOT answer with unnecessary preamble or postamble (such as explaining your code or summarizing your action), unless the user asks you to.\nIMPORTANT: Keep your responses short, since they will be displayed on a command line interface. You MUST answer concisely with fewer than 4 lines (not including tool use or code generation), unless user asks for detail. Answer the user's question directly, without elaboration, explanation, or details. One word answers are best. Avoid introductions, conclusions, and explanations. You MUST avoid text before/after your response, such as \"The answer is <answer>.\", \"Here is the content of the file...\" or \"Based on the information provided, the answer is...\" or \"Here is what I will do next...\". Here are some examples to demonstrate appropriate verbosity:\n<example>\nuser: what is 2+2?\nassistant: 4\n</example>\n\n<example>\nuser: is 11 a prime number?\nassistant: Yes\n</example>\n\n<example>\nuser: what command should I run to list files in the current directory?\nassistant: ls\n</example>\n\n<example>\nuser: what command should I run to watch files in the current directory?\nassistant: [use the ls tool to list the files in the current directory, then read docs/commands in the relevant file to find out how to watch files]\nnpm run dev\n</example>\n\n<example>\nuser: what files are in the directory src/?\nassistant: [runs ls and sees foo.c, bar.c, baz.c]\nuser: which file contains the implementation of foo?\nassistant: src/foo.c\n</example>\n\n<example>\nuser: write tests for new feature\nassistant: [uses grep and glob search tools to find where similar tests are defined, uses concurrent read file tool use blocks in one tool call to read relevant files at the same time, uses edit file tool to write new tests]\n</example>\n\n# Proactiveness\nYou are allowed to be proactive, but only when the user asks you to do something. You should strive to strike a balance between:\n1. Doing the right thing when asked, including taking actions and follow-up actions\n2. Not surprising the user with actions you take without asking\nFor example, if the user asks you how to approach something, you should do your best to answer their question first, and not immediately jump into taking actions.\n3. Do not add additional code explanation summary unless requested by the user. After working on a file, just stop, rather than providing an explanation of what you did.\n\n# Following conventions\nWhen making changes to files, first understand the file's code conventions. Mimic code style, use existing libraries and utilities, and follow existing patterns.\n- NEVER assume that a given library is available, even if it is well known. Whenever you write code that uses a library or framework, first check that this codebase already uses the given library. For example, you might look at neighboring files, or check the package.json (or cargo.toml, and so on depending on the language).\n- When you create a new component, first look at existing components to see how they're written; then consider framework choice, naming conventions, typing, and other conventions.\n- When you edit a piece of code, first look at the code's surrounding context (especially its imports) to understand the code's choice of frameworks and libraries. Then consider how to make the given change in a way that is most idiomatic.\n- Always follow security best practices. Never introduce code that exposes or logs secrets and keys. Never commit secrets or keys to the repository.\n\n# Code style\n- IMPORTANT: DO NOT ADD ***ANY*** COMMENTS unless asked\n\n# Doing tasks\nThe user will primarily request you perform software engineering tasks. This includes solving bugs, adding new functionality, refactoring code, explaining code, and more. For these tasks the following steps are recommended:\n- Use the available search tools to understand the codebase and the user's query. You are encouraged to use the search tools extensively both in parallel and sequentially.\n- Implement the solution using all tools available to you\n- Verify the solution if possible with tests. NEVER assume specific test framework or test script. Check the README or search codebase to determine the testing approach.\n- VERY IMPORTANT: When you have completed a task, you MUST run the lint and typecheck commands (e.g. npm run lint, npm run typecheck, ruff, etc.) with Bash if they were provided to you to ensure your code is correct. If you are unable to find the correct command, ask the user for the command to run and if they supply it, proactively suggest writing it to AGENTS.md so that you will know to run it next time.\nNEVER commit changes unless the user explicitly asks you to. It is VERY IMPORTANT to only commit when explicitly asked, otherwise the user will feel that you are being too proactive.\n\n- Tool results and user messages may include <system-reminder> tags. <system-reminder> tags contain useful information and reminders. They are NOT part of the user's provided input or the tool result.\n\n# Tool usage policy\n- When doing file search, prefer to use the Task tool in order to reduce context usage.\n- You have the capability to call multiple tools in a single response. When multiple independent pieces of information are requested, batch your tool calls together for optimal performance. When making multiple bash tool calls, you MUST send a single message with multiple tools calls to run the calls in parallel. For example, if you need to run \"git status\" and \"git diff\", send a single message with two tool calls to run the calls in parallel.\n\nYou MUST answer concisely with fewer than 4 lines of text (not including tool use or code generation), unless user asks for detail.\n\nIMPORTANT: Before you begin work, think about what the code you're editing is supposed to do based on the filenames directory structure.\n\n# Code References\n\nWhen referencing specific functions or pieces of code include the pattern `file_path:line_number` to allow the user to easily navigate to the source code location.\n\n<example>\nuser: Where are errors from the client handled?\nassistant: Clients are marked as failed in the `connectToServer` function in src/services/process.ts:712.\n</example>\n\nYou are powered by the model named fixture. The exact model ID is fixture/fixture\nHere is some useful information about the environment you are running in:\n<env>\n  Working directory: /tmp/strata-opencode-api-431bzgf4/workspace\n  Workspace root folder: /\n  Is directory a git repo: no\n  Platform: linux\n  Today's date: Fri Oct 23 2026\n</env>"
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_FAIL: run owned failure fixture and report the failure."
+          },
+          {
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "call_fixture_5",
+                "type": "function",
+                "function": {
+                  "name": "bash",
+                  "arguments": "{\"command\":\"python3 fail_fixture.py\",\"description\":\"Run owned harness fixture\",\"timeout\":20000}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call_fixture_5",
+            "content": "BUILD FAILED (owned fixture)\n"
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "bash",
+              "description": "Executes a given bash command in a persistent shell session with optional timeout, ensuring proper handling and security measures.\n\nBe aware: OS: linux, Shell: bash\n\nAll commands run in the current working directory by default. Use the `workdir` parameter if you need to run a command in a different directory. AVOID using `cd <directory> && <command>` patterns - use `workdir` instead.\n\nUse `/tmp/opencode` for temporary work outside the workspace. This directory has already been created, already exists, and is pre-approved for external directory access.\n\nIMPORTANT: This tool is for terminal operations like git, npm, docker, etc. DO NOT use it for file operations (reading, writing, editing, searching, finding files) - use the specialized tools for this instead.\n\nBefore executing the command, please follow these steps:\n\n1. Directory Verification:\n   - If the command will create new directories or files, first use `ls` to verify the parent directory exists and is the correct location\n   - For example, before running \"mkdir foo/bar\", first use `ls foo` to check that \"foo\" exists and is the intended parent directory\n\n2. Command Execution:\n   - Always quote file paths that contain spaces with double quotes (e.g., rm \"path with spaces/file.txt\")\n   - Examples of proper quoting:\n     - mkdir \"/Users/name/My Documents\" (correct)\n     - mkdir /Users/name/My Documents (incorrect - will fail)\n     - python \"/path/with spaces/script.py\" (correct)\n     - python /path/with spaces/script.py (incorrect - will fail)\n   - After ensuring proper quoting, execute the command.\n   - Capture the output of the command.\n\nUsage notes:\n  - The command argument is required.\n  - You can specify an optional timeout in milliseconds. If not specified, commands will time out after 120000ms.\n  - If the output exceeds 2000 lines or 51200 bytes, it will be truncated and the full output will be written to a file. You can use Read with offset/limit to read specific sections or Grep to search the full content. Do NOT use `head`, `tail`, or other truncation commands to limit output; the full output will already be captured to a file for more precise searching.\n\n  - Avoid using Bash with the `find`, `grep`, `cat`, `head`, `tail`, `sed`, `awk`, or `echo` commands, unless explicitly instructed or when these commands are truly necessary for the task. Instead, always prefer using the dedicated tools for these commands:\n    - File search: Use Glob (NOT find or ls)\n    - Content search: Use Grep (NOT grep or rg)\n    - Read files: Use Read (NOT cat/head/tail)\n    - Edit files: Use Edit (NOT sed/awk)\n    - Write files: Use Write (NOT echo >/cat <<EOF)\n    - Communication: Output text directly (NOT echo/printf)\n  - When issuing multiple commands:\n    - If the commands are independent and can run in parallel, make multiple bash tool calls in a single message. For example, if you need to run \"git status\" and \"git diff\", send a single message with two bash tool calls in parallel.\n    - If the commands depend on each other and must run sequentially, use a single Bash call with '&&' to chain them together (e.g., `git add . && git commit -m \"message\" && git push`). For instance, if one operation must complete before another starts (like mkdir before cp, Write before Bash for git operations, or git add before git commit), run these operations sequentially instead.\n    - Use ';' only when you need to run commands sequentially but don't care if earlier commands fail\n    - DO NOT use newlines to separate commands (newlines are ok in quoted strings)\n  - AVOID using `cd <directory> && <command>`. Use the `workdir` parameter to change directories instead.\n    <good-example>\n    Use workdir=\"/foo/bar\" with command: pytest tests\n    </good-example>\n    <bad-example>\n    cd /foo/bar && pytest tests\n    </bad-example>\n\n# Git and GitHub\n- Only commit, amend, push, or create PRs when explicitly requested.\n- Before committing, inspect `git status`, `git diff`, and `git log --oneline -10`; stage only intended files and never commit secrets.\n- Write a concise commit message that matches the repo style.\n- Do not update git config, skip hooks, use interactive `-i`, force-push, or create empty commits unless explicitly requested.\n- If a commit fails or hooks reject it, fix the issue and create a new commit; do not amend the failed commit.\n- Before creating a PR, inspect status, diff, remote tracking, recent commits, and the diff from the base branch.\n- Review all commits included in the PR, not just the latest commit.\n- Use `gh` for GitHub tasks, including PRs, issues, checks, and releases; return the PR URL when done.\n",
+              "parameters": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "The command to execute"
+                  },
+                  "timeout": {
+                    "minimum": -9007199254740991,
+                    "exclusiveMinimum": 0,
+                    "type": "integer",
+                    "maximum": 9007199254740991,
+                    "description": "Optional timeout in milliseconds"
+                  },
+                  "workdir": {
+                    "type": "string",
+                    "description": "The working directory to run the command in. Defaults to the current directory. Use this instead of 'cd' commands."
+                  }
+                },
+                "required": [
+                  "command"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "tool_finished": true
+    },
+    {
+      "at": 1792750163.4576712,
+      "path": "/v1/chat/completions",
+      "body": {
+        "model": "fixture",
+        "max_tokens": 2048,
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are opencode, an interactive CLI tool that helps users with software engineering tasks. Use the instructions below and the tools available to you to assist the user.\n\nIMPORTANT: You must NEVER generate or guess URLs for the user unless you are confident that the URLs are for helping the user with programming. You may use URLs provided by the user in their messages or local files.\n\nIf the user asks for help or wants to give feedback inform them of the following:\n- /help: Get help with using opencode\n- To give feedback, users should report the issue at https://github.com/anomalyco/opencode/issues\n\nWhen the user directly asks about opencode (eg 'can opencode do...', 'does opencode have...') or asks in second person (eg 'are you able...', 'can you do...'), first use the WebFetch tool to gather information to answer the question from opencode docs at https://opencode.ai\n\n# Tone and style\nYou should be concise, direct, and to the point. When you run a non-trivial bash command, you should explain what the command does and why you are running it, to make sure the user understands what you are doing (this is especially important when you are running a command that will make changes to the user's system).\nRemember that your output will be displayed on a command line interface. Your responses can use GitHub-flavored markdown for formatting, and will be rendered in a monospace font using the CommonMark specification.\nOutput text to communicate with the user; all text you output outside of tool use is displayed to the user. Only use tools to complete tasks. Never use tools like Bash or code comments as means to communicate with the user during the session.\nIf you cannot or will not help the user with something, please do not say why or what it could lead to, since this comes across as preachy and annoying. Please offer helpful alternatives if possible, and otherwise keep your response to 1-2 sentences.\nOnly use emojis if the user explicitly requests it. Avoid using emojis in all communication unless asked.\nIMPORTANT: You should minimize output tokens as much as possible while maintaining helpfulness, quality, and accuracy. Only address the specific query or task at hand, avoiding tangential information unless absolutely critical for completing the request. If you can answer in 1-3 sentences or a short paragraph, please do.\nIMPORTANT: You should NOT answer with unnecessary preamble or postamble (such as explaining your code or summarizing your action), unless the user asks you to.\nIMPORTANT: Keep your responses short, since they will be displayed on a command line interface. You MUST answer concisely with fewer than 4 lines (not including tool use or code generation), unless user asks for detail. Answer the user's question directly, without elaboration, explanation, or details. One word answers are best. Avoid introductions, conclusions, and explanations. You MUST avoid text before/after your response, such as \"The answer is <answer>.\", \"Here is the content of the file...\" or \"Based on the information provided, the answer is...\" or \"Here is what I will do next...\". Here are some examples to demonstrate appropriate verbosity:\n<example>\nuser: what is 2+2?\nassistant: 4\n</example>\n\n<example>\nuser: is 11 a prime number?\nassistant: Yes\n</example>\n\n<example>\nuser: what command should I run to list files in the current directory?\nassistant: ls\n</example>\n\n<example>\nuser: what command should I run to watch files in the current directory?\nassistant: [use the ls tool to list the files in the current directory, then read docs/commands in the relevant file to find out how to watch files]\nnpm run dev\n</example>\n\n<example>\nuser: what files are in the directory src/?\nassistant: [runs ls and sees foo.c, bar.c, baz.c]\nuser: which file contains the implementation of foo?\nassistant: src/foo.c\n</example>\n\n<example>\nuser: write tests for new feature\nassistant: [uses grep and glob search tools to find where similar tests are defined, uses concurrent read file tool use blocks in one tool call to read relevant files at the same time, uses edit file tool to write new tests]\n</example>\n\n# Proactiveness\nYou are allowed to be proactive, but only when the user asks you to do something. You should strive to strike a balance between:\n1. Doing the right thing when asked, including taking actions and follow-up actions\n2. Not surprising the user with actions you take without asking\nFor example, if the user asks you how to approach something, you should do your best to answer their question first, and not immediately jump into taking actions.\n3. Do not add additional code explanation summary unless requested by the user. After working on a file, just stop, rather than providing an explanation of what you did.\n\n# Following conventions\nWhen making changes to files, first understand the file's code conventions. Mimic code style, use existing libraries and utilities, and follow existing patterns.\n- NEVER assume that a given library is available, even if it is well known. Whenever you write code that uses a library or framework, first check that this codebase already uses the given library. For example, you might look at neighboring files, or check the package.json (or cargo.toml, and so on depending on the language).\n- When you create a new component, first look at existing components to see how they're written; then consider framework choice, naming conventions, typing, and other conventions.\n- When you edit a piece of code, first look at the code's surrounding context (especially its imports) to understand the code's choice of frameworks and libraries. Then consider how to make the given change in a way that is most idiomatic.\n- Always follow security best practices. Never introduce code that exposes or logs secrets and keys. Never commit secrets or keys to the repository.\n\n# Code style\n- IMPORTANT: DO NOT ADD ***ANY*** COMMENTS unless asked\n\n# Doing tasks\nThe user will primarily request you perform software engineering tasks. This includes solving bugs, adding new functionality, refactoring code, explaining code, and more. For these tasks the following steps are recommended:\n- Use the available search tools to understand the codebase and the user's query. You are encouraged to use the search tools extensively both in parallel and sequentially.\n- Implement the solution using all tools available to you\n- Verify the solution if possible with tests. NEVER assume specific test framework or test script. Check the README or search codebase to determine the testing approach.\n- VERY IMPORTANT: When you have completed a task, you MUST run the lint and typecheck commands (e.g. npm run lint, npm run typecheck, ruff, etc.) with Bash if they were provided to you to ensure your code is correct. If you are unable to find the correct command, ask the user for the command to run and if they supply it, proactively suggest writing it to AGENTS.md so that you will know to run it next time.\nNEVER commit changes unless the user explicitly asks you to. It is VERY IMPORTANT to only commit when explicitly asked, otherwise the user will feel that you are being too proactive.\n\n- Tool results and user messages may include <system-reminder> tags. <system-reminder> tags contain useful information and reminders. They are NOT part of the user's provided input or the tool result.\n\n# Tool usage policy\n- When doing file search, prefer to use the Task tool in order to reduce context usage.\n- You have the capability to call multiple tools in a single response. When multiple independent pieces of information are requested, batch your tool calls together for optimal performance. When making multiple bash tool calls, you MUST send a single message with multiple tools calls to run the calls in parallel. For example, if you need to run \"git status\" and \"git diff\", send a single message with two tool calls to run the calls in parallel.\n\nYou MUST answer concisely with fewer than 4 lines of text (not including tool use or code generation), unless user asks for detail.\n\nIMPORTANT: Before you begin work, think about what the code you're editing is supposed to do based on the filenames directory structure.\n\n# Code References\n\nWhen referencing specific functions or pieces of code include the pattern `file_path:line_number` to allow the user to easily navigate to the source code location.\n\n<example>\nuser: Where are errors from the client handled?\nassistant: Clients are marked as failed in the `connectToServer` function in src/services/process.ts:712.\n</example>\n\nYou are powered by the model named fixture. The exact model ID is fixture/fixture\nHere is some useful information about the environment you are running in:\n<env>\n  Working directory: /tmp/strata-opencode-api-431bzgf4/workspace\n  Workspace root folder: /\n  Is directory a git repo: no\n  Platform: linux\n  Today's date: Fri Oct 23 2026\n</env>"
+          },
+          {
+            "role": "user",
+            "content": "Manager guidance within the current authorized task:\nHARNESS_CLIENT: retain the selected task scope and acknowledge this guidance.\n\nAcknowledge receipt with this exact line: GUIDANCE_ACK msg_8b02b579393e3cda2ad64fcbb320bd94\nThis acknowledgement records receipt, not verified application."
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "bash",
+              "description": "Executes a given bash command in a persistent shell session with optional timeout, ensuring proper handling and security measures.\n\nBe aware: OS: linux, Shell: bash\n\nAll commands run in the current working directory by default. Use the `workdir` parameter if you need to run a command in a different directory. AVOID using `cd <directory> && <command>` patterns - use `workdir` instead.\n\nUse `/tmp/opencode` for temporary work outside the workspace. This directory has already been created, already exists, and is pre-approved for external directory access.\n\nIMPORTANT: This tool is for terminal operations like git, npm, docker, etc. DO NOT use it for file operations (reading, writing, editing, searching, finding files) - use the specialized tools for this instead.\n\nBefore executing the command, please follow these steps:\n\n1. Directory Verification:\n   - If the command will create new directories or files, first use `ls` to verify the parent directory exists and is the correct location\n   - For example, before running \"mkdir foo/bar\", first use `ls foo` to check that \"foo\" exists and is the intended parent directory\n\n2. Command Execution:\n   - Always quote file paths that contain spaces with double quotes (e.g., rm \"path with spaces/file.txt\")\n   - Examples of proper quoting:\n     - mkdir \"/Users/name/My Documents\" (correct)\n     - mkdir /Users/name/My Documents (incorrect - will fail)\n     - python \"/path/with spaces/script.py\" (correct)\n     - python /path/with spaces/script.py (incorrect - will fail)\n   - After ensuring proper quoting, execute the command.\n   - Capture the output of the command.\n\nUsage notes:\n  - The command argument is required.\n  - You can specify an optional timeout in milliseconds. If not specified, commands will time out after 120000ms.\n  - If the output exceeds 2000 lines or 51200 bytes, it will be truncated and the full output will be written to a file. You can use Read with offset/limit to read specific sections or Grep to search the full content. Do NOT use `head`, `tail`, or other truncation commands to limit output; the full output will already be captured to a file for more precise searching.\n\n  - Avoid using Bash with the `find`, `grep`, `cat`, `head`, `tail`, `sed`, `awk`, or `echo` commands, unless explicitly instructed or when these commands are truly necessary for the task. Instead, always prefer using the dedicated tools for these commands:\n    - File search: Use Glob (NOT find or ls)\n    - Content search: Use Grep (NOT grep or rg)\n    - Read files: Use Read (NOT cat/head/tail)\n    - Edit files: Use Edit (NOT sed/awk)\n    - Write files: Use Write (NOT echo >/cat <<EOF)\n    - Communication: Output text directly (NOT echo/printf)\n  - When issuing multiple commands:\n    - If the commands are independent and can run in parallel, make multiple bash tool calls in a single message. For example, if you need to run \"git status\" and \"git diff\", send a single message with two bash tool calls in parallel.\n    - If the commands depend on each other and must run sequentially, use a single Bash call with '&&' to chain them together (e.g., `git add . && git commit -m \"message\" && git push`). For instance, if one operation must complete before another starts (like mkdir before cp, Write before Bash for git operations, or git add before git commit), run these operations sequentially instead.\n    - Use ';' only when you need to run commands sequentially but don't care if earlier commands fail\n    - DO NOT use newlines to separate commands (newlines are ok in quoted strings)\n  - AVOID using `cd <directory> && <command>`. Use the `workdir` parameter to change directories instead.\n    <good-example>\n    Use workdir=\"/foo/bar\" with command: pytest tests\n    </good-example>\n    <bad-example>\n    cd /foo/bar && pytest tests\n    </bad-example>\n\n# Git and GitHub\n- Only commit, amend, push, or create PRs when explicitly requested.\n- Before committing, inspect `git status`, `git diff`, and `git log --oneline -10`; stage only intended files and never commit secrets.\n- Write a concise commit message that matches the repo style.\n- Do not update git config, skip hooks, use interactive `-i`, force-push, or create empty commits unless explicitly requested.\n- If a commit fails or hooks reject it, fix the issue and create a new commit; do not amend the failed commit.\n- Before creating a PR, inspect status, diff, remote tracking, recent commits, and the diff from the base branch.\n- Review all commits included in the PR, not just the latest commit.\n- Use `gh` for GitHub tasks, including PRs, issues, checks, and releases; return the PR URL when done.\n",
+              "parameters": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "The command to execute"
+                  },
+                  "timeout": {
+                    "minimum": -9007199254740991,
+                    "exclusiveMinimum": 0,
+                    "type": "integer",
+                    "maximum": 9007199254740991,
+                    "description": "Optional timeout in milliseconds"
+                  },
+                  "workdir": {
+                    "type": "string",
+                    "description": "The working directory to run the command in. Defaults to the current directory. Use this instead of 'cd' commands."
+                  }
+                },
+                "required": [
+                  "command"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "tool_finished": true
+    }
+  ]
+}

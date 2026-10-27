@@ -1,0 +1,2 @@
+User supervisor installed; no task selected. Inspect status and Board identity next.
+Created symlink /home/ubuntu/.config/systemd/user/default.target.wants/strata-board-harness.service → /home/ubuntu/.config/systemd/user/strata-board-harness.service.

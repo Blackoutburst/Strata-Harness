@@ -1,0 +1,25 @@
+{
+  "real_strata_requests": 0,
+  "real_board_tasks": 0,
+  "temporary_root": "/home/ubuntu/.local/share/strata-board-harness-setup/managed-engine-fxz1nv5e",
+  "passed": true,
+  "startup_errors": [],
+  "session_id": "ses_e9776c54affeS4cSnhCZhv4naW",
+  "no_model_step_during_active_tool": true,
+  "rtk_actual_command": true,
+  "real_exit37": true,
+  "assistant_ack": true,
+  "steps": 3,
+  "token_totals": {
+    "input": 20,
+    "output": 20,
+    "reasoning": 0
+  },
+  "build_timeout_raised": true,
+  "outside_command_rejected": true,
+  "outside_native_read_rejected": true,
+  "process_cleanup_verified": true,
+  "worker_lock_absent": true,
+  "model_requests": 6,
+  "temporary_files_removed": true
+}

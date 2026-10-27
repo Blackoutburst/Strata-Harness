@@ -1,0 +1,15 @@
+{
+  "python": "3.10.12",
+  "tests_exit_code": 0,
+  "tests_output": "test_authenticated_probe_checks_loaded_model (test_supervisor.SupervisorTests) ... ok\ntest_backoff_is_bounded_does_not_block_control_heartbeat_and_survives_restart (test_supervisor.SupervisorTests) ... ok\ntest_configuration_precedence_and_validation (test_supervisor.SupervisorTests) ... ok\ntest_daemon_survives_model_shutdown_and_handles_sigterm (test_supervisor.SupervisorTests) ... ok\ntest_lock_rejects_duplicate_supervisor_then_allows_restart (test_supervisor.SupervisorTests) ... ok\ntest_outage_authentication_and_invalid_response_are_distinct (test_supervisor.SupervisorTests) ... ok\ntest_outage_recovery_preserves_checkpoint_and_records_only_transitions (test_supervisor.SupervisorTests) ... ok\ntest_redirect_does_not_forward_credentials (test_supervisor.SupervisorTests) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 4.217s\n\nOK\n",
+  "systemd_verify_exit_code": 0,
+  "systemd_verify_output": "netplan-ovs-cleanup.service: Failed to open /run/systemd/system/netplan-ovs-cleanup.service: Permission denied\n/lib/systemd/system/snapd.service:23: Unknown key name 'RestartMode' in section 'Service', ignoring.\n",
+  "temporary_files_removed": true,
+  "checked_at": "2026-10-23T07:03:30.811520+00:00",
+  "host_role": "Ubuntu home server",
+  "deployed": false,
+  "local_tests": {
+    "passed": 8,
+    "command": "python3 -m unittest discover -s tests -v"
+  }
+}

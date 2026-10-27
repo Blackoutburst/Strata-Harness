@@ -1,0 +1,52 @@
+test_authenticated_urgent_stop_is_processed_even_when_model_offline (test_worker.WorkerTests) ... ok
+test_build_review_dedup_restart_and_deadline_do_not_grant_approval (test_worker.WorkerTests) ... ERROR
+test_build_reviews_have_separate_bounded_budget_and_still_pause_for_manager (test_worker.WorkerTests) ... FAIL
+test_claim_precedes_prompt_and_time_cap_is_terminal_without_automatic_retry (test_worker.WorkerTests) ... ok
+test_early_build_missing_escalates_once_with_evidence_and_stops (test_worker.WorkerTests) ... ok
+test_explicit_operator_resume_reclaims_same_task_without_resubmitting_initial_prompt (test_worker.WorkerTests) ... ok
+test_failure_budget_remains_terminal_after_separate_build_reviews (test_worker.WorkerTests) ... FAIL
+test_idle_offline_does_not_prepare_claim_or_invoke_model (test_worker.WorkerTests) ... ok
+test_legacy_budget_is_conservative_and_a_stopped_worker_is_not_resumed (test_worker.WorkerTests) ... ok
+test_legitimate_bounded_job_liveness_does_not_extend_past_its_deadline (test_worker.WorkerTests) ... ok
+test_multiline_developer_blocker_escalates_once_and_user_quotation_does_not (test_worker.WorkerTests) ... ok
+test_real_early_build_attempt_survives_controller_restart_without_becoming_a_pass (test_worker.WorkerTests) ... ok
+test_repeated_unchanged_reads_pause_before_step_budget (test_worker.WorkerTests) ... ok
+test_review_requires_clean_exact_commit_build_and_releases_to_review (test_worker.WorkerTests) ... ok
+test_stale_build_cannot_be_used_for_review_of_different_source (test_worker.WorkerTests) ... ok
+test_step_cap_preserves_partial_checkpoint_and_never_enters_a_new_round (test_worker.WorkerTests) ... ok
+test_trusted_stop_received_before_admission_prevents_claim_and_prompt (test_worker.WorkerTests) ... ok
+
+======================================================================
+ERROR: test_build_review_dedup_restart_and_deadline_do_not_grant_approval (test_worker.WorkerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/florianchanson/Documents/strata-board-harness/tests/test_worker.py", line 221, in test_build_review_dedup_restart_and_deadline_do_not_grant_approval
+    self.assertEqual(restored.state['build_review_count'],1)
+KeyError: 'build_review_count'
+
+======================================================================
+FAIL: test_build_reviews_have_separate_bounded_budget_and_still_pause_for_manager (test_worker.WorkerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/florianchanson/Documents/strata-board-harness/tests/test_worker.py", line 196, in test_build_reviews_have_separate_bounded_budget_and_still_pause_for_manager
+    self.assertEqual(self.worker.state['phase'],'waiting_for_manager')
+AssertionError: 'stopped' != 'waiting_for_manager'
+- stopped
++ waiting_for_manager
+
+
+======================================================================
+FAIL: test_failure_budget_remains_terminal_after_separate_build_reviews (test_worker.WorkerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/florianchanson/Documents/strata-board-harness/tests/test_worker.py", line 238, in test_failure_budget_remains_terminal_after_separate_build_reviews
+    self.assertEqual(self.worker.state['phase'],'waiting_for_manager')
+AssertionError: 'stopped' != 'waiting_for_manager'
+- stopped
++ waiting_for_manager
+
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.074s
+
+FAILED (failures=2, errors=1)

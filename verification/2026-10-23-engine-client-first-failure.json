@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-10-23T09:28:00.879980+00:00",
+  "command": "python3 -m unittest discover -s tests -p test_engine.py -v",
+  "tests": 9,
+  "failures": 1,
+  "exact_failure": "test_accepted_or_uncertain_abort_is_not_repeated_or_reported_as_cleanup: AssertionError: 0 != 1 at self.assertEqual(len(self.posts('/abort')), 1)",
+  "fixture_exception": "JSONDecodeError: Expecting value: line 1 column 1 (char 0) while parsing a valid bodyless POST /abort",
+  "fix": "Fake HTTP fixture now parses JSON only when Content-Length > 0. Production client behavior unchanged for this fixture repair."
+}

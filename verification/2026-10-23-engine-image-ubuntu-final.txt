@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "real_board_tasks": 0,
+  "kind": "infrastructure_image_path_smoke",
+  "request_settings": {
+    "model": "strata/swift-1.5-iq3_s",
+    "context_limit": 262144,
+    "output_limit": 1024,
+    "configured_options": {
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    },
+    "steps": 8
+  },
+  "read_actual_image_path": true,
+  "rtk_actual_ls": true,
+  "known_code_recognized": true,
+  "session_id": "ses_e977640a7ffex9goteCmyyQQCS",
+  "steps": 2,
+  "token_totals": {
+    "input": 4274,
+    "output": 82,
+    "reasoning": 0
+  },
+  "api_errors": [],
+  "process_cleanup_verified": true,
+  "worker_lock_absent": true,
+  "model_requests": [
+    {
+      "id": "0c41be0351c34fae8a419c20b9257a7a",
+      "at": "2026-10-23T11:33:41.417121+00:00",
+      "state": "completed",
+      "configured_api_billing_usd": 0,
+      "client_body_sha256": "857b47311568f3f09aea4484d4db084e8ac942c5b1f97cbce5d95a5e91f59c03",
+      "requested_settings": {
+        "model": "swift-1.5-iq3_s",
+        "max_tokens": 1024,
+        "stream": true,
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        },
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "body_sha256": "9fb6f783b75af369da2582ca1e1f26e9cbadfa3e6450e7bc3b674b7204258311",
+      "message_count": 2,
+      "tool_count": 2,
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3982,
+        "completion_tokens": 75,
+        "total_tokens": 4057,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "seconds": 6.20881462097168
+    },
+    {
+      "id": "3824251ef35a452ba20973c2da1cc510",
+      "at": "2026-10-23T11:33:47.707265+00:00",
+      "state": "completed",
+      "configured_api_billing_usd": 0,
+      "client_body_sha256": "43e3c2b3d8f066bd4e3c7b5075072029780eb313dc791d1096485179717b84f1",
+      "requested_settings": {
+        "model": "swift-1.5-iq3_s",
+        "max_tokens": 1024,
+        "stream": true,
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        },
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "body_sha256": "f6832b0e23352fc56cf685ce571a5adcea480e663ca6a6b12995475b4c602bfc",
+      "message_count": 6,
+      "tool_count": 2,
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4267,
+        "completion_tokens": 7,
+        "total_tokens": 4274,
+        "prompt_tokens_details": {
+          "cached_tokens": 3975
+        }
+      },
+      "seconds": 2.189453363418579
+    }
+  ],
+  "upstream_usage_recorded": true,
+  "thinking_disabled_on_wire": true,
+  "temporary_files_removed": true
+}

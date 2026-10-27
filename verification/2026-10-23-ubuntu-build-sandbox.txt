@@ -1,0 +1,9 @@
+{
+  "package": "bubblewrap",
+  "version": "0.6.1-1ubuntu0.3",
+  "package_sha256": "706763714e5d19fc7ab2572a6418506e3a4a5d5960e99309707b58117e6b40cb",
+  "binary_sha256": "bf6cf3d4456665f5d80c14eb79a76e0ce87b39a0883e614a161658b4ec33492c",
+  "probe_exit": 0,
+  "probe_stdout": "isolated\n",
+  "probe_stderr": ""
+}

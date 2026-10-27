@@ -1,0 +1,31 @@
+[Unit]
+Description=Strata Board Harness supervisor
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=exec
+User=strata-harness
+Group=strata-harness
+WorkingDirectory=/opt/strata-board-harness
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+EnvironmentFile=/etc/strata-board-harness/environment
+ExecStart=/usr/bin/python3 -m strata_board_harness --config /etc/strata-board-harness/config.json run
+Restart=always
+RestartSec=10
+TimeoutStopSec=30
+StateDirectory=strata-board-harness
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target

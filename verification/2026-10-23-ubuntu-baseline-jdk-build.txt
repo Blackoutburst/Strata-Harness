@@ -1,0 +1,26 @@
+{"exit_code": 1, "seconds": 8.438055753707886, "source_baseline": "19d7458debbe540c9cb7f0061805f7af766cdf5a", "jdk": "private javac17.0.20.1", "trusted_baseline_prefetch_network": true}
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/home/worker
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.1.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+Checking the license for package Android SDK Build-Tools 36 in /opt/android-sdk/licenses
+License for package Android SDK Build-Tools 36 accepted.
+Preparing "Install Android SDK Build-Tools 36 v.36.0.0".
+Warning: Failed to read or create install properties file.
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Could not determine the dependencies of task ':app:compileDebugJavaWithJavac'.
+> Failed to install the following SDK components:
+      build-tools;36.0.0 Android SDK Build-Tools 36
+  The SDK directory is not writable (/opt/android-sdk)
+
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to generate a Build Scan (Powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 8s
+

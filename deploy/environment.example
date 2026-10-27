@@ -1,0 +1,2 @@
+# Fill this on the deployment host; never commit the real file.
+STRATA_API_KEY=

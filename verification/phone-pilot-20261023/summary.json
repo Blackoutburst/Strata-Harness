@@ -1,0 +1,58 @@
+{
+  "at": "2026-10-23T12:54:31.906385+00:00",
+  "outcome": "incomplete_pilot_stopped_by_shared_blocker_budget",
+  "engine_session": "ses_e976e64ffffe4RYMXLu4fuhQGj",
+  "engine_stopped_at": 1792759182.7229397,
+  "steps": 104,
+  "charged_active_seconds": 2713.813525915146,
+  "charged_time_is_not_inference_time": true,
+  "source_checkpoint": {
+    "head": "19d7458debbe540c9cb7f0061805f7af766cdf5a",
+    "clean": false,
+    "source_sha256": "8d8e9094dac1c3a73d6632f19886a73e7652482f028c16192372c2890548f1e1",
+    "owned_effects": {
+      "phase": "idle",
+      "snapshot": "strata_harness_0a0cbc15848564d0ef3d3f70",
+      "cleanup_verified": true,
+      "started_at": 1792755319.4573371,
+      "restored_at": 1792755324.276046,
+      "before_sha256": "e4b3f1836599c38b452f01f43160bafe6c260e5971a457a6df1c6466cfcd9414"
+    }
+  },
+  "proxy_requests": 104,
+  "request_states": {
+    "completed": 99,
+    "client_disconnected": 5
+  },
+  "requests_with_usage": 99,
+  "missing_usage_requests": 5,
+  "recorded_prompt_tokens_including_cache": 12981185,
+  "recorded_cache_read_tokens": 12797226,
+  "recorded_fresh_input_tokens": 183959,
+  "recorded_output_tokens": 18768,
+  "sum_recorded_request_seconds": 622.1017460823059,
+  "request_seconds_are_not_wall_or_compute_time": true,
+  "engine_token_totals": {
+    "input": 183959,
+    "output": 18768,
+    "reasoning": 0
+  },
+  "engine_cache_tokens": {
+    "read": 12797226,
+    "write": 0
+  },
+  "rtk_tool_activity": [],
+  "board_operation_counts": {
+    "claim_ticket": 4,
+    "renew_ticket": 7,
+    "release_ticket": 4
+  },
+  "coding_process_cleanup_verified": true,
+  "claim_released": true,
+  "pilot_runtime_tests_run": 0,
+  "final_test_apk_compiled": false,
+  "privileged_deploy": "not_run_incomplete_failed_implementation",
+  "ci_physical_rom_sim": "not_verified",
+  "configured_api_billing_usd": 0,
+  "energy": "unmeasured"
+}

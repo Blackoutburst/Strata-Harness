@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-23T13:03:51.779756+00:00",
+  "daemon": {
+    "state": "running",
+    "pid": 348850,
+    "heartbeat_at": "2026-10-23T13:03:50.284452+00:00"
+  },
+  "runtime": {
+    "state": "released",
+    "checked_at": 1792760631.3222787,
+    "selected_ticket": "7667684d1e4fc8c0531c6dc0a51a8c0f"
+  },
+  "worker_phase": "stopped",
+  "worker_stop_reason": "blocker_budget_elapsed",
+  "engine_phase": "stopped",
+  "coding_processes": [],
+  "coding_lock_exists": false,
+  "coordination": {
+    "mode": "released",
+    "poll_count": 138,
+    "last_inbox_at": 1792760617.2662222,
+    "poll_failures": 0,
+    "inbox_error": null,
+    "release_completed": true
+  }
+}

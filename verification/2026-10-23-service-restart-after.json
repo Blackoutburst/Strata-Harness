@@ -1,0 +1,53 @@
+{
+  "runtime_admission": {
+    "identity": {
+      "owner_id": "blackoutburst",
+      "agent_id": "e1842df60e6de4ae0025464e7930f869",
+      "device_id": "40604a98d22b5f8688c1c073ab0f59f7",
+      "session_id": "strata-harness-ubuntu-bc4ee9db4db845e0bd702982b0502b9c"
+    },
+    "selected_task": null
+  },
+  "runtime_identity": {
+    "owner_id": "blackoutburst",
+    "agent_id": "e1842df60e6de4ae0025464e7930f869",
+    "device_id": "40604a98d22b5f8688c1c073ab0f59f7",
+    "session_id": "strata-harness-ubuntu-bc4ee9db4db845e0bd702982b0502b9c",
+    "profile_version": 2
+  },
+  "daemon": {
+    "state": "running",
+    "pid": 316655,
+    "heartbeat_at": "2026-10-23T10:12:35.279560+00:00"
+  },
+  "backend": {
+    "state": "model_available",
+    "detail": "advertised_by_models_endpoint",
+    "checked_at": "2026-10-23T10:12:36.335649+00:00",
+    "model_id": "swift-1.5-iq3_s"
+  },
+  "consecutive_failures": 0,
+  "coordination_control": {
+    "mode": "quiesce_requested",
+    "offline_since": null,
+    "stop_reason": "supervisor_shutdown",
+    "quiesce_request": {
+      "id": "c472c3156e2b46988cfafcda0a832113",
+      "reason": "supervisor_shutdown",
+      "requested_at": 1792750262.6354444
+    },
+    "poll_failures": 0,
+    "backend": "model_available",
+    "last_inbox_at": 1792750353.5665655,
+    "inbox_error": null,
+    "last_tick_at": 1792750358.9327075,
+    "text_retry_at": {},
+    "text_error": null,
+    "quiesce_error": "pause_outcome_requires_reconciliation"
+  },
+  "runtime": {
+    "state": "quiesce_requested",
+    "checked_at": 1792750358.9327075,
+    "selected_ticket": null
+  }
+}

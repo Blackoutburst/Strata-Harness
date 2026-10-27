@@ -1,0 +1,25 @@
+{
+  "experiment": "baseline_adapter_smoke_only",
+  "exit_code": 1,
+  "instrumentation": {
+    "counts": {
+      "passed": 0,
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "started": 1,
+      "started_without_result": 0,
+      "runner_success": false,
+      "crashed": false
+    },
+    "tests": [
+      {
+        "class": "tech.primal.attentive_os.phone.ExampleInstrumentedTest",
+        "test": "useAppContext",
+        "code": -2
+      }
+    ]
+  },
+  "cleanup_verified": true,
+  "seconds": 102.46821117401123
+}

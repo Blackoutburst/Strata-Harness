@@ -1,0 +1,21 @@
+{
+  "id": "job-00a8e5e619fd52a15a8cf655267d3b3d",
+  "operation": "build",
+  "state": "completed",
+  "argument": null,
+  "started_at": 1792759177.8561573,
+  "exit_code": 78,
+  "cleanup_verified": true,
+  "requires_manager_review": [
+    {
+      "path": "app/build.gradle.kts",
+      "sha256": "d7d9cdf8293472d54d2115edd2af0c04a9052a8993b54bd83170fcf5aa1f29d5"
+    }
+  ],
+  "passed": false,
+  "log": "/home/ubuntu/.local/state/strata-board-harness/phone-e2e-pilot-20261023/engine/jobs/job-00a8e5e619fd52a15a8cf655267d3b3d.log",
+  "log_sha256": "1fe8bec62c0fcb6f22b82b3d49d24bb6b6f64d69b71c196b4d53407c8cafc477",
+  "output_tail": "Build control changes need manager review: [{\"path\": \"app/build.gradle.kts\", \"sha256\": \"d7d9cdf8293472d54d2115edd2af0c04a9052a8993b54bd83170fcf5aa1f29d5\"}]",
+  "output_bytes": 155,
+  "finished_at": 1792759178.0519984
+}

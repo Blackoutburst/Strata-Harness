@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<string>", line 10, in <module>
+  File "/home/ubuntu/.local/lib/strata-board-harness/strata_board_harness/bridge.py", line 189, in test
+    if len(data)>64*1024*1024:raise ValueError('APK too large')
+ValueError: APK too large

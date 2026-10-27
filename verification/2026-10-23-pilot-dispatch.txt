@@ -1,0 +1,5 @@
+{"ticket_id": "7667684d1e4fc8c0531c6dc0a51a8c0f", "authorization_id": "phone-e2e-harness-pilot-20261023", "selected_at": 1792755726.2562013, "active_seconds_cap": 5400, "assistant_steps_cap": 400, "service": "strata-board-harness.service", "workspace": "/home/ubuntu/agent-workspaces/phone-harness-pilot-20261023", "runtime_sha256": "eab11563f8b7b43f03efc42aa0c7870f81aec28e47602d1b98d52f122bf4684e", "previous_worker_absent": true}
+MainPID=334310
+NRestarts=0
+ActiveState=active
+

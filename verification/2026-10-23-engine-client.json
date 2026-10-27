@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-10-23T09:36:16.988085+00:00",
+  "increment": "selected_engine_session_client",
+  "local_tests": 57,
+  "ubuntu_tests": 57,
+  "ubuntu_python": "3.10.12",
+  "local_receipt": "2026-10-23-engine-client-local.json",
+  "ubuntu_receipt": "2026-10-23-engine-client-ubuntu.json",
+  "installed_receipt": "2026-10-23-engine-client-installed.json",
+  "first_failure_receipt": "2026-10-23-engine-client-first-failure.json",
+  "actual_selected_session_contract_passed": true,
+  "actual_enginehttp_transport_integration": false,
+  "rtk_actual_rewrite": true,
+  "nonzero_exit37_preserved": true,
+  "stop_tool_process_exit_observed": true,
+  "stop_observation_seconds": 0.5,
+  "lost_reply_restart_tests": "loopback fake engine plus SQLite close/reopen, not a live model outage",
+  "cold_bootstrap": {
+    "trace_receipt": "2026-10-23-engine-bootstrap-trace.json",
+    "trace_session_seconds": 6.007805499713868,
+    "observed_dependency_downloads": true,
+    "subsequent_control_probes_passed": 2,
+    "earlier_timeout_cause": "unconfirmed; intermittent readiness issue remains"
+  },
+  "boundaries": {
+    "daemon_wired": false,
+    "engine_launcher_implemented": false,
+    "event_pump_implemented": false,
+    "worker_paired": false,
+    "service_installed": false,
+    "real_strata_requests": 0,
+    "real_board_developer_calls": 0,
+    "phone_pilot_dispatched": false,
+    "glm_held": true,
+    "original_benchmark_untouched": true,
+    "ubuntu_actual_engine_tested": false
+  },
+  "cleanup": {
+    "ubuntu_temporary_files_removed": true,
+    "installed_probe_temporary_files_removed": true,
+    "no_live_opencode_processes": true,
+    "shared_worker_lock_absent": true
+  },
+  "manager_inbox_monitoring": {
+    "observed_poll_gap_seconds": 686,
+    "note": "One chat-manager gap exceeded ten minutes; this was not a live trial of the new deterministic coordinator. No new inbox messages."
+  },
+  "source_sha256": {
+    "README.md": "8852826467ed6861bf84c2eb5c3a1b34cde99c09ce89e3d34fbb5691ffc435e8",
+    "docs/architecture.md": "a03df46b3764e318c2f3e9ce555dd4221f14d0172d05c27b78a7b19b549aed4f",
+    "docs/engine-client.md": "f41808e87e017bf4e420d6c7868795f4046913e3d83f4fba38602b39f239f9df",
+    "docs/engine-control.md": "b22a0ac6f690c42e826081367ad701aab42f1b8e32d3cfb9b55650777bc6f7f2",
+    "scripts/inspect_opencode.py": "5fa67906418b8b4d34ce502694527925195b87a11f3a0f958370793853b14f2b",
+    "scripts/probe_opencode_control.py": "c71901910e7d97b5b6e8bda1c69f435a5070c37ca3a4e1ad2aa19e6ee63f629c",
+    "scripts/trace_opencode_bootstrap.py": "01fc5a25a3c13f44c4e81628588fef2c2648214a480e837ab8db38e08fa6ddd6",
+    "strata_board_harness/__init__.py": "03b95b66c39e3d9b16fe4a4e60e1e87cc964c4bff25844b37b0dbf0a333a477e",
+    "strata_board_harness/__main__.py": "a457fb4a623a0525d115e34ecf7cbd01b0c15e0ea72c34717d3aa0dd5883ccd1",
+    "strata_board_harness/board.py": "e46db41057a39fb9f635c8227a9141a12f664822803c6350ee3ada49955a9c1b",
+    "strata_board_harness/coordination.py": "4468ba1759652228f0728fa1e522a4852e982722ad914c2660ab9a4ea17a8911",
+    "strata_board_harness/coordinator.py": "99183d486d26072d3b311de29bef32220b637bba8a22d713f8e0bf1fd10ee4cb",
+    "strata_board_harness/engine.py": "a0c963b75ee4f8115ff2fe25fdd26e39903813c9f5db1670a54ed52560aed242",
+    "strata_board_harness/supervisor.py": "961ec7155d48c4f1306952391a5634445c1fb9f9522fc9d86d707e80896217c0",
+    "tests/test_board.py": "95992eff0fcb91c0066e15538a436efe448e434ec1063fbd1a219362f7264038",
+    "tests/test_coordination.py": "efb329026011f1b66f7ccccff8b763a809b3f9de23abab7443c21e97e791a184",
+    "tests/test_coordinator.py": "b398203558842c88b29f2b40e719b922dbd5099d717835648aca049ab22257f8",
+    "tests/test_engine.py": "c563aac0f5caa5ba9b120a6e2aa649914d7f356ee8cbbbdb2f65bdb1a699f554",
+    "tests/test_engine_inspection.py": "1511b6b875a2b4b01ee8b895616ebbbb576681ca14ee8481b53b08f8c0c03caa",
+    "tests/test_supervisor.py": "9cddd1223b62db085de4a1a6e08284506c3b2daf5db144c2c895fd3756bd5033"
+  }
+}

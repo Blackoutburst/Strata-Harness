@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-23T13:00:26.192725+00:00",
+  "tests_local": 119,
+  "tests_ubuntu": 119,
+  "test_exit_local": 0,
+  "test_exit_ubuntu": 0,
+  "before_regression_receipt": "2026-10-23-review-budget-before.txt",
+  "local_receipt": "2026-10-23-review-budget-local.txt",
+  "ubuntu_receipt": "2026-10-23-review-budget-ubuntu.txt",
+  "deployed": false,
+  "pilot_resumed": false,
+  "source_hashes": {
+    "strata_board_harness/worker.py": "7420be9156dbafda7669d25c399a896c3f1eb15450d67d4a7aaa34dfed8b0102",
+    "tests/test_worker.py": "93fa0ab9a6786fc09e9454cdf5a70168d360d0642ec6baca454fed3e687e2f31"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "probe_key": "strata_harness_snapshot_probe",
+  "before": "null",
+  "restore_exit": 0,
+  "restore_stdout": "OK\n",
+  "probe_value_after_restore": "null",
+  "running_unlocked_after_restore": true
+}

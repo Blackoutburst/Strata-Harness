@@ -1,0 +1,12 @@
+{
+  "kind": "manager_reviewed_dependency_prefetch",
+  "approved_build_controls": {
+    "app/build.gradle.kts": "8da481c439fb2cb083778adf88943138e7666a09100844ff5694b63c981305aa",
+    "gradle/libs.versions.toml": "3040617ec4a1f3672c2225ea396e5d17dd71ac05dd8dbcb0454d35fc3d6134a8"
+  },
+  "exit_code": 1,
+  "started_at": 1792758908.8290687,
+  "finished_at": 1792759010.803948,
+  "log": "/home/ubuntu/.local/state/strata-board-harness/phone-e2e-pilot-20261023/manager-reviewed-prefetch-20261023T1235.log",
+  "not_worker_acceptance": true
+}

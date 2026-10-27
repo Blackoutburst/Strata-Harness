@@ -1,0 +1,235 @@
+[
+  {
+    "operation": "claim_ticket",
+    "at": "2026-10-23T11:42:15.592348+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 1
+        },
+        "at": "2026-10-23T11:42:15.498477+00:00",
+        "operation": "claim_ticket"
+      },
+      "result_version": 2
+    }
+  },
+  {
+    "operation": "renew_ticket",
+    "at": "2026-10-23T11:42:17.029163+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 2,
+          "progress": "Harness verified active execution; coordination tick"
+        },
+        "at": "2026-10-23T11:42:16.932723+00:00",
+        "operation": "renew_ticket"
+      },
+      "result_version": 3
+    }
+  },
+  {
+    "operation": "release_ticket",
+    "at": "2026-10-23T11:52:27.398452+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 3,
+          "idempotency_key": "07b0e6151a544e62aa985b9eb3cad73c",
+          "reason": "Harness checkpoint: runtime_execution_error",
+          "status": "todo",
+          "unassign_self": false
+        },
+        "at": "2026-10-23T11:52:27.287077+00:00",
+        "operation": "release_ticket"
+      },
+      "result_version": 4
+    }
+  },
+  {
+    "operation": "claim_ticket",
+    "at": "2026-10-23T12:00:34.747339+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 4
+        },
+        "at": "2026-10-23T12:00:34.551046+00:00",
+        "operation": "claim_ticket"
+      },
+      "result_version": 5
+    }
+  },
+  {
+    "operation": "renew_ticket",
+    "at": "2026-10-23T12:00:36.883193+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 5,
+          "progress": "Harness verified active execution; coordination tick"
+        },
+        "at": "2026-10-23T12:00:36.756343+00:00",
+        "operation": "renew_ticket"
+      },
+      "result_version": 6
+    }
+  },
+  {
+    "operation": "release_ticket",
+    "at": "2026-10-23T12:04:36.576953+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 6,
+          "idempotency_key": "46613faa934f4166b738d68a9544c078",
+          "reason": "Harness checkpoint: runtime_execution_error",
+          "status": "todo",
+          "unassign_self": false
+        },
+        "at": "2026-10-23T12:04:36.271248+00:00",
+        "operation": "release_ticket"
+      },
+      "result_version": 7
+    }
+  },
+  {
+    "operation": "claim_ticket",
+    "at": "2026-10-23T12:09:08.214073+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 7
+        },
+        "at": "2026-10-23T12:09:08.113136+00:00",
+        "operation": "claim_ticket"
+      },
+      "result_version": 8
+    }
+  },
+  {
+    "operation": "release_ticket",
+    "at": "2026-10-23T12:09:11.707441+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 8,
+          "idempotency_key": "9021e4b08b4049a2aef4dc509e276d6b",
+          "reason": "Harness checkpoint: runtime_execution_error",
+          "status": "todo",
+          "unassign_self": false
+        },
+        "at": "2026-10-23T12:09:11.523316+00:00",
+        "operation": "release_ticket"
+      },
+      "result_version": 9
+    }
+  },
+  {
+    "operation": "claim_ticket",
+    "at": "2026-10-23T12:19:31.875839+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 9
+        },
+        "at": "2026-10-23T12:19:31.774784+00:00",
+        "operation": "claim_ticket"
+      },
+      "result_version": 10
+    }
+  },
+  {
+    "operation": "renew_ticket",
+    "at": "2026-10-23T12:19:34.136145+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 10,
+          "progress": "Harness verified active execution; coordination tick"
+        },
+        "at": "2026-10-23T12:19:34.026746+00:00",
+        "operation": "renew_ticket"
+      },
+      "result_version": 11
+    }
+  },
+  {
+    "operation": "renew_ticket",
+    "at": "2026-10-23T12:24:35.364883+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 11,
+          "progress": "Harness verified active execution; coordination tick"
+        },
+        "at": "2026-10-23T12:24:35.270832+00:00",
+        "operation": "renew_ticket"
+      },
+      "result_version": 12
+    }
+  },
+  {
+    "operation": "renew_ticket",
+    "at": "2026-10-23T12:29:34.970709+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 12,
+          "progress": "Harness verified active execution; coordination tick"
+        },
+        "at": "2026-10-23T12:29:34.845943+00:00",
+        "operation": "renew_ticket"
+      },
+      "result_version": 13
+    }
+  },
+  {
+    "operation": "renew_ticket",
+    "at": "2026-10-23T12:34:35.515016+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 13,
+          "progress": "Harness verified active execution; coordination tick"
+        },
+        "at": "2026-10-23T12:34:35.424842+00:00",
+        "operation": "renew_ticket"
+      },
+      "result_version": 14
+    }
+  },
+  {
+    "operation": "renew_ticket",
+    "at": "2026-10-23T12:39:38.094782+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 14,
+          "progress": "Harness verified active execution; coordination tick"
+        },
+        "at": "2026-10-23T12:39:38.005960+00:00",
+        "operation": "renew_ticket"
+      },
+      "result_version": 15
+    }
+  },
+  {
+    "operation": "release_ticket",
+    "at": "2026-10-23T12:39:43.194534+00:00",
+    "evidence": {
+      "request": {
+        "arguments": {
+          "expected_version": 15,
+          "idempotency_key": "598afd7ed13a466fbb29e99043df8d1e",
+          "reason": "Harness checkpoint: execution stopped",
+          "status": "todo",
+          "unassign_self": false
+        },
+        "at": "2026-10-23T12:39:43.022300+00:00",
+        "operation": "release_ticket"
+      },
+      "result_version": 16
+    }
+  }
+]

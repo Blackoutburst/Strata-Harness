@@ -1,0 +1,12 @@
+--- AttentiveOS E2E playbook (lessons from earlier tickets; the manager keeps it current) ---
+Environment: emulator-5556, API 35, Pixel launcher, 1080x2400, en-US. The adapter runs ONE plain `am instrument` (no orchestrator, no clearPackageData). Each run's output ends with that run's logcat (E2E_DUMP, AndroidRuntime, TestRunner). Use Log.d("E2E_DUMP", ...) for evidence.
+- Instrumentation runs INSIDE the app process. Never `am force-stop <app package>` and never revoke a permission from a test: the test process dies ("Process crashed." with no stack).
+- Tests share one process and one app state. Reset your own state in @Before (data, services, companion/static state) and never rely on test order.
+- Read your evidence before changing code. When a test fails twice the same way, the harness asks for an `EVIDENCE:` line quoting the exact log or assertion line. Give it before editing.
+- harness-tool prints a digest. Full logs come from `harness-tool logs <job>:<page>`. Keep your own outputs short; the context window is limited.
+- Widgets: never drive the launcher UI (picker, long-press, drag-to-Remove). Host them in the test with E2eWidgetHost (clock repo, app/src/androidTest/.../clock/e2e/E2eWidgetHost.kt; copy it into the app's e2e package): `appwidget grantbind` + a private AppWidgetHost, read the rendered texts, click views, delete the ids in close(). Grant POST_NOTIFICATIONS first if the opened activity asks for it. Hosted views are not attached to a window: a TextClock renders no text there, so assert its declared format instead. Never add production APIs used only by tests.
+- Google apps share labels with ours ("Contacts", "Clock"). Never identify our app or widget by label alone. Use package/component names.
+- `dumpsys` output on API 35 indents section headers (e.g. `  50 pending alarms:`). Parsers must allow leading whitespace and be tested against a real dump.
+- Accessibility checks (ATF) run in every E2E test. Fix touch targets in the app (heightIn/sizeIn ≥ 56dp floors survive Material3 insets). Never exclude a check class.
+- Failure triage: test bug (fix the test), environment limit (prove it with evidence), APP bug (keep the test red and fix the app minimally). Never weaken or skip an assertion to get green. Production code must not gain diagnostic-only logging.
+- Commit messages describe THIS app's change. Commit a checkpoint whenever a class turns green.

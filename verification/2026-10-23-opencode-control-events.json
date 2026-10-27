@@ -1,0 +1,1669 @@
+{
+  "started_at": "2026-10-23T08:47:34.643301+00:00",
+  "real_inference_requests": 0,
+  "real_board_calls": 0,
+  "rtk_agent": "harness-fixture",
+  "rtk_hook": {
+    "command": "rtk ls"
+  },
+  "main_session": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+  "first_admission": {
+    "admittedSeq": 1,
+    "id": "msg_e4e58f36f23c26625dd55d467b55f3bf",
+    "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+    "prompt": {
+      "text": "HARNESS_MAIN: run the owned fixture tool, then inspect ls and acknowledge."
+    },
+    "delivery": "steer",
+    "timeCreated": 1792745259897
+  },
+  "ping_admission": {
+    "admittedSeq": 7,
+    "id": "msg_e6de869295007fee25f53ca3a597ac5b",
+    "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+    "prompt": {
+      "text": "HARNESS_PING: finish the current owned tool, then ls and HARNESS_ACK."
+    },
+    "delivery": "steer",
+    "timeCreated": 1792745260389
+  },
+  "main_requests_before_tool_release": 1,
+  "main_history": {
+    "data": [
+      {
+        "id": "evt_167f1c379001bmQSiYeCcu2nmP",
+        "type": "session.next.prompt.admitted",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 1,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745259897,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "messageID": "msg_e4e58f36f23c26625dd55d467b55f3bf",
+          "prompt": {
+            "text": "HARNESS_MAIN: run the owned fixture tool, then inspect ls and acknowledge."
+          },
+          "delivery": "steer"
+        }
+      },
+      {
+        "id": "evt_167f1c498001GOdIezYo3quON8",
+        "type": "session.next.prompted",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 2,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745259897,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "messageID": "msg_e4e58f36f23c26625dd55d467b55f3bf",
+          "prompt": {
+            "text": "HARNESS_MAIN: run the owned fixture tool, then inspect ls and acknowledge."
+          },
+          "delivery": "steer"
+        }
+      },
+      {
+        "id": "evt_167f1c50f002aBFef3hMx45SDP",
+        "type": "session.next.step.started",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 3,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260303,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c50f0014jzdBbYWcfSSPt",
+          "agent": "harness-fixture",
+          "model": {
+            "id": "fixture",
+            "providerID": "fixture",
+            "variant": "default"
+          }
+        }
+      },
+      {
+        "id": "evt_167f1c5110015CTg058YCR3JM3",
+        "type": "session.next.tool.input.started",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 4,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260305,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c50f0014jzdBbYWcfSSPt",
+          "callID": "call_fixture_1",
+          "name": "bash"
+        }
+      },
+      {
+        "id": "evt_167f1c514001DnLTSlAICDL3FR",
+        "type": "session.next.tool.input.ended",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 5,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260308,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c50f0014jzdBbYWcfSSPt",
+          "callID": "call_fixture_1",
+          "text": "{\"command\": \"python3 tool_fixture.py\", \"description\": \"Run owned harness fixture\", \"timeout\": 20000}"
+        }
+      },
+      {
+        "id": "evt_167f1c515001h2YBi6QZ726RqA",
+        "type": "session.next.tool.called",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 6,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260309,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c50f0014jzdBbYWcfSSPt",
+          "callID": "call_fixture_1",
+          "tool": "bash",
+          "input": {
+            "command": "python3 tool_fixture.py",
+            "description": "Run owned harness fixture",
+            "timeout": 20000
+          },
+          "provider": {
+            "executed": false
+          }
+        }
+      },
+      {
+        "id": "evt_167f1c565001aaskxfp3zOxZUL",
+        "type": "session.next.prompt.admitted",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 7,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260389,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "messageID": "msg_e6de869295007fee25f53ca3a597ac5b",
+          "prompt": {
+            "text": "HARNESS_PING: finish the current owned tool, then ls and HARNESS_ACK."
+          },
+          "delivery": "steer"
+        }
+      },
+      {
+        "id": "evt_167f1c6b2001ZxU7GADaYsDLrf",
+        "type": "session.next.tool.success",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 8,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260722,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c50f0014jzdBbYWcfSSPt",
+          "callID": "call_fixture_1",
+          "structured": {
+            "exit": 0,
+            "truncated": false
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "fixture tool completed\n"
+            },
+            {
+              "type": "text",
+              "text": "Command exited with code 0."
+            }
+          ],
+          "outputPaths": [],
+          "provider": {
+            "executed": false
+          }
+        }
+      },
+      {
+        "id": "evt_167f1c6b5001cslHR5EGnx392j",
+        "type": "session.next.step.ended",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 9,
+          "version": 2
+        },
+        "data": {
+          "timestamp": 1792745260725,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c50f0014jzdBbYWcfSSPt",
+          "finish": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "input": 10,
+            "output": 10,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "evt_167f1c6b700177zvNUAp2KQ11M",
+        "type": "session.next.prompted",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 10,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260389,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "messageID": "msg_e6de869295007fee25f53ca3a597ac5b",
+          "prompt": {
+            "text": "HARNESS_PING: finish the current owned tool, then ls and HARNESS_ACK."
+          },
+          "delivery": "steer"
+        }
+      },
+      {
+        "id": "evt_167f1c738002eHvbwq6HkpwJyf",
+        "type": "session.next.step.started",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 11,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260856,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c738001fzxgKB1jYDcajN",
+          "agent": "harness-fixture",
+          "model": {
+            "id": "fixture",
+            "providerID": "fixture",
+            "variant": "default"
+          }
+        }
+      },
+      {
+        "id": "evt_167f1c73a001UPqEFeLJeg0YIX",
+        "type": "session.next.tool.input.started",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 12,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260858,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c738001fzxgKB1jYDcajN",
+          "callID": "call_fixture_2",
+          "name": "bash"
+        }
+      },
+      {
+        "id": "evt_167f1c73b001UvtnP0cCV9J2er",
+        "type": "session.next.tool.input.ended",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 13,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260859,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c738001fzxgKB1jYDcajN",
+          "callID": "call_fixture_2",
+          "text": "{\"command\": \"ls\", \"description\": \"Run owned harness fixture\", \"timeout\": 20000}"
+        }
+      },
+      {
+        "id": "evt_167f1c73b0029gxi55Ms3AAZas",
+        "type": "session.next.tool.called",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 14,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260859,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c738001fzxgKB1jYDcajN",
+          "callID": "call_fixture_2",
+          "tool": "bash",
+          "input": {
+            "command": "ls",
+            "description": "Run owned harness fixture",
+            "timeout": 20000
+          },
+          "provider": {
+            "executed": false
+          }
+        }
+      },
+      {
+        "id": "evt_167f1c744001euTdh19vE9rgNA",
+        "type": "session.next.tool.success",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 15,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260868,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c738001fzxgKB1jYDcajN",
+          "callID": "call_fixture_2",
+          "structured": {
+            "exit": 0,
+            "truncated": false
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "finished\nmain_pid\nrelease\nstarted\ntool_fixture.py\ntool_stop_fixture.py\n"
+            },
+            {
+              "type": "text",
+              "text": "Command exited with code 0."
+            }
+          ],
+          "outputPaths": [],
+          "provider": {
+            "executed": false
+          }
+        }
+      },
+      {
+        "id": "evt_167f1c7450017OA8GFzrcyU4Sl",
+        "type": "session.next.step.ended",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 16,
+          "version": 2
+        },
+        "data": {
+          "timestamp": 1792745260869,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c738001fzxgKB1jYDcajN",
+          "finish": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "input": 10,
+            "output": 10,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "evt_167f1c78b002TjxwKNpHvLEjou",
+        "type": "session.next.step.started",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 17,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260939,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c78b001oLy9AFd9Dpi7iR",
+          "agent": "harness-fixture",
+          "model": {
+            "id": "fixture",
+            "providerID": "fixture",
+            "variant": "default"
+          }
+        }
+      },
+      {
+        "id": "evt_167f1c78c001ENh9V7YCbp0pwi",
+        "type": "session.next.text.started",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 18,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260940,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c78b001oLy9AFd9Dpi7iR",
+          "textID": "text-0"
+        }
+      },
+      {
+        "id": "evt_167f1c78d002obFR1wmKONpLUL",
+        "type": "session.next.text.ended",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 19,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260941,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c78b001oLy9AFd9Dpi7iR",
+          "textID": "text-0",
+          "text": "HARNESS_ACK"
+        }
+      },
+      {
+        "id": "evt_167f1c78e001La8FiGlt7u04r6",
+        "type": "session.next.step.ended",
+        "durable": {
+          "aggregateID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "seq": 20,
+          "version": 2
+        },
+        "data": {
+          "timestamp": 1792745260942,
+          "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+          "assistantMessageID": "msg_167f1c78b001oLy9AFd9Dpi7iR",
+          "finish": "stop",
+          "cost": 0,
+          "tokens": {
+            "input": 10,
+            "output": 10,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      }
+    ],
+    "hasMore": false
+  },
+  "main_model_requests": 3,
+  "main_tool_finished": true,
+  "rtk_in_engine_history": false,
+  "ping_seen_by_model": true,
+  "model_waited_for_tool": true,
+  "stop_session": "ses_e980e385effexjccyHe596T1zR",
+  "stop_admission": {
+    "admittedSeq": 1,
+    "id": "msg_c4d4037b37ee108542d31614d329e52f",
+    "sessionID": "ses_e980e385effexjccyHe596T1zR",
+    "prompt": {
+      "text": "HARNESS_STOP: run the owned stop fixture."
+    },
+    "delivery": "steer",
+    "timeCreated": 1792745260964
+  },
+  "queued_admission": {
+    "admittedSeq": 7,
+    "id": "msg_6eccb62ad9b2c0a701c2720395051263",
+    "sessionID": "ses_e980e385effexjccyHe596T1zR",
+    "prompt": {
+      "text": "HARNESS_STOP pending guidance; must stay dormant after interrupt."
+    },
+    "delivery": "queue",
+    "timeCreated": 1792745261081
+  },
+  "stop_model_requests_after_interrupt": 1,
+  "stop_tool_finished": false,
+  "stop_tool_process_exited": true,
+  "stop_history": {
+    "data": [
+      {
+        "id": "evt_167f1c7a4001O7XvccLrfV6MCz",
+        "type": "session.next.prompt.admitted",
+        "durable": {
+          "aggregateID": "ses_e980e385effexjccyHe596T1zR",
+          "seq": 1,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260964,
+          "sessionID": "ses_e980e385effexjccyHe596T1zR",
+          "messageID": "msg_c4d4037b37ee108542d31614d329e52f",
+          "prompt": {
+            "text": "HARNESS_STOP: run the owned stop fixture."
+          },
+          "delivery": "steer"
+        }
+      },
+      {
+        "id": "evt_167f1c7a7001uwDy9sltd59nRp",
+        "type": "session.next.prompted",
+        "durable": {
+          "aggregateID": "ses_e980e385effexjccyHe596T1zR",
+          "seq": 2,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745260964,
+          "sessionID": "ses_e980e385effexjccyHe596T1zR",
+          "messageID": "msg_c4d4037b37ee108542d31614d329e52f",
+          "prompt": {
+            "text": "HARNESS_STOP: run the owned stop fixture."
+          },
+          "delivery": "steer"
+        }
+      },
+      {
+        "id": "evt_167f1c7e6002jQXkZuUv3g7cHQ",
+        "type": "session.next.step.started",
+        "durable": {
+          "aggregateID": "ses_e980e385effexjccyHe596T1zR",
+          "seq": 3,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745261030,
+          "sessionID": "ses_e980e385effexjccyHe596T1zR",
+          "assistantMessageID": "msg_167f1c7e60014i3qZVBU4xEKvs",
+          "agent": "harness-fixture",
+          "model": {
+            "id": "fixture",
+            "providerID": "fixture",
+            "variant": "default"
+          }
+        }
+      },
+      {
+        "id": "evt_167f1c7e7001x0yG5MNlwFHUHt",
+        "type": "session.next.tool.input.started",
+        "durable": {
+          "aggregateID": "ses_e980e385effexjccyHe596T1zR",
+          "seq": 4,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745261031,
+          "sessionID": "ses_e980e385effexjccyHe596T1zR",
+          "assistantMessageID": "msg_167f1c7e60014i3qZVBU4xEKvs",
+          "callID": "call_fixture_4",
+          "name": "bash"
+        }
+      },
+      {
+        "id": "evt_167f1c7e8001utLFefP43zenOF",
+        "type": "session.next.tool.input.ended",
+        "durable": {
+          "aggregateID": "ses_e980e385effexjccyHe596T1zR",
+          "seq": 5,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745261032,
+          "sessionID": "ses_e980e385effexjccyHe596T1zR",
+          "assistantMessageID": "msg_167f1c7e60014i3qZVBU4xEKvs",
+          "callID": "call_fixture_4",
+          "text": "{\"command\": \"python3 tool_stop_fixture.py\", \"description\": \"Run owned harness fixture\", \"timeout\": 20000}"
+        }
+      },
+      {
+        "id": "evt_167f1c7e80025deUV5PcTztnoh",
+        "type": "session.next.tool.called",
+        "durable": {
+          "aggregateID": "ses_e980e385effexjccyHe596T1zR",
+          "seq": 6,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745261032,
+          "sessionID": "ses_e980e385effexjccyHe596T1zR",
+          "assistantMessageID": "msg_167f1c7e60014i3qZVBU4xEKvs",
+          "callID": "call_fixture_4",
+          "tool": "bash",
+          "input": {
+            "command": "python3 tool_stop_fixture.py",
+            "description": "Run owned harness fixture",
+            "timeout": 20000
+          },
+          "provider": {
+            "executed": false
+          }
+        }
+      },
+      {
+        "id": "evt_167f1c819001J81udsHdPJEhG1",
+        "type": "session.next.prompt.admitted",
+        "durable": {
+          "aggregateID": "ses_e980e385effexjccyHe596T1zR",
+          "seq": 7,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745261081,
+          "sessionID": "ses_e980e385effexjccyHe596T1zR",
+          "messageID": "msg_6eccb62ad9b2c0a701c2720395051263",
+          "prompt": {
+            "text": "HARNESS_STOP pending guidance; must stay dormant after interrupt."
+          },
+          "delivery": "queue"
+        }
+      },
+      {
+        "id": "evt_167f1c81f001lXJxASqrb8XAUY",
+        "type": "session.next.tool.failed",
+        "durable": {
+          "aggregateID": "ses_e980e385effexjccyHe596T1zR",
+          "seq": 8,
+          "version": 1
+        },
+        "data": {
+          "timestamp": 1792745261087,
+          "sessionID": "ses_e980e385effexjccyHe596T1zR",
+          "assistantMessageID": "msg_167f1c7e60014i3qZVBU4xEKvs",
+          "callID": "call_fixture_4",
+          "error": {
+            "type": "unknown",
+            "message": "Tool execution interrupted"
+          },
+          "provider": {
+            "executed": false
+          }
+        }
+      },
+      {
+        "id": "evt_167f1c820001XUup5svZth4GEm",
+        "type": "session.next.step.ended",
+        "durable": {
+          "aggregateID": "ses_e980e385effexjccyHe596T1zR",
+          "seq": 9,
+          "version": 2
+        },
+        "data": {
+          "timestamp": 1792745261088,
+          "sessionID": "ses_e980e385effexjccyHe596T1zR",
+          "assistantMessageID": "msg_167f1c7e60014i3qZVBU4xEKvs",
+          "finish": "tool-calls",
+          "cost": 0,
+          "tokens": {
+            "input": 10,
+            "output": 10,
+            "reasoning": 0,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      }
+    ],
+    "hasMore": false
+  },
+  "interrupt_stayed_stopped": true,
+  "passed": false,
+  "owned_tool_processes_exited": true,
+  "process_receipt": {
+    "checked_at": "2026-10-23T08:47:34.674572+00:00",
+    "inference_requests": 0,
+    "real_board_calls": 0,
+    "pure_api_inspection_only": false,
+    "binary_version": "1.19.3",
+    "server_pid": 38191,
+    "unauthenticated_status": 401,
+    "health": {
+      "healthy": true,
+      "version": "1.19.3"
+    },
+    "api_schema": "verification/opencode-1.19.3-openapi.json",
+    "paths": {
+      "/experimental/control-plane/move-session": [
+        "post"
+      ],
+      "/global/health": [
+        "get"
+      ],
+      "/global/event": [
+        "get"
+      ],
+      "/event": [
+        "get"
+      ],
+      "/experimental/session": [
+        "get"
+      ],
+      "/experimental/session/{sessionID}/background": [
+        "post"
+      ],
+      "/session": [
+        "get",
+        "post"
+      ],
+      "/session/status": [
+        "get"
+      ],
+      "/session/{sessionID}": [
+        "get",
+        "delete",
+        "patch"
+      ],
+      "/session/{sessionID}/children": [
+        "get"
+      ],
+      "/session/{sessionID}/todo": [
+        "get"
+      ],
+      "/session/{sessionID}/diff": [
+        "get"
+      ],
+      "/session/{sessionID}/message": [
+        "get",
+        "post"
+      ],
+      "/session/{sessionID}/message/{messageID}": [
+        "get",
+        "delete"
+      ],
+      "/session/{sessionID}/fork": [
+        "post"
+      ],
+      "/session/{sessionID}/abort": [
+        "post"
+      ],
+      "/session/{sessionID}/init": [
+        "post"
+      ],
+      "/session/{sessionID}/share": [
+        "post",
+        "delete"
+      ],
+      "/session/{sessionID}/summarize": [
+        "post"
+      ],
+      "/session/{sessionID}/prompt_async": [
+        "post"
+      ],
+      "/session/{sessionID}/command": [
+        "post"
+      ],
+      "/session/{sessionID}/shell": [
+        "post"
+      ],
+      "/session/{sessionID}/revert": [
+        "post"
+      ],
+      "/session/{sessionID}/unrevert": [
+        "post"
+      ],
+      "/session/{sessionID}/permissions/{permissionID}": [
+        "post"
+      ],
+      "/session/{sessionID}/message/{messageID}/part/{partID}": [
+        "delete",
+        "patch"
+      ],
+      "/tui/open-sessions": [
+        "post"
+      ],
+      "/tui/select-session": [
+        "post"
+      ],
+      "/api/session": [
+        "get",
+        "post"
+      ],
+      "/api/session/active": [
+        "get"
+      ],
+      "/api/session/{sessionID}": [
+        "get"
+      ],
+      "/api/session/{sessionID}/agent": [
+        "post"
+      ],
+      "/api/session/{sessionID}/model": [
+        "post"
+      ],
+      "/api/session/{sessionID}/prompt": [
+        "post"
+      ],
+      "/api/session/{sessionID}/compact": [
+        "post"
+      ],
+      "/api/session/{sessionID}/wait": [
+        "post"
+      ],
+      "/api/session/{sessionID}/revert/stage": [
+        "post"
+      ],
+      "/api/session/{sessionID}/revert/clear": [
+        "post"
+      ],
+      "/api/session/{sessionID}/revert/commit": [
+        "post"
+      ],
+      "/api/session/{sessionID}/context": [
+        "get"
+      ],
+      "/api/session/{sessionID}/history": [
+        "get"
+      ],
+      "/api/session/{sessionID}/event": [
+        "get"
+      ],
+      "/api/session/{sessionID}/interrupt": [
+        "post"
+      ],
+      "/api/session/{sessionID}/message/{messageID}": [
+        "get"
+      ],
+      "/api/session/{sessionID}/message": [
+        "get"
+      ],
+      "/api/session/{sessionID}/permission": [
+        "post",
+        "get"
+      ],
+      "/api/session/{sessionID}/permission/{requestID}": [
+        "get"
+      ],
+      "/api/session/{sessionID}/permission/{requestID}/reply": [
+        "post"
+      ],
+      "/api/session/{sessionID}/question": [
+        "get"
+      ],
+      "/api/session/{sessionID}/question/{requestID}/reply": [
+        "post"
+      ],
+      "/api/session/{sessionID}/question/{requestID}/reject": [
+        "post"
+      ]
+    },
+    "exercise": {
+      "started_at": "2026-10-23T08:47:34.643301+00:00",
+      "real_inference_requests": 0,
+      "real_board_calls": 0,
+      "rtk_agent": "harness-fixture",
+      "rtk_hook": {
+        "command": "rtk ls"
+      },
+      "main_session": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+      "first_admission": {
+        "admittedSeq": 1,
+        "id": "msg_e4e58f36f23c26625dd55d467b55f3bf",
+        "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+        "prompt": {
+          "text": "HARNESS_MAIN: run the owned fixture tool, then inspect ls and acknowledge."
+        },
+        "delivery": "steer",
+        "timeCreated": 1792745259897
+      },
+      "ping_admission": {
+        "admittedSeq": 7,
+        "id": "msg_e6de869295007fee25f53ca3a597ac5b",
+        "sessionID": "ses_e980e4aa3ffeV8k2QCtEAN2FfF",
+        "prompt": {
+          "text": "HARNESS_PING: finish the current owned tool, then ls and HARNESS_ACK."
+        },
+        "delivery": "steer",
+        "timeCreated": 1792745260389
+      },
+      "main_requests_before_tool_release": 1,
+      "main_model_requests": 3,
+      "main_tool_finished": true,
+      "ping_seen_by_model": true,
+      "model_waited_for_tool": true,
+      "stop_session": "ses_e980e385effexjccyHe596T1zR",
+      "stop_admission": {
+        "admittedSeq": 1,
+        "id": "msg_c4d4037b37ee108542d31614d329e52f",
+        "sessionID": "ses_e980e385effexjccyHe596T1zR",
+        "prompt": {
+          "text": "HARNESS_STOP: run the owned stop fixture."
+        },
+        "delivery": "steer",
+        "timeCreated": 1792745260964
+      },
+      "queued_admission": {
+        "admittedSeq": 7,
+        "id": "msg_6eccb62ad9b2c0a701c2720395051263",
+        "sessionID": "ses_e980e385effexjccyHe596T1zR",
+        "prompt": {
+          "text": "HARNESS_STOP pending guidance; must stay dormant after interrupt."
+        },
+        "delivery": "queue",
+        "timeCreated": 1792745261081
+      },
+      "stop_model_requests_after_interrupt": 1,
+      "stop_tool_finished": false,
+      "stop_tool_process_exited": true,
+      "interrupt_stayed_stopped": true,
+      "passed": false
+    },
+    "fixture_server_log": "opencode server listening on http://127.0.0.1:4096\n",
+    "server_exited": true,
+    "temporary_files_removed": true,
+    "owned_worker_lock_removed": true
+  },
+  "fixture_requests": [
+    {
+      "at": 1792745260.295448,
+      "path": "/v1/chat/completions",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Here is some useful information about the environment you are running in:\n<env>\n  Working directory: /var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-vz4d6a_z/workspace\n  Workspace root folder: /\n  Is directory a git repo: no\n  Platform: darwin\n</env>\n\nToday's date: Fri Oct 23 2026"
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_MAIN: run the owned fixture tool, then inspect ls and acknowledge."
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "apply_patch",
+              "description": "Apply one patch containing add, update, and delete file operations. All targets are resolved and approved before target contents are read. Operations apply sequentially; if a later operation fails, earlier operations remain applied and the failure reports them explicitly. Moves and atomic rollback are not supported yet.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "patchText": {
+                    "type": "string",
+                    "description": "The full patch text describing add, update, and delete operations"
+                  }
+                },
+                "required": [
+                  "patchText"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "bash",
+              "description": "Execute one shell command string with the host user's filesystem, process, and network authority. The active Location is the default working directory. Relative workdir values resolve from that Location. External workdir values require external_directory approval; best-effort command-argument path warnings are advisory only. Timeout values are milliseconds (default: 120000; maximum: 600000). Uses the configured shell when set; otherwise uses /bin/sh on POSIX and COMSPEC or cmd.exe on Windows.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "Shell command string to execute"
+                  },
+                  "workdir": {
+                    "description": "Working directory. Defaults to the active Location; relative paths resolve from that Location.",
+                    "type": "string"
+                  },
+                  "timeout": {
+                    "description": "Timeout in milliseconds. Defaults to 120000 and may not exceed 600000.",
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "exclusiveMinimum": 0
+                      },
+                      {
+                        "maximum": 600000
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "command"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "edit",
+              "description": "Replace exact text in one file. Relative paths resolve within the active Location. Absolute paths inside the Location are accepted. Explicit external absolute paths require external_directory approval before edit approval.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "description": "File path to edit. Relative paths resolve within the active Location. Absolute paths inside that Location are accepted; external absolute paths require external_directory approval."
+                  },
+                  "oldString": {
+                    "type": "string",
+                    "description": "Exact text to replace"
+                  },
+                  "newString": {
+                    "type": "string",
+                    "description": "Replacement text, which must differ from oldString"
+                  },
+                  "replaceAll": {
+                    "description": "Replace all exact occurrences of oldString (default false)",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "path",
+                  "oldString",
+                  "newString"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "glob",
+              "description": "Find files by glob pattern within the active Location. Returns concise relative file resources. Use a relative path to narrow the search and limit to bound the result count.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "pattern": {
+                    "type": "string",
+                    "description": "Glob pattern to match files against"
+                  },
+                  "path": {
+                    "description": "Relative directory to search. Defaults to the active Location.",
+                    "type": "string"
+                  },
+                  "limit": {
+                    "description": "Maximum results to return",
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "exclusiveMinimum": 0
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "pattern"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "grep",
+              "description": "Search file contents by regular expression within the active Location or an absolute managed tool-output file. Use a path to narrow the search, include to filter files by glob, and limit to bound the match count. Returns concise file resources, line numbers, and bounded line previews.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "pattern": {
+                    "type": "string",
+                    "description": "Regex pattern to search for in file contents"
+                  },
+                  "path": {
+                    "description": "Relative directory to search. Defaults to the active Location.",
+                    "type": "string"
+                  },
+                  "include": {
+                    "description": "File glob to include in the search (for example, \"*.js\" or \"*.{ts,tsx}\")",
+                    "type": "string"
+                  },
+                  "limit": {
+                    "description": "Maximum matches to return",
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "exclusiveMinimum": 0
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "pattern"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "question",
+              "description": "Use this tool when you need to ask the user questions during execution. This allows you to:\n1. Gather user preferences or requirements\n2. Clarify ambiguous instructions\n3. Get decisions on implementation choices as you work\n4. Offer choices to the user about what direction to take.\n\nUsage notes:\n- When `custom` is enabled (default), a \"Type your own answer\" option is added automatically; don't include \"Other\" or catch-all options\n- Answers are returned as arrays of labels; set `multiple: true` to allow selecting more than one\n- If you recommend a specific option, make that the first option in the list and add \"(Recommended)\" at the end of the label",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "questions": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/QuestionV2.Prompt"
+                    },
+                    "description": "Questions to ask"
+                  }
+                },
+                "required": [
+                  "questions"
+                ],
+                "additionalProperties": false,
+                "$defs": {
+                  "QuestionV2.Option": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "description": "Display text (1-5 words, concise)"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Explanation of choice"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "description"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "QuestionV2.Prompt": {
+                    "type": "object",
+                    "properties": {
+                      "question": {
+                        "type": "string",
+                        "description": "Complete question"
+                      },
+                      "header": {
+                        "type": "string",
+                        "description": "Very short label (max 30 chars)"
+                      },
+                      "options": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/$defs/QuestionV2.Option"
+                        },
+                        "description": "Available choices"
+                      },
+                      "multiple": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "question",
+                      "header",
+                      "options"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "read",
+              "description": "Read a text file or supported image, page through a large UTF-8 text file by line offset, or list a directory page. Relative paths resolve from the current location; absolute paths inside it are accepted, while external absolute paths require external_directory approval.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "offset": {
+                    "description": "The 1-based directory entry or text line offset to start reading from",
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "exclusiveMinimum": 0
+                      }
+                    ]
+                  },
+                  "limit": {
+                    "description": "The maximum number of directory entries or text lines to read",
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "exclusiveMinimum": 0
+                      },
+                      {
+                        "maximum": 2000
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "skill",
+              "description": "Load a specialized skill when the task at hand matches one of the available skills in the system context.\n\nUse this tool to inject the skill's instructions and resources into the current conversation. The output may contain detailed workflow guidance as well as references to scripts, files, etc. in the same directory as the skill.\n\nThe skill name must match one of the available skills in the system context.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the skill from the available skills list"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "todowrite",
+              "description": "Create and maintain a structured task list for the current coding session. Use it to track progress during multi-step work and keep todo statuses current.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "todos": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/Todo"
+                    },
+                    "description": "The updated todo list"
+                  }
+                },
+                "required": [
+                  "todos"
+                ],
+                "additionalProperties": false,
+                "$defs": {
+                  "Todo": {
+                    "type": "object",
+                    "properties": {
+                      "content": {
+                        "type": "string",
+                        "description": "Brief description of the task"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Current status of the task: pending, in_progress, completed, cancelled"
+                      },
+                      "priority": {
+                        "type": "string",
+                        "description": "Priority level of the task: high, medium, low"
+                      }
+                    },
+                    "required": [
+                      "content",
+                      "status",
+                      "priority"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "webfetch",
+              "description": "Fetch content from an HTTP or HTTPS URL and return it as text, markdown, or HTML. Markdown is the default.\n\nUse a more targeted tool when one is available. This tool is read-only. Large text results may be replaced with a preview while the complete output is retained in managed storage.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "The HTTP or HTTPS URL to fetch content from"
+                  },
+                  "format": {
+                    "type": "string",
+                    "enum": [
+                      "text",
+                      "markdown",
+                      "html"
+                    ],
+                    "description": "The format to return the content in. Defaults to markdown."
+                  },
+                  "timeout": {
+                    "description": "Optional timeout in seconds (maximum: 120)",
+                    "allOf": [
+                      {
+                        "exclusiveMinimum": 0
+                      },
+                      {
+                        "maximum": 120
+                      }
+                    ],
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "NaN"
+                        ]
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "Infinity"
+                        ]
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "-Infinity"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "url"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "websearch",
+              "description": "Search the web using the session's local web search provider. Use this for current information beyond knowledge cutoff.\n\nThis is a provider-independent local tool backed by Exa or Parallel. Provider-hosted web search tools are separate and execute at the model provider.\n\nOptional controls support result count, live crawling ('fallback' or 'preferred'), search type ('auto', 'fast', or 'deep'), and maximum context characters.\n\nThe current year is 2026. Use this year when searching for recent information or current events.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "Websearch query"
+                  },
+                  "numResults": {
+                    "description": "Number of search results to return (default: 8, maximum: 20)",
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "exclusiveMinimum": 0
+                      },
+                      {
+                        "maximum": 20
+                      }
+                    ]
+                  },
+                  "livecrawl": {
+                    "description": "Live crawl mode - 'fallback': use live crawling as backup if cached unavailable, 'preferred': prioritize live crawling (default: 'fallback')",
+                    "type": "string",
+                    "enum": [
+                      "fallback",
+                      "preferred"
+                    ]
+                  },
+                  "type": {
+                    "description": "Search type - 'auto': balanced search (default), 'fast': quick results, 'deep': comprehensive search",
+                    "type": "string",
+                    "enum": [
+                      "auto",
+                      "fast",
+                      "deep"
+                    ]
+                  },
+                  "contextMaxCharacters": {
+                    "description": "Maximum characters for context string optimized for models (default: 10000, maximum: 50000)",
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "exclusiveMinimum": 0
+                      },
+                      {
+                        "maximum": 50000
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "query"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "write",
+              "description": "Write content to one file. Relative paths resolve within the active Location. Absolute paths inside the Location are accepted. Explicit external absolute paths require external_directory approval before edit approval.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "description": "File path to write. Relative paths resolve within the active Location. Absolute paths inside that Location are accepted; external absolute paths require external_directory approval."
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content to write to the file"
+                  }
+                },
+                "required": [
+                  "path",
+                  "content"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "tool_finished": false
+    },
+    {
+      "at": 1792745260.853075,
+      "path": "/v1/chat/completions",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Here is some useful information about the environment you are running in:\n<env>\n  Working directory: /var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-vz4d6a_z/workspace\n  Workspace root folder: /\n  Is directory a git repo: no\n  Platform: darwin\n</env>\n\nToday's date: Fri Oct 23 2026"
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_MAIN: run the owned fixture tool, then inspect ls and acknowledge."
+          },
+          {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call_fixture_1",
+                "type": "function",
+                "function": {
+                  "name": "bash",
+                  "arguments": "{\"command\":\"python3 tool_fixture.py\",\"description\":\"Run owned harness fixture\",\"timeout\":20000}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call_fixture_1",
+            "content": "fixture tool completed\n\nCommand exited with code 0."
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_PING: finish the current owned tool, then ls and HARNESS_ACK."
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "bash",
+              "description": "Execute one shell command string with the host user's filesystem, process, and network authority. The active Location is the default working directory. Relative workdir values resolve from that Location. External workdir values require external_directory approval; best-effort command-argument path warnings are advisory only. Timeout values are milliseconds (default: 120000; maximum: 600000). Uses the configured shell when set; otherwise uses /bin/sh on POSIX and COMSPEC or cmd.exe on Windows.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "Shell command string to execute"
+                  },
+                  "workdir": {
+                    "description": "Working directory. Defaults to the active Location; relative paths resolve from that Location.",
+                    "type": "string"
+                  },
+                  "timeout": {
+                    "description": "Timeout in milliseconds. Defaults to 120000 and may not exceed 600000.",
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "exclusiveMinimum": 0
+                      },
+                      {
+                        "maximum": 600000
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "command"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "tool_finished": true
+    },
+    {
+      "at": 1792745260.936098,
+      "path": "/v1/chat/completions",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Here is some useful information about the environment you are running in:\n<env>\n  Working directory: /var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-vz4d6a_z/workspace\n  Workspace root folder: /\n  Is directory a git repo: no\n  Platform: darwin\n</env>\n\nToday's date: Fri Oct 23 2026"
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_MAIN: run the owned fixture tool, then inspect ls and acknowledge."
+          },
+          {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call_fixture_1",
+                "type": "function",
+                "function": {
+                  "name": "bash",
+                  "arguments": "{\"command\":\"python3 tool_fixture.py\",\"description\":\"Run owned harness fixture\",\"timeout\":20000}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call_fixture_1",
+            "content": "fixture tool completed\n\nCommand exited with code 0."
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_PING: finish the current owned tool, then ls and HARNESS_ACK."
+          },
+          {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call_fixture_2",
+                "type": "function",
+                "function": {
+                  "name": "bash",
+                  "arguments": "{\"command\":\"ls\",\"description\":\"Run owned harness fixture\",\"timeout\":20000}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call_fixture_2",
+            "content": "finished\nmain_pid\nrelease\nstarted\ntool_fixture.py\ntool_stop_fixture.py\n\nCommand exited with code 0."
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "bash",
+              "description": "Execute one shell command string with the host user's filesystem, process, and network authority. The active Location is the default working directory. Relative workdir values resolve from that Location. External workdir values require external_directory approval; best-effort command-argument path warnings are advisory only. Timeout values are milliseconds (default: 120000; maximum: 600000). Uses the configured shell when set; otherwise uses /bin/sh on POSIX and COMSPEC or cmd.exe on Windows.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "Shell command string to execute"
+                  },
+                  "workdir": {
+                    "description": "Working directory. Defaults to the active Location; relative paths resolve from that Location.",
+                    "type": "string"
+                  },
+                  "timeout": {
+                    "description": "Timeout in milliseconds. Defaults to 120000 and may not exceed 600000.",
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "exclusiveMinimum": 0
+                      },
+                      {
+                        "maximum": 600000
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "command"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "tool_finished": true
+    },
+    {
+      "at": 1792745261.0264819,
+      "path": "/v1/chat/completions",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Here is some useful information about the environment you are running in:\n<env>\n  Working directory: /var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-vz4d6a_z/workspace\n  Workspace root folder: /\n  Is directory a git repo: no\n  Platform: darwin\n</env>\n\nToday's date: Fri Oct 23 2026"
+          },
+          {
+            "role": "user",
+            "content": "HARNESS_STOP: run the owned stop fixture."
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "bash",
+              "description": "Execute one shell command string with the host user's filesystem, process, and network authority. The active Location is the default working directory. Relative workdir values resolve from that Location. External workdir values require external_directory approval; best-effort command-argument path warnings are advisory only. Timeout values are milliseconds (default: 120000; maximum: 600000). Uses the configured shell when set; otherwise uses /bin/sh on POSIX and COMSPEC or cmd.exe on Windows.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "Shell command string to execute"
+                  },
+                  "workdir": {
+                    "description": "Working directory. Defaults to the active Location; relative paths resolve from that Location.",
+                    "type": "string"
+                  },
+                  "timeout": {
+                    "description": "Timeout in milliseconds. Defaults to 120000 and may not exceed 600000.",
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "exclusiveMinimum": 0
+                      },
+                      {
+                        "maximum": 600000
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "command"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "tool_finished": true
+    }
+  ]
+}

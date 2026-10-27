@@ -1,0 +1,75 @@
+{
+  "at": 1792758308.936886,
+  "daemon": {
+    "state": "running",
+    "pid": 348850,
+    "heartbeat_at": "2026-10-23T12:25:00.353352+00:00"
+  },
+  "runtime": {
+    "state": "running",
+    "checked_at": 1792758307.3648427,
+    "selected_ticket": "7667684d1e4fc8c0531c6dc0a51a8c0f"
+  },
+  "execution_worker": {
+    "phase": "developing",
+    "active_seconds": 2376.398422241211,
+    "stop_reason": null,
+    "build_checkpoint": true,
+    "source_sha256": "ac26d47184d9cfe3bb4e9237d97bd48ea144fbf4125c62f2528e8b086b1e18ae",
+    "manager_wait_deadline": 1792757509.1059248,
+    "blocker_count": 1
+  },
+  "managed_engine": {
+    "phase": "running",
+    "session_id": "ses_e976e64ffffe4RYMXLu4fuhQGj",
+    "steps": 55,
+    "process": {
+      "pid": 348857,
+      "stamp": "Fri Oct 23 12:19:28 2026  348857 /home/ubuntu/.local/share/strata-board-harness/tools/opencode serve --hostname 127.0.0.1 --port 0 --print-logs --log-level ERROR"
+    },
+    "token_totals": {
+      "input": 156898,
+      "output": 5274,
+      "reasoning": 0
+    },
+    "cache_tokens": {
+      "read": 4229758,
+      "write": 0
+    },
+    "api_errors": [
+      {
+        "data": {
+          "message": "Aborted"
+        },
+        "name": "MessageAbortedError"
+      },
+      {
+        "data": {
+          "message": "Aborted"
+        },
+        "name": "MessageAbortedError"
+      }
+    ]
+  },
+  "coordination_control": {
+    "mode": "running",
+    "last_inbox_at": 1792758303.4633298,
+    "last_renew_at": 1792758274.122364,
+    "stop_reason": null,
+    "poll_count": 58,
+    "max_poll_gap_seconds": 496.52127027511597
+  },
+  "worker_blocker": {
+    "reason": "repeated_validation_failure",
+    "evidence": {
+      "failure_sha256": "f67b530f90744dbd4a54efad4293b29277a58e385eda95dd3e31b683d02abbb7",
+      "attempts": 2,
+      "exit_code": 1,
+      "evidence": "full gateway build receipt"
+    },
+    "created_at": 1792756848.1997736,
+    "state": "posted"
+  },
+  "source_status": "",
+  "source_diff_stat": ""
+}

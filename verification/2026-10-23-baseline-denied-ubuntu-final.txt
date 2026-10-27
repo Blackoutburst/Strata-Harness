@@ -1,0 +1,18 @@
+{
+  "experiment": "baseline_adapter_smoke_only",
+  "exit_code": 78,
+  "instrumentation": {
+    "counts": {
+      "passed": 0,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "started": 0,
+      "unrun": null,
+      "runner_success": false
+    },
+    "tests": []
+  },
+  "cleanup_verified": true,
+  "seconds": 101.05918025970459
+}

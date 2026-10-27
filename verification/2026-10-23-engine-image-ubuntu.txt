@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "real_board_tasks": 0,
+  "kind": "infrastructure_image_path_smoke",
+  "request_settings": {
+    "model": "strata/swift-1.5-iq3_s",
+    "context_limit": 262144,
+    "output_limit": 1024,
+    "configured_options": {
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    },
+    "steps": 8
+  },
+  "read_actual_image_path": true,
+  "rtk_actual_ls": true,
+  "known_code_recognized": true,
+  "session_id": "ses_e979bc172ffeg0JPw1qOBntMyW",
+  "steps": 2,
+  "token_totals": {
+    "input": 4272,
+    "output": 81,
+    "reasoning": 0
+  },
+  "api_errors": [],
+  "process_cleanup_verified": true,
+  "worker_lock_absent": true,
+  "temporary_files_removed": true
+}

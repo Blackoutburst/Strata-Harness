@@ -1,0 +1,36 @@
+{
+  "id": "job-17559b96fc98d1ad5c5dd4387bbe3b1d",
+  "operation": "test",
+  "state": "completed",
+  "argument": null,
+  "started_at": 1792755319.263805,
+  "exit_code": 78,
+  "scenario": "denied",
+  "external_permission_fixture": {
+    "android.permission.CALL_PHONE": "android.permission.CALL_PHONE: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|GRANTED_BY_ROLE]",
+    "android.permission.READ_CALL_LOG": "android.permission.READ_CALL_LOG: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|RESTRICTION_INSTALLER_EXEMPT|RESTRICTION_SYSTEM_EXEMPT|GRANTED_BY_ROLE]",
+    "android.permission.ANSWER_PHONE_CALLS": "android.permission.ANSWER_PHONE_CALLS: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|GRANTED_BY_ROLE]"
+  },
+  "instrumentation": {
+    "counts": {
+      "passed": 0,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "started": 0,
+      "unrun": null,
+      "runner_success": false
+    },
+    "tests": []
+  },
+  "cleanup_verified": true,
+  "passed": false,
+  "log": "/Users/florianchanson/.local/state/strata-board-harness-bridge/bridge/jobs/job-17559b96fc98d1ad5c5dd4387bbe3b1d.log",
+  "log_sha256": "78499d15a0efd67669fd737cbfc09edb9466a00c8a067f7f4d41767968af8c91",
+  "output_tail": "No denied-state annotation in this test APK; no tests executed",
+  "output_bytes": 62,
+  "finished_at": 1792755324.277236,
+  "output": "No denied-state annotation in this test APK; no tests executed",
+  "experiment": "baseline_adapter_smoke_only",
+  "seconds": 101.05918025970459
+}

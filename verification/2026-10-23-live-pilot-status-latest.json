@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-23T12:37:49.104410+00:00",
+  "worker": {
+    "phase": "developing",
+    "active_seconds": 2602.256995201111,
+    "stop_reason": null,
+    "build_checkpoint": true,
+    "source_sha256": "fdafd0f28ad16ba3f5b42de17cf78abe713eb93919b085dbd9e37e8b6b292ae7",
+    "blocker_count": 3
+  },
+  "engine": {
+    "phase": "running",
+    "session_id": "ses_e976e64ffffe4RYMXLu4fuhQGj",
+    "steps": 95,
+    "progress_at": 1792758866.0884113,
+    "process": {
+      "pid": 348857,
+      "stamp": "Fri Oct 23 12:19:28 2026  348857 /home/ubuntu/.local/share/strata-board-harness/tools/opencode serve --hostname 127.0.0.1 --port 0 --print-logs --log-level ERROR"
+    }
+  },
+  "guidance_receipts": [
+    {
+      "phase": "submitted",
+      "at": "2026-10-23T12:37:48.609535+00:00",
+      "evidence": "{\"engine_session\":\"ses_e976e64ffffe4RYMXLu4fuhQGj\",\"observation\":\"http_204\",\"request_id\":\"msg_dafd28d3e1b537f37adadf903a538751\"}"
+    }
+  ]
+}

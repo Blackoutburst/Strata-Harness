@@ -1,0 +1,21 @@
+{
+  "python": "3.10.12",
+  "deployed": false,
+  "tests_exit_code": 0,
+  "tests_output": "test_actual_process_crash_after_commit_retains_page_and_checkpoint (test_coordination.CoordinationTests) ... ok\ntest_actual_process_crash_during_page_transaction_replays_without_loss (test_coordination.CoordinationTests) ... ok\ntest_bad_page_rolls_back_inserted_messages_and_cursor (test_coordination.CoordinationTests) ... ok\ntest_delivery_requires_canonical_hash_and_never_promotes_preview (test_coordination.CoordinationTests) ... ok\ntest_duplicate_page_and_message_are_deduplicated (test_coordination.CoordinationTests) ... ok\ntest_empty_polls_do_not_submit_to_engine_or_lose_pending_guidance (test_coordination.CoordinationTests) ... ok\ntest_page_and_checkpoint_survive_restart_before_next_cursor_ack (test_coordination.CoordinationTests) ... ok\ntest_receipts_are_ordered_idempotent_and_application_is_distinct (test_coordination.CoordinationTests) ... ok\ntest_stale_cursor_or_wrong_identity_cannot_advance_reader (test_coordination.CoordinationTests) ... ok\ntest_uncertain_submission_is_retained_for_reconciliation_not_resent (test_coordination.CoordinationTests) ... ok\ntest_authenticated_probe_checks_loaded_model (test_supervisor.SupervisorTests) ... ok\ntest_backoff_is_bounded_does_not_block_control_heartbeat_and_survives_restart (test_supervisor.SupervisorTests) ... ok\ntest_configuration_precedence_and_validation (test_supervisor.SupervisorTests) ... ok\ntest_daemon_survives_model_shutdown_and_handles_sigterm (test_supervisor.SupervisorTests) ... ok\ntest_lock_rejects_duplicate_supervisor_then_allows_restart (test_supervisor.SupervisorTests) ... ok\ntest_outage_authentication_and_invalid_response_are_distinct (test_supervisor.SupervisorTests) ... ok\ntest_outage_recovery_preserves_checkpoint_and_records_only_transitions (test_supervisor.SupervisorTests) ... ok\ntest_redirect_does_not_forward_credentials (test_supervisor.SupervisorTests) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 4.881s\n\nOK\n",
+  "temporary_files_removed": true,
+  "checked_at": "2026-10-23T08:00:27.380921+00:00",
+  "host_role": "Ubuntu home server",
+  "local_tests": {
+    "passed": 18,
+    "exit_code": 0,
+    "command": "python3 -m unittest discover -s tests -v",
+    "source": "current-turn local tool output"
+  },
+  "source_sha256": {
+    "strata_board_harness/coordination.py": "4468ba1759652228f0728fa1e522a4852e982722ad914c2660ab9a4ea17a8911",
+    "tests/test_coordination.py": "efb329026011f1b66f7ccccff8b763a809b3f9de23abab7443c21e97e791a184",
+    "strata_board_harness/supervisor.py": "0bf14505983f07ef0a9814540b81e33e33e51593e80b40294fecf045af14aa35",
+    "tests/test_supervisor.py": "22cd0f0a3fd34d1be770c86421129f938dc10d8cc9dc67cd340f242e51d8cd50"
+  }
+}

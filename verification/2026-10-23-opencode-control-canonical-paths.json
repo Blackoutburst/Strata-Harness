@@ -1,0 +1,204 @@
+{
+  "started_at": "2026-10-23T09:04:48.409230+00:00",
+  "real_inference_requests": 0,
+  "real_board_calls": 0,
+  "rtk_agent": "harness-fixture",
+  "api_version": "v1",
+  "rtk_hook": {
+    "command": "rtk ls"
+  },
+  "stage": "creating_main_session",
+  "owned_tool_processes_exited": true,
+  "process_receipt": {
+    "checked_at": "2026-10-23T09:04:48.441698+00:00",
+    "inference_requests": 0,
+    "real_board_calls": 0,
+    "pure_api_inspection_only": false,
+    "default_plugins_disabled": true,
+    "project_config_disabled": true,
+    "fixture_filewatcher_disabled": true,
+    "binary_version": "1.19.3",
+    "server_pid": 39609,
+    "temporary_root": "/private/var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-3z8xfe_8",
+    "unauthenticated_status": 401,
+    "health": {
+      "healthy": true,
+      "version": "1.19.3"
+    },
+    "api_schema": "verification/opencode-1.19.3-openapi.json",
+    "paths": {
+      "/experimental/control-plane/move-session": [
+        "post"
+      ],
+      "/global/health": [
+        "get"
+      ],
+      "/global/event": [
+        "get"
+      ],
+      "/event": [
+        "get"
+      ],
+      "/experimental/session": [
+        "get"
+      ],
+      "/experimental/session/{sessionID}/background": [
+        "post"
+      ],
+      "/session": [
+        "get",
+        "post"
+      ],
+      "/session/status": [
+        "get"
+      ],
+      "/session/{sessionID}": [
+        "get",
+        "delete",
+        "patch"
+      ],
+      "/session/{sessionID}/children": [
+        "get"
+      ],
+      "/session/{sessionID}/todo": [
+        "get"
+      ],
+      "/session/{sessionID}/diff": [
+        "get"
+      ],
+      "/session/{sessionID}/message": [
+        "get",
+        "post"
+      ],
+      "/session/{sessionID}/message/{messageID}": [
+        "get",
+        "delete"
+      ],
+      "/session/{sessionID}/fork": [
+        "post"
+      ],
+      "/session/{sessionID}/abort": [
+        "post"
+      ],
+      "/session/{sessionID}/init": [
+        "post"
+      ],
+      "/session/{sessionID}/share": [
+        "post",
+        "delete"
+      ],
+      "/session/{sessionID}/summarize": [
+        "post"
+      ],
+      "/session/{sessionID}/prompt_async": [
+        "post"
+      ],
+      "/session/{sessionID}/command": [
+        "post"
+      ],
+      "/session/{sessionID}/shell": [
+        "post"
+      ],
+      "/session/{sessionID}/revert": [
+        "post"
+      ],
+      "/session/{sessionID}/unrevert": [
+        "post"
+      ],
+      "/session/{sessionID}/permissions/{permissionID}": [
+        "post"
+      ],
+      "/session/{sessionID}/message/{messageID}/part/{partID}": [
+        "delete",
+        "patch"
+      ],
+      "/tui/open-sessions": [
+        "post"
+      ],
+      "/tui/select-session": [
+        "post"
+      ],
+      "/api/session": [
+        "get",
+        "post"
+      ],
+      "/api/session/active": [
+        "get"
+      ],
+      "/api/session/{sessionID}": [
+        "get"
+      ],
+      "/api/session/{sessionID}/agent": [
+        "post"
+      ],
+      "/api/session/{sessionID}/model": [
+        "post"
+      ],
+      "/api/session/{sessionID}/prompt": [
+        "post"
+      ],
+      "/api/session/{sessionID}/compact": [
+        "post"
+      ],
+      "/api/session/{sessionID}/wait": [
+        "post"
+      ],
+      "/api/session/{sessionID}/revert/stage": [
+        "post"
+      ],
+      "/api/session/{sessionID}/revert/clear": [
+        "post"
+      ],
+      "/api/session/{sessionID}/revert/commit": [
+        "post"
+      ],
+      "/api/session/{sessionID}/context": [
+        "get"
+      ],
+      "/api/session/{sessionID}/history": [
+        "get"
+      ],
+      "/api/session/{sessionID}/event": [
+        "get"
+      ],
+      "/api/session/{sessionID}/interrupt": [
+        "post"
+      ],
+      "/api/session/{sessionID}/message/{messageID}": [
+        "get"
+      ],
+      "/api/session/{sessionID}/message": [
+        "get"
+      ],
+      "/api/session/{sessionID}/permission": [
+        "post",
+        "get"
+      ],
+      "/api/session/{sessionID}/permission/{requestID}": [
+        "get"
+      ],
+      "/api/session/{sessionID}/permission/{requestID}/reply": [
+        "post"
+      ],
+      "/api/session/{sessionID}/question": [
+        "get"
+      ],
+      "/api/session/{sessionID}/question/{requestID}/reply": [
+        "post"
+      ],
+      "/api/session/{sessionID}/question/{requestID}/reject": [
+        "post"
+      ]
+    },
+    "fixture_server_log": "timestamp=2026-10-23T09:04:49.085Z level=INFO run=b920e62f message=loading path=/private/var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-3z8xfe_8/config/opencode/config.json\ntimestamp=2026-10-23T09:04:49.086Z level=INFO run=b920e62f message=loading path=/private/var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-3z8xfe_8/config/opencode/opencode.json\ntimestamp=2026-10-23T09:04:49.094Z level=INFO run=b920e62f message=loading path=/private/var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-3z8xfe_8/config/opencode/opencode.jsonc\nopencode server listening on http://127.0.0.1:4096\ntimestamp=2026-10-23T09:04:49.762Z level=INFO run=b920e62f message=\"creating instance\" directory=/private/var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-3z8xfe_8/workspace\ntimestamp=2026-10-23T09:04:49.763Z level=INFO run=b920e62f message=fromDirectory directory=/private/var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-3z8xfe_8/workspace\ntimestamp=2026-10-23T09:04:49.768Z level=INFO run=b920e62f message=bootstrapping directory=/private/var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-3z8xfe_8/workspace\ntimestamp=2026-10-23T09:04:49.770Z level=INFO run=b920e62f message=loading path=/private/var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-3z8xfe_8/config/opencode/config.json\ntimestamp=2026-10-23T09:04:49.770Z level=INFO run=b920e62f message=loading path=/private/var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-3z8xfe_8/config/opencode/opencode.json\ntimestamp=2026-10-23T09:04:49.771Z level=INFO run=b920e62f message=loading path=/private/var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-3z8xfe_8/config/opencode/opencode.jsonc\n",
+    "server_exited": true,
+    "temporary_files_removed": true,
+    "owned_worker_lock_removed": true
+  },
+  "passed": false,
+  "error": {
+    "type": "TimeoutError",
+    "message": "timed out"
+  },
+  "fixture_requests": []
+}

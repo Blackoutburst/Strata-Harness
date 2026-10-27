@@ -1,0 +1,102 @@
+{"exit_code": 0, "seconds": 149.1748125553131, "baseline": "19d7458debbe540c9cb7f0061805f7af766cdf5a", "offline": false, "jdk": "private javac17.0.20.1", "sdk": "private build-tools36.0.0", "log": "/home/ubuntu/.local/share/strata-board-harness-setup/baseline-build/warm-1792751897629857739.log"}
+ libonnxruntime.so, libsherpa-onnx-jni.so. Run with --info option to learn more.
+
+> Task :app:mergeDebugAndroidTestAssets
+> Task :app:compressDebugAndroidTestAssets
+> Task :app:desugarDebugAndroidTestFileDependencies
+> Task :app:checkDebugAndroidTestDuplicateClasses
+> Task :app:checkDebugAndroidTestAarMetadata
+> Task :app:processDebugResources
+> Task :app:desugarDebugFileDependencies
+> Task :app:kspDebugKotlin
+> Task :app:mergeExtDexDebugAndroidTest
+> Task :app:compileDebugAndroidTestNavigationResources
+> Task :app:mergeLibDexDebugAndroidTest
+> Task :app:mapDebugAndroidTestSourceSetPaths
+> Task :app:mergeDebugAndroidTestJniLibFolders
+> Task :app:mergeDebugAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :app:validateSigningDebugAndroidTest
+> Task :app:writeDebugAndroidTestSigningConfigVersions
+> Task :app:mergeDebugAndroidTestResources
+> Task :app:processDebugAndroidTestResources
+> Task :app:mergeExtDexDebug
+> Task :app:compileDebugKotlin
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/app/navigation/EntryProvider.kt:66:54 'fun <reified VM : ViewModel, reified VMF> hiltViewModel(viewModelStoreOwner: ViewModelStoreOwner = ..., key: String? = ..., noinline creationCallback: (VMF) -> VM): VM' is deprecated. Moved to package: androidx.hilt.lifecycle.viewmodel.compose.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/app/navigation/EntryProvider.kt:109:44 'fun <reified VM : ViewModel> hiltViewModel(viewModelStoreOwner: ViewModelStoreOwner = ..., key: String? = ...): VM' is deprecated. Moved to package: androidx.hilt.lifecycle.viewmodel.compose.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/app/navigation/PhoneNavDisplay.kt:26:58 'fun <reified VM : ViewModel> hiltViewModel(viewModelStoreOwner: ViewModelStoreOwner = ..., key: String? = ...): VM' is deprecated. Moved to package: androidx.hilt.lifecycle.viewmodel.compose.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/core/data/model/Call.kt:49:60 'val state: Int' is deprecated. Deprecated in Java.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/core/data/model/Call.kt:63:65 'val state: Int' is deprecated. Deprecated in Java.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/core/service/ContactsSyncService.kt:114:43 'static field TIMES_CONTACTED: String' is deprecated. Deprecated in Java.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/core/service/ContactsSyncService.kt:115:43 'static field LAST_TIME_CONTACTED: String' is deprecated. Deprecated in Java.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/core/service/call/CallService.kt:88:28 'fun setAudioRoute(p0: Int): Unit' is deprecated. Deprecated in Java.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/core/service/call/CallService.kt:97:28 'fun setAudioRoute(p0: Int): Unit' is deprecated. Deprecated in Java.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/core/service/call/CallService.kt:253:15 'fun onCallAudioStateChanged(p0: CallAudioState!): Unit' is deprecated. Deprecated in Java.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/core/service/receiver/DefaultDialerChangeReceiver.kt:48:40 'fun get(p0: String!): Any?' is deprecated. Deprecated in Java.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/features/call/CallActivity.kt:115:19 'fun onBackPressed(): Unit' is deprecated. This method has been deprecated in favor of using the
+      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.
+      The OnBackPressedDispatcher controls how back button events are dispatched
+      to one or more {@link OnBackPressedCallback} objects.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/features/call/CallActivity.kt:136:32 'fun <reified VM : ViewModel> hiltViewModel(viewModelStoreOwner: ViewModelStoreOwner = ..., key: String? = ...): VM' is deprecated. Moved to package: androidx.hilt.lifecycle.viewmodel.compose.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/features/contacts/AddContactScreen.kt:63:38 'fun <reified VM : ViewModel> hiltViewModel(viewModelStoreOwner: ViewModelStoreOwner = ..., key: String? = ...): VM' is deprecated. Moved to package: androidx.hilt.lifecycle.viewmodel.compose.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/features/contacts/ContactsScreen.kt:72:42 'fun <reified VM : ViewModel> hiltViewModel(viewModelStoreOwner: ViewModelStoreOwner = ..., key: String? = ...): VM' is deprecated. Moved to package: androidx.hilt.lifecycle.viewmodel.compose.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/features/contacts/EditContactScreen.kt:63:39 'fun <reified VM : ViewModel> hiltViewModel(viewModelStoreOwner: ViewModelStoreOwner = ..., key: String? = ...): VM' is deprecated. Moved to package: androidx.hilt.lifecycle.viewmodel.compose.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/features/history/CallDetailsScreen.kt:79:39 'fun <reified VM : ViewModel> hiltViewModel(viewModelStoreOwner: ViewModelStoreOwner = ..., key: String? = ...): VM' is deprecated. Moved to package: androidx.hilt.lifecycle.viewmodel.compose.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/features/history/HistoryScreen.kt:100:41 'fun <reified VM : ViewModel> hiltViewModel(viewModelStoreOwner: ViewModelStoreOwner = ..., key: String? = ...): VM' is deprecated. Moved to package: androidx.hilt.lifecycle.viewmodel.compose.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/receiver/AgentUpdateReceiver.kt:14:11 'fun get(p0: String!): Any?' is deprecated. Deprecated in Java.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/receiver/AgentUpdateReceiver.kt:18:11 'fun get(p0: String!): Any?' is deprecated. Deprecated in Java.
+w: file:///work/app/src/main/java/tech/primal/attentive_os/phone/receiver/AgentUpdateReceiver.kt:22:11 'fun get(p0: String!): Any?' is deprecated. Deprecated in Java.
+
+> Task :app:compileDebugJavaWithJavac
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/home/worker
+
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/home/worker
+
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/home/worker
+
+
+> Task :app:hiltSyncDebug
+> Task :app:processDebugJavaRes
+> Task :app:hiltAggregateDepsDebug
+> Task :app:mergeDebugJavaResource
+> Task :app:hiltJavaCompileDebug
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:transformDebugClassesWithAsm
+> Task :app:kspDebugAndroidTestKotlin
+> Task :app:kspDebugUnitTestKotlin
+> Task :app:dexBuilderDebug
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:mergeProjectDexDebug
+> Task :app:compileDebugAndroidTestKotlin
+> Task :app:compileDebugUnitTestKotlin
+> Task :app:compileDebugAndroidTestJavaWithJavac
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:copyRoomSchemas NO-SOURCE
+> Task :app:processDebugAndroidTestJavaRes
+> Task :app:mergeDebugAndroidTestJavaResource
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+> Task :app:hiltSyncDebugAndroidTest
+> Task :app:processDebugUnitTestJavaRes
+> Task :app:hiltAggregateDepsDebugAndroidTest
+> Task :app:hiltSyncDebugUnitTest
+> Task :app:hiltJavaCompileDebugAndroidTest NO-SOURCE
+> Task :app:transformDebugAndroidTestClassesWithAsm
+> Task :app:hiltAggregateDepsDebugUnitTest
+> Task :app:dexBuilderDebugAndroidTest
+> Task :app:hiltJavaCompileDebugUnitTest NO-SOURCE
+> Task :app:mergeProjectDexDebugAndroidTest
+> Task :app:transformDebugUnitTestClassesWithAsm
+
+> Task :app:testDebugUnitTest
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/home/worker
+
+> Task :app:packageDebugAndroidTest
+> Task :app:createDebugAndroidTestApkListingFileRedirect
+> Task :app:assembleDebugAndroidTest
+
+BUILD SUCCESSFUL in 2m 28s
+86 actionable tasks: 86 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.1.0/userguide/configuration_cache_enabling.html
+

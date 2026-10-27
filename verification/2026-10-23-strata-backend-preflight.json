@@ -1,0 +1,151 @@
+{
+  "at": "2026-10-23T10:47:03.253528+00:00",
+  "model": "swift-1.5-iq3_s",
+  "settings": {
+    "temperature": 0,
+    "max_tokens": 256,
+    "stream": false,
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "configured_api_billing_usd": 0,
+  "energy": "unmeasured",
+  "models": {
+    "http_status": 200,
+    "seconds": 0.008021943969652057,
+    "body": {
+      "object": "list",
+      "data": [
+        {
+          "id": "swift-1.5-iq3_s",
+          "object": "model",
+          "status": {
+            "value": "loaded"
+          },
+          "meta": {
+            "n_ctx": 262144
+          },
+          "architecture": {
+            "input_modalities": [
+              "text",
+              "image"
+            ],
+            "output_modalities": [
+              "text"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "properties": {
+    "model_path": "C:\\Users\\black\\Documents\\Strata-data\\models\\swift-IQ3_S\\Swift-Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+    "model_alias": "swift-1.5-iq3_s",
+    "chat_template_caps": {
+      "supports_tools": true,
+      "supports_tool_calls": true,
+      "supports_system_role": true,
+      "supports_parallel_tool_calls": true,
+      "supports_preserve_reasoning": true
+    },
+    "default_generation_settings": {
+      "n_ctx": 262144
+    }
+  },
+  "tool_probe": {
+    "http_status": 200,
+    "seconds": 4.094318524992559,
+    "body": {
+      "id": "chatcmpl-ccc4bc9ad86846ef8ed4d107",
+      "object": "chat.completion",
+      "created": 1792752423,
+      "model": "swift-1.5-iq3_s",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "call_cf442b16f77a4d9aba272d2e",
+                "type": "function",
+                "function": {
+                  "name": "harness_ping",
+                  "arguments": "{\"nonce\":\"69c5a2f0f90e0bc7\"}"
+                }
+              }
+            ]
+          },
+          "finish_reason": "tool_calls"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 300,
+        "completion_tokens": 41,
+        "total_tokens": 341,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 300,
+        "prompt_ms": 2922.2,
+        "prompt_per_token_ms": 9.741,
+        "prompt_per_second": 102.7,
+        "predicted_n": 41,
+        "predicted_ms": 1144.5,
+        "predicted_per_token_ms": 27.915,
+        "predicted_per_second": 35.8,
+        "draft_n": 40,
+        "draft_n_accepted": 29
+      }
+    }
+  },
+  "tool_call_verified": true,
+  "image_probe": {
+    "http_status": 200,
+    "seconds": 1.9399957510177046,
+    "body": {
+      "id": "chatcmpl-68d5ed60b0e74e3fab44ca35",
+      "object": "chat.completion",
+      "created": 1792752428,
+      "model": "swift-1.5-iq3_s",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "294268"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 192,
+        "completion_tokens": 7,
+        "total_tokens": 199,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 192,
+        "prompt_ms": 1677.7,
+        "prompt_per_token_ms": 8.738,
+        "prompt_per_second": 114.4,
+        "predicted_n": 7,
+        "predicted_ms": 148.5,
+        "predicted_per_token_ms": 21.214,
+        "predicted_per_second": 47.1,
+        "draft_n": 6,
+        "draft_n_accepted": 4
+      }
+    }
+  },
+  "image_fixture_sha256": "ac51ff47ed2eae3e0b777ecfe75ec04db65ef3a45197a020f53a531f295ae200",
+  "image_verified": true
+}

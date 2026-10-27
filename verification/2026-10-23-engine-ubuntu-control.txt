@@ -1,0 +1,86 @@
+{
+  "started_at": "2026-10-23T10:09:11.201525+00:00",
+  "real_inference_requests": 0,
+  "real_board_calls": 0,
+  "rtk_agent": "harness-fixture",
+  "api_version": "v1",
+  "rtk_plugin_sha256": "356164874868aa58f26310fa3cb337469a83ff756d560598815fb23a09d1f61d",
+  "rtk_hook": {
+    "command": "rtk ls"
+  },
+  "stage": "creating_main_session",
+  "main_session": "ses_e97c37478ffe69Sh9eAUpuuAyP",
+  "first_admission": {
+    "id": "msg_3165a4f8114363e58acd57fe9a863a41",
+    "http_accepted": true,
+    "applied": false
+  },
+  "ping_admission": {
+    "id": "msg_df674fb12cc8604a1535705ab6bb422d",
+    "http_accepted": true,
+    "applied": false
+  },
+  "main_requests_before_tool_release": 1,
+  "main_model_requests": 3,
+  "main_tool_finished": true,
+  "rtk_in_engine_history": true,
+  "ping_seen_by_model": true,
+  "model_waited_for_tool": true,
+  "stop_session": "ses_e97c36dffffeTlfaOgOHfSD9cR",
+  "stop_admission": {
+    "id": "msg_d26f671bfdaf339817863dd56b5ec5db",
+    "http_accepted": true,
+    "applied": false
+  },
+  "queued_admission": {
+    "id": "msg_2c3f6ff8e5a267a2a7e4460422f317a8",
+    "http_accepted": true,
+    "applied": false
+  },
+  "stop_model_requests_after_interrupt": 1,
+  "stop_tool_finished": false,
+  "stop_tool_process_exited": true,
+  "interrupt_stayed_stopped": true,
+  "post_interrupt_observation_seconds": 0.5,
+  "failure_session": "ses_e97c36b2bffeTlFbkR3Sy4LwUd",
+  "failed_exit_preserved": true,
+  "client_exit37_receipt": true,
+  "client_admission": {
+    "engine_session": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+    "request_id": "msg_8b02b579393e3cda2ad64fcbb320bd94",
+    "observation": "http_204"
+  },
+  "client_acknowledgement": {
+    "acknowledged": true,
+    "applied": false
+  },
+  "client_reconciled": {
+    "observed": true,
+    "acknowledged": true,
+    "applied": false
+  },
+  "client_receipts": [
+    {
+      "phase": "submitted",
+      "at": "2026-10-23T10:09:23.430421+00:00",
+      "evidence": {
+        "engine_session": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+        "observation": "http_204",
+        "request_id": "msg_8b02b579393e3cda2ad64fcbb320bd94"
+      }
+    },
+    {
+      "phase": "acknowledged",
+      "at": "2026-10-23T10:09:23.520743+00:00",
+      "evidence": {
+        "assistant_id": "msg_1683c95e8001QnP4vO9titdVn6",
+        "engine_session": "ses_e97c36a91ffeS7WHRWjCCK3u5w",
+        "observation": "assistant_marker",
+        "request_id": "msg_8b02b579393e3cda2ad64fcbb320bd94"
+      }
+    }
+  ],
+  "scoped_client_verified": true,
+  "passed": true,
+  "owned_tool_processes_exited": true
+}

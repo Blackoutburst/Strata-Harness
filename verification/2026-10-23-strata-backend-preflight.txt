@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-23T10:47:03.253528+00:00",
+  "model": "swift-1.5-iq3_s",
+  "properties": {
+    "model_path": "C:\\Users\\black\\Documents\\Strata-data\\models\\swift-IQ3_S\\Swift-Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+    "model_alias": "swift-1.5-iq3_s",
+    "chat_template_caps": {
+      "supports_tools": true,
+      "supports_tool_calls": true,
+      "supports_system_role": true,
+      "supports_parallel_tool_calls": true,
+      "supports_preserve_reasoning": true
+    },
+    "default_generation_settings": {
+      "n_ctx": 262144
+    }
+  },
+  "tool_call_verified": true,
+  "image_verified": true
+}

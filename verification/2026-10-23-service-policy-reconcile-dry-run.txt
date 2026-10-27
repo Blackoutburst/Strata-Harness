@@ -1,0 +1,40 @@
+{
+  "kind": "manager_explicit_same_pilot_service_policy_reconciliation",
+  "at": "2026-10-23T12:05:40.547265+00:00",
+  "ticket_id": "7667684d1e4fc8c0531c6dc0a51a8c0f",
+  "session_id": "ses_e976e64ffffe4RYMXLu4fuhQGj",
+  "previous_pid": 340266,
+  "jobs": [
+    "job-6f0b82efe7cd9a32e01cc7eb7603fff2",
+    "job-d482df42ffea4ec1fa70ecf37287dbc9",
+    "job-f1ddf3d9793de6feb5eba8a539601a40",
+    "job-df4a8c57452fbe24549016214ca43ea1"
+  ],
+  "owned_process_and_group_gone": true,
+  "source_unchanged_at_baseline": true,
+  "emulator_cleanup_verified": true,
+  "original_gateway_failure": "Service socket-family policy omitted AF_NETLINK required for bwrap loopback setup. Exact clean offline baseline build passed in an owned transient unit with the corrected policy.",
+  "steps_preserved": 14,
+  "automatic_retry": false,
+  "applied": false,
+  "continuation_number": 3,
+  "automatic_future_continuations": false,
+  "service_policy_proof": {
+    "exit_code": 0,
+    "seconds": 65.90630078315735,
+    "baseline": "19d7458debbe540c9cb7f0061805f7af766cdf5a",
+    "offline": true,
+    "jdk": "private javac17.0.20.1",
+    "sdk": "private build-tools36.0.0",
+    "log": "/home/ubuntu/.local/share/strata-board-harness-setup/baseline-build/offline-1792756932685625983.log",
+    "receipt": "/home/ubuntu/.local/share/strata-board-harness-setup/baseline-build/offline-1792756932685625983.json",
+    "address_families": "AF_UNIX AF_INET AF_INET6 AF_NETLINK",
+    "under_transient_systemd_unit": "strata-harness-baseline-preflight-20261023.service",
+    "log_sha256": "3ffa0920b28989f23855332fc264d34677d58d002bbd5b5d422c2028e023df73",
+    "unit_before_sha256": "717be209cba64c7aa1ec622c6692bbc73eba26087320ffd48764e3b64aa795cd",
+    "unit_after_sha256": "a623172e43dba16b5d17726d045bb6992bd6d24002672c7e923cdf66da81ba18",
+    "unit_verify_exit_code": 0,
+    "network_isolation_retained": true,
+    "at": 1792757139.7825546
+  }
+}

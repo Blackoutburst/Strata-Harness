@@ -1,0 +1,145 @@
+{
+  "checked_at": "2026-10-23T09:14:06.674764+00:00",
+  "increment": "installed_engine_control_preflight",
+  "live_pilot_ready": false,
+  "original_benchmark_untouched": true,
+  "real_strata_requests": 0,
+  "real_board_developer_calls": 0,
+  "service_installed": false,
+  "worker_paired": false,
+  "daemon_wired": false,
+  "engine_adapter_implemented": false,
+  "installed_engine": {
+    "version": "1.19.3",
+    "binary_sha256": "6d3e6458fce4b649edf974c19959d5dbfe1e7f255a503dcfc01215b24ad3ea5b",
+    "rtk_binary_sha256": "52007bae2712f1455b6ddf8fc5128b812c020f1cf4297757e041e3fa544eee42",
+    "rtk_plugin_sha256": "356164874868aa58f26310fa3cb337469a83ff756d560598815fb23a09d1f61d"
+  },
+  "v1_control": {
+    "receipt": "2026-10-23-opencode-control-v1.json",
+    "actual_assistant_ack": true,
+    "actual_rtk_tool_rewrite_exit0": true,
+    "model_waited_for_tool": true,
+    "ping_seen_by_model": true,
+    "owned_stop_tool_exited": true,
+    "dormant_queue_observation_seconds": 0.5,
+    "nonzero_exit37_gate": "implemented in strengthened fixture; not reached because cold session creation times out"
+  },
+  "v2_control": {
+    "receipt": "2026-10-23-opencode-control-events.json",
+    "rtk_gate_passed": false,
+    "wait_http_status": 503,
+    "wait_error_receipt": "2026-10-23-opencode-control-diagnostic.json"
+  },
+  "cold_bootstrap_failures": [
+    {
+      "receipt": "2026-10-23-opencode-control-cold-start-timeout.json",
+      "started_at": "2026-10-23T08:53:22.435570+00:00",
+      "stage": "not recorded",
+      "error": {
+        "type": "TimeoutError",
+        "message": "timed out"
+      },
+      "fixture_request_count": 0,
+      "original_temporary_cleanup": true
+    },
+    {
+      "receipt": "2026-10-23-opencode-control-configuration-timeout.json",
+      "started_at": "2026-10-23T08:54:42.381386+00:00",
+      "stage": "not recorded",
+      "error": {
+        "type": "TimeoutError",
+        "message": "timed out"
+      },
+      "fixture_request_count": 0,
+      "original_temporary_cleanup": false
+    },
+    {
+      "receipt": "2026-10-23-opencode-control-session-debug-timeout.json",
+      "started_at": "2026-10-23T08:55:55.299135+00:00",
+      "stage": "creating_main_session",
+      "error": {
+        "type": "TimeoutError",
+        "message": "timed out"
+      },
+      "fixture_request_count": 0,
+      "original_temporary_cleanup": false
+    },
+    {
+      "receipt": "2026-10-23-opencode-control-isolated.json",
+      "started_at": "2026-10-23T08:58:45.278468+00:00",
+      "stage": "creating_main_session",
+      "error": {
+        "type": "TimeoutError",
+        "message": "timed out"
+      },
+      "fixture_request_count": 0,
+      "original_temporary_cleanup": false
+    },
+    {
+      "receipt": "2026-10-23-opencode-control-project-isolation.json",
+      "started_at": "2026-10-23T09:03:39.777089+00:00",
+      "stage": "creating_main_session",
+      "error": {
+        "type": "TimeoutError",
+        "message": "timed out"
+      },
+      "fixture_request_count": 0,
+      "original_temporary_cleanup": true
+    },
+    {
+      "receipt": "2026-10-23-opencode-control-canonical-paths.json",
+      "started_at": "2026-10-23T09:04:48.409230+00:00",
+      "stage": "creating_main_session",
+      "error": {
+        "type": "TimeoutError",
+        "message": "timed out"
+      },
+      "fixture_request_count": 0,
+      "original_temporary_cleanup": true
+    },
+    {
+      "receipt": "2026-10-23-opencode-control-error-log-level.json",
+      "started_at": "2026-10-23T09:06:12.961236+00:00",
+      "stage": "creating_main_session",
+      "error": {
+        "type": "TimeoutError",
+        "message": "timed out"
+      },
+      "fixture_request_count": 0,
+      "original_temporary_cleanup": true
+    }
+  ],
+  "cleanup_reconciliation": "2026-10-23-engine-preflight-cleanup-reconciliation.json",
+  "local_tests": {
+    "passed": 48,
+    "receipt": "2026-10-23-engine-preflight-local-tests.json"
+  },
+  "ubuntu_tests": {
+    "passed": 48,
+    "python": "3.10.12",
+    "receipt": "2026-10-23-engine-preflight-ubuntu-tests.json",
+    "temporary_files_removed": true,
+    "actual_opencode_tested": false
+  },
+  "no_live_opencode_processes": true,
+  "shared_worker_lock_absent": true,
+  "source_sha256": {
+    "README.md": "874186d36c358e6a4ddb057b3ecfd4a03c35007e96b11b79126c9c06765268d2",
+    "docs/architecture.md": "a47fd7ccee74429d30f447f6ec370c671b19a9a50f4f2287a8e983e5ed95df5f",
+    "docs/engine-control.md": "07672647be1473d6c247b7c0d7677f24b01fb5183c1080af7febc1c55d005376",
+    "scripts/inspect_opencode.py": "f4cb2d42a41b14932452b63e9b80ed7023a1ea022494e16d7fa34826b56a84cc",
+    "scripts/probe_opencode_control.py": "cc104307f7a0a2b07e7a1e718133bea7c14c4ad3bc1880f3d31811435be1fdc5",
+    "strata_board_harness/__init__.py": "03b95b66c39e3d9b16fe4a4e60e1e87cc964c4bff25844b37b0dbf0a333a477e",
+    "strata_board_harness/__main__.py": "a457fb4a623a0525d115e34ecf7cbd01b0c15e0ea72c34717d3aa0dd5883ccd1",
+    "strata_board_harness/board.py": "e46db41057a39fb9f635c8227a9141a12f664822803c6350ee3ada49955a9c1b",
+    "strata_board_harness/coordination.py": "4468ba1759652228f0728fa1e522a4852e982722ad914c2660ab9a4ea17a8911",
+    "strata_board_harness/coordinator.py": "99183d486d26072d3b311de29bef32220b637bba8a22d713f8e0bf1fd10ee4cb",
+    "strata_board_harness/supervisor.py": "961ec7155d48c4f1306952391a5634445c1fb9f9522fc9d86d707e80896217c0",
+    "tests/test_board.py": "95992eff0fcb91c0066e15538a436efe448e434ec1063fbd1a219362f7264038",
+    "tests/test_coordination.py": "efb329026011f1b66f7ccccff8b763a809b3f9de23abab7443c21e97e791a184",
+    "tests/test_coordinator.py": "b398203558842c88b29f2b40e719b922dbd5099d717835648aca049ab22257f8",
+    "tests/test_engine_inspection.py": "1511b6b875a2b4b01ee8b895616ebbbb576681ca14ee8481b53b08f8c0c03caa",
+    "tests/test_supervisor.py": "9cddd1223b62db085de4a1a6e08284506c3b2daf5db144c2c895fd3756bd5033"
+  }
+}

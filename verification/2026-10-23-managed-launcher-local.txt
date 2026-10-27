@@ -1,0 +1,10 @@
+test_gateway_cleanup_is_required_before_unlock (test_managed_engine.ManagedEngineTests) ... ok
+test_guard_failure_does_not_start_or_clear_foreign_lock (test_managed_engine.ManagedEngineTests) ... ok
+test_launcher_has_private_environment_and_owned_group_cleanup (test_managed_engine.ManagedEngineTests) ... ok
+test_session_creation_lost_reply_is_reconciled_without_second_post (test_managed_engine.ManagedEngineTests) ... ok
+test_uncertain_creation_missing_from_list_is_not_retried (test_managed_engine.ManagedEngineTests) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 2.779s
+
+OK

@@ -1,0 +1,21 @@
+{
+  "kind": "manager_explicit_same_pilot_startup_reconciliation",
+  "at": "2026-10-23T12:00:31.401247+00:00",
+  "ticket_id": "7667684d1e4fc8c0531c6dc0a51a8c0f",
+  "session_id": "ses_e976e64ffffe4RYMXLu4fuhQGj",
+  "previous_pid": 339199,
+  "jobs": [
+    "job-6f0b82efe7cd9a32e01cc7eb7603fff2",
+    "job-d482df42ffea4ec1fa70ecf37287dbc9"
+  ],
+  "owned_process_and_group_gone": true,
+  "source_unchanged_at_baseline": true,
+  "emulator_cleanup_verified": true,
+  "original_gateway_failure": "Old appended listening URL was read before restarted API listened; no new model request or source edit occurred.",
+  "steps_preserved": 10,
+  "automatic_retry": false,
+  "applied": true,
+  "continuation_number": 2,
+  "automatic_future_continuations": false,
+  "active_seconds_preserved": 980.3925626277924
+}

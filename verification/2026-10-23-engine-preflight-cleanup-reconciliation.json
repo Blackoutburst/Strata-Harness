@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-10-23T09:13:27.952904+00:00",
+  "no_opencode_processes": true,
+  "shared_lock_absent": true,
+  "reason": "older probe deleted temporary tree before stopping server; current script reverses ordering and has regression tests",
+  "items": [
+    {
+      "original_receipt": "2026-10-23-opencode-control-configuration-timeout.json",
+      "original_cleanup": false,
+      "now_removed": null,
+      "reason": "Original receipt omitted temporary_root and log lacks path; no deletion based on prefix alone"
+    },
+    {
+      "original_receipt": "2026-10-23-opencode-control-session-debug-timeout.json",
+      "original_cleanup": false,
+      "path": "/var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-uj4g6vdc",
+      "exists_after_server_exit": true,
+      "remaining_files": [],
+      "now_removed": true
+    },
+    {
+      "original_receipt": "2026-10-23-opencode-control-isolated.json",
+      "original_cleanup": false,
+      "path": "/var/folders/_g/2stqvp_s3tl63f2z529k5mh40000gn/T/strata-opencode-api-s3ebr6nc",
+      "exists_after_server_exit": true,
+      "remaining_files": [
+        "home/.npm/_cacache/content-v2/sha512/03/1b/cfadf104e9edf3f8c137b6180eff5da83e508eeb6dd05d20c77622f3f9d98c5ebe02788bd141b016da8221eefcc62814e27abfdc0acc9d7763897fc021bb",
+        "home/.npm/_cacache/index-v5/cc/5f/9a8e611a4d512ac3f6a7e80a54f2f21096b9f32dd76508831745febcc4a0"
+      ],
+      "now_removed": true
+    }
+  ]
+}

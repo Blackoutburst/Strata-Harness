@@ -1,0 +1,8 @@
+{
+  "backend_url": "http://127.0.0.1:18080/v1",
+  "model_id": "swift-1.5-iq3_s",
+  "api_key_env": "STRATA_API_KEY",
+  "poll_seconds": 5,
+  "max_backoff_seconds": 60,
+  "request_timeout_seconds": 5
+}

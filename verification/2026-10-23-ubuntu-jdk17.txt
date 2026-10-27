@@ -1,0 +1,7 @@
+{
+  "package": "openjdk-17-jdk-headless",
+  "version": "17.0.20.1+1-1~22.04",
+  "package_sha256": "65b6595526f98963c6b1f665760c71ddcd24af6b1f6d1f4772feb15d61b18a34",
+  "javac_exit": 0,
+  "javac": "javac 17.0.20.1\n"
+}
