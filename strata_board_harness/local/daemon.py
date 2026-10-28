@@ -15,6 +15,7 @@ from .agents import Agent
 from .boardlink import AgentSession, BoardError
 from .runner import run_ticket
 
+OUTAGE_BACKOFF = 600  # seconds to wait after the model provider failed
 PRIORITY = {'urgent': 0, 'high': 1, 'normal': 2, 'low': 3}
 
 
@@ -93,8 +94,11 @@ def serve_agent(agent, once=False, poll_seconds=30, log=print):
                 ticket = next_ticket(agent, session)
                 backoff = poll_seconds
                 if ticket:
-                    run_ticket(agent, session, ticket, log=log)
-                    continue
+                    result = run_ticket(agent, session, ticket, log=log)
+                    if result.get('status') == 'retry':
+                        backoff = OUTAGE_BACKOFF
+                    else:
+                        continue
             except BoardError as error:
                 log(f'[{agent.name}] board: {error}')
                 session, backoff = None, min(backoff * 2, 600)

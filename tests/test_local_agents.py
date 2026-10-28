@@ -187,6 +187,12 @@ class RunnerTests(unittest.TestCase):
         self.assertFalse(cold_start_failure(1, False, events))
         self.assertTrue(cold_start_failure(1, False, {'tokens': {'input': 0, 'output': 0}}))
 
+    def test_provider_outages_are_not_the_agents_fault(self):
+        from strata_board_harness.local.runner import provider_outage
+        self.assertTrue(provider_outage(['Service unavailable.', 'Rate limit exceeded']))
+        self.assertFalse(provider_outage(['Service unavailable.', 'Tool failed: syntax error']))
+        self.assertFalse(provider_outage([]))
+
     def test_prompt_carries_task_project_feedback_and_rules(self):
         agent = mock.Mock(name='agent')
         agent.name, agent.config = 'coder', {'display_name': 'Coder', 'instructions': 'Prefer small commits.'}

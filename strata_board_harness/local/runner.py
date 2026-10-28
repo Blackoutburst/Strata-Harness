@@ -131,6 +131,14 @@ def read_events(path):
             'errors': errors}
 
 
+OUTAGE = re.compile(r'service unavailable|overloaded|rate.?limit|too many requests|bad gateway|gateway timeout|'
+                    r'temporarily unavailable|internal server error', re.IGNORECASE)
+
+
+def provider_outage(errors):
+    return bool(errors) and all(OUTAGE.search(error or '') for error in errors)
+
+
 def cold_start_failure(code, timed_out, events):
     """OpenCode failed before the model produced anything (e.g. provider package install)."""
     return not timed_out and code != 0 and not any(events['tokens'].values())
@@ -228,11 +236,14 @@ def run_ticket(agent, session, ticket, log=print):
             pushed = True
         report = events['report']
         blocked = timed_out or code != 0 or ahead == 0 or report.upper().startswith('RESULT: BLOCKED')
+        status = 'blocked' if blocked else 'review'
+        if code != 0 and not timed_out and new_commits == 0 and provider_outage(events['errors']):
+            status = 'retry'  # The provider failed, not the agent: hand the ticket back and try later.
         result.update(branch=branch, workspace=str(workspace), exit_code=code, timed_out=timed_out,
                       untracked=untracked[:50],
                       new_commits=new_commits, commits_ahead=ahead, pushed=pushed, report=report,
                       tokens=events['tokens'], cost_usd=events['cost_usd'], errors=events['errors'][-3:],
-                      status='blocked' if blocked else 'review')
+                      status=status)
     except Exception as error:  # Report every failure on the ticket rather than leaving it claimed.
         result.update(status='blocked', error=f'{type(error).__name__}: {error}'[:2000])
     except BaseException:
@@ -281,6 +292,11 @@ def report_to_board(session, ticket, result):
                      idempotency_key='run-' + str(int(result['started_at'])) + '-' + ticket['id'][:8])
     except BoardError:
         pass
+    if result['status'] == 'retry':
+        session.tool('release_ticket', ticket_id=current['id'], expected_version=current['version'],
+                     idempotency_key='retry-' + str(int(result['started_at'])) + '-' + ticket['id'][:8],
+                     reason='Model provider unavailable; the agent will retry later', status='todo')
+        return
     changes = {'progress': summary[:20000], 'release_claim': True}
     if result['status'] == 'review':
         changes.update(status='review', evidence=summary[:20000])
