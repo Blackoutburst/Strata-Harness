@@ -70,6 +70,15 @@ class BridgeTests(unittest.TestCase):
         result=self.client.test(work,threading.Event())
         self.assertEqual(result['exit_code'],1);self.assertEqual(self.runtime.count,1)
 
+    def test_a_cancel_after_a_finished_run_does_not_refuse_the_next_run(self):
+        work=self.root/'workspace';app=work/'app/build/outputs/apk/debug/app-debug.apk'
+        test=work/'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'
+        for p,data in ((app,self.app),(test,self.test)):p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
+        self.client.test(work,threading.Event());self.client.cancel()
+        test.write_bytes(self.test+b'changed')
+        result=self.client.test(work,threading.Event())
+        self.assertEqual(result['exit_code'],1);self.assertEqual(self.runtime.count,2)
+
     def test_auth_and_changed_global_reservation_fail_closed(self):
         request=Request(self.endpoint+'/guard',headers={'Authorization':'Bearer wrong'})
         with self.assertRaises(HTTPError) as error:urlopen(request,timeout=3)

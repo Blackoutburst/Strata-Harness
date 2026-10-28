@@ -83,6 +83,11 @@ class MacBridge:
                 if saved['hashes']!=admission['hashes'] or saved.get('scenario','normal')!=scenario:raise RuntimeError('Changed request identity')
                 return self.lookup(identifier)
             if not self.guard() or not self.gateway.clean():raise RuntimeError('Exclusivity or cleanup not verified')
+            # A /cancel targets the run in flight. Once nothing runs and the bridge is not
+            # shutting down, a new request is not cancelled by it.
+            if self.gateway.cancel.is_set():
+                if self.gateway.stopped:raise RuntimeError('Bridge shutting down')
+                self.gateway.cancel.clear()
             prune_artifacts(self.directory,keep=KEEP_ARTIFACT_REQUESTS)
             folder.mkdir(mode=0o700)
             for name,data in artifacts.items():

@@ -25,7 +25,7 @@ class JobGateway:
         self.directory = Path(directory).resolve();self.directory.mkdir(parents=True, exist_ok=True, mode=0o700)
         self.handlers, self.token, self.clock = handlers, token or secrets.token_urlsafe(32), clock
         self.lock = threading.Lock();self.jobs = {};self.threads = {};self.cancel = threading.Event()
-        self.server = self.thread = None
+        self.server = self.thread = None;self.stopped = False
         # Previous jobs are not assumed stopped merely because the server restarted.
         for path in self.directory.glob('job-*.json'):
             value = json.loads(path.read_text())
@@ -143,7 +143,7 @@ class JobGateway:
         return 'http://127.0.0.1:' + str(self.server.server_port)
 
     def stop(self, timeout=10):
-        self.cancel.set()
+        self.stopped = True;self.cancel.set()
         deadline = time.monotonic() + timeout
         for thread in list(self.threads.values()): thread.join(max(0, deadline - time.monotonic()))
         if self.server: self.server.shutdown();self.server.server_close()
