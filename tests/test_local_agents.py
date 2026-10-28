@@ -96,6 +96,13 @@ class SandboxTests(Home):
         self.assertFalse({'MISTRAL_API_KEY', 'GITHUB_TOKEN'} & set(env))
         self.assertEqual(env['GIT_AUTHOR_EMAIL'], 'coder@agents.local')
 
+    def test_agent_env_and_deny_rules_reach_the_engine(self):
+        agent = self.agent()
+        agent.config.update(env={'JAVA_HOME': '/jdk17'}, deny=[r'\badb\b'])
+        env = engine_env(agent, {'PATH': '/bin'})
+        self.assertEqual(env['JAVA_HOME'], '/jdk17')
+        self.assertEqual(json.loads(env['HARNESS_DENY']), [r'\badb\b'])
+
     def test_engine_config_points_only_at_the_proxy(self):
         agent = self.agent()
         model = write_engine_config(agent, 'http://127.0.0.1:5000/v1', 'throwaway')

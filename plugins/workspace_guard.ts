@@ -15,6 +15,9 @@ const denied = [
   /\brm\s+-[a-zA-Z]*r[a-zA-Z]*f?\s+(?:\/|~|\$HOME)(?:\s|$)/,
 ]
 
+// Extra per-agent rules from the harness (agent.json "deny"), e.g. no device access.
+for (const pattern of JSON.parse(process.env.HARNESS_DENY ?? "[]")) denied.push(new RegExp(pattern))
+
 function inside(value: unknown, writing = false) {
   if (typeof value !== "string" || value === "") return
   const target = resolve(root, value)

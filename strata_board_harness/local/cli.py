@@ -14,6 +14,7 @@ import argparse
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -52,6 +53,10 @@ def agent_add(args):
                          not args.no_push, args.project or None, text_or_file(args.instructions))
     try:
         agent.config['take_unassigned'] = args.take_unassigned
+        agent.config['env'] = dict(item.split('=', 1) for item in args.env or [])
+        agent.config['deny'] = list(args.deny or [])
+        for pattern in agent.config['deny']:
+            re.compile(pattern)
         owner.enable_agents()
         from .agents import write_private
         write_private(agent.dir / 'board.private.json', owner.pair(agent.config['display_name']))
@@ -172,6 +177,9 @@ def main(argv=None):
     add.add_argument('--take-unassigned', action='store_true', help='also take unassigned ready tickets')
     add.add_argument('--no-push', action='store_true', help='keep branches in the agent checkout only')
     add.add_argument('--skip-check', action='store_true', help='skip the live model check')
+    add.add_argument('--env', action='append', metavar='KEY=VALUE', help='extra environment for the agent (repeatable)')
+    add.add_argument('--deny', action='append', metavar='REGEX',
+                     help='refuse shell commands matching this pattern, e.g. "\\badb\\b" (repeatable)')
     add.set_defaults(func=agent_add)
     agents.add_parser('list').set_defaults(func=agent_list)
     show = agents.add_parser('show')

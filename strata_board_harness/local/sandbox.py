@@ -22,6 +22,7 @@ def engine_env(agent, base_env=None):
     env = {key: value for key, value in (base_env or os.environ).items()
            if not SECRET.search(key) and not key.startswith(('XDG_', 'OPENCODE_')) and key not in ('HOME', 'USERPROFILE')}
     env.update(agent.config.get('env') or {})
+    env['HARNESS_DENY'] = json.dumps(agent.config.get('deny') or [])
     env['HOME'] = str(root / 'home')
     if os.name == 'nt':
         env['USERPROFILE'] = env['HOME']
