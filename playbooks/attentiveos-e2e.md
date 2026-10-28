@@ -11,3 +11,4 @@ Environment: emulator-5556, API 35, Pixel launcher, 1080x2400, en-US. The adapte
 - Failure triage: test bug (fix the test), environment limit (prove it with evidence), APP bug (keep the test red and fix the app minimally). Never weaken or skip an assertion to get green. Production code must not gain diagnostic-only logging.
 - Commit messages describe THIS app's change. Commit a checkpoint whenever a class turns green.
 - Compose: click with semantic actions (`performSemanticsAction(SemanticsActions.OnClick)` on the node that has the click action), not coordinate taps, inside sheets/dialogs that animate or sit under the IME. Never reflect into Compose internals.
+- Role-holder apps (Phone=DIALER, Messages=SMS, Launcher=HOME) run with the role held. Never disable the components the role requires (InCallService for DIALER; the SMS receivers/services for SMS; the HOME activity for HOME): the role is revoked and the process is killed ("permissions revoked").
