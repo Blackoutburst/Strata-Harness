@@ -142,7 +142,8 @@ class MacBridge:
                     size=int(self.headers.get('Content-Length','0'))
                     if not 0<size<=352*1024*1024:raise ValueError('Bounded upload required')
                     result=owner.admit(json.loads(self.rfile.read(size)));self.answer(result)
-                except (ValueError,RuntimeError,OSError,KeyError,TypeError):self.send_error(409)
+                except (ValueError,RuntimeError,OSError,KeyError,TypeError) as error:
+                    self.send_error(409,explain=(type(error).__name__+': '+str(error))[:300])
             def log_message(self,*_):pass
         self.server=ThreadingHTTPServer(('127.0.0.1',port),Handler)
         thread=threading.Thread(target=self.server.serve_forever,daemon=True);thread.start();self.thread=thread
@@ -154,6 +155,13 @@ class MacBridge:
         # Never clear cross-host exclusivity merely because this server exited.
         # The manager must verify the remote coding process/lock and these effects.
         return self.runtime.clean() and self.gateway.clean()
+
+
+class BridgeRefused(RuntimeError):
+    """An HTTP error answer from the bridge, with its reason when it sent one."""
+    def __init__(self,code,reason=''):
+        self.code,self.reason=code,reason
+        super().__init__('Bridge HTTP '+str(code)+(': '+reason if reason else ''))
 
 
 def upload_timeout(payload_bytes):
@@ -182,7 +190,12 @@ class EmulatorClient:
                 if len(body)>limit:raise RuntimeError('Oversized bridge response')
                 return json.loads(body)
         except HTTPError as error:
-            code=error.code;error.close();raise RuntimeError('Bridge HTTP '+str(code)) from None
+            code=error.code
+            try:detail=re.sub(r'<[^>]+>',' ',error.read(4096).decode(errors='replace'))
+            except OSError:detail=''
+            error.close()
+            reason=re.search(r'Message:\s*([^\n]*?)\s+Error code explanation:\s*409\s*-\s*([^\n.]*)',detail)
+            raise BridgeRefused(code,(reason.group(2) if reason else '').strip()) from None
         except (URLError,OSError,ValueError):raise RuntimeError('Bridge unavailable or response invalid') from None
 
     def guard(self):
@@ -225,7 +238,16 @@ class EmulatorClient:
             # Base64 APKs cross the SSH tunnel: a 100 MB debug APK is ~140 MB on the wire, far
             # beyond a fixed 120 s. Budget a conservative 256 KiB/s with the old floor.
             upload=sum(len(item['base64']) for item in artifacts.values())
-            result=self._request('POST','/run',payload,timeout=upload_timeout(upload))
+            try:result=self._request('POST','/run',payload,timeout=upload_timeout(upload))
+            except BridgeRefused as refusal:
+                # The bridge validates before it stores anything: a refusal leaves no admitted
+                # request. Confirm that, then report an ordinary failure instead of an
+                # uncertain admission that would fence every later run.
+                if refusal.code!=409 or self._request('GET','/request/'+identifier)['state']!='not_observed':raise
+                saved_path.unlink(missing_ok=True);self.current=None
+                return {'exit_code':78,'cleanup_verified':True,'scenario':scenario,
+                        'output':'The emulator bridge refused this run before admitting it (HTTP 409): '
+                                 +(refusal.reason or 'no reason given')+'. Nothing ran; retry after fixing the cause.'}
             self.current['state']='admitted';write_private(saved_path,self.current)
         else:result=observed
         deadline=time.monotonic()+1600

@@ -60,6 +60,16 @@ class BridgeTests(unittest.TestCase):
         self.assertEqual(result['exit_code'],1);self.assertTrue(result['cleanup_verified'])
         self.client.test(work,threading.Event());self.assertEqual(self.runtime.count,1)
 
+    def test_refused_run_is_an_ordinary_failure_with_the_reason_and_never_fences_retries(self):
+        work=self.root/'workspace';app=work/'app/build/outputs/apk/debug/app-debug.apk'
+        test=work/'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'
+        for p,data in ((app,self.app),(test,self.test)):p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
+        refused=self.client.test(work,threading.Event(),scenario='class:tech.primal.attentive_os.phone.e2e.Foo#bar')
+        self.assertEqual(refused['exit_code'],78);self.assertTrue(refused['cleanup_verified'])
+        self.assertIn('Invalid selected test scenario',refused['output']);self.assertEqual(self.runtime.count,0)
+        result=self.client.test(work,threading.Event())
+        self.assertEqual(result['exit_code'],1);self.assertEqual(self.runtime.count,1)
+
     def test_auth_and_changed_global_reservation_fail_closed(self):
         request=Request(self.endpoint+'/guard',headers={'Authorization':'Bearer wrong'})
         with self.assertRaises(HTTPError) as error:urlopen(request,timeout=3)
