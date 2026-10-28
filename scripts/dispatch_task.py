@@ -197,9 +197,8 @@ def main():
     print('Ticket', ticket['number'], ticket['title'], '| status', ticket['status'], '| baseline', baseline)
 
     # 1. Exclusivity on both hosts before any effect.
-    local = subprocess.check_output(['ps', '-axo', 'comm='], text=True)
-    if any(Path(x.strip()).name == 'opencode' for x in local.splitlines()):
-        raise SystemExit('A coding process runs on the Mac; refusing')
+    # The harness's coding engine runs on Ubuntu; an OpenCode session on the Mac is the
+    # owner's own and is not a worker. Mac exclusivity is the bridge's worker lock below.
     remote_state = json.loads(remote.py(
         "import json,subprocess,pathlib,sys\n"
         "ps=subprocess.check_output(['ps','-axo','comm='],text=True)\n"
