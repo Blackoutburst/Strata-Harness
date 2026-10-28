@@ -51,6 +51,7 @@ class EmulatorTests(unittest.TestCase):
             elif 'instrumentation' in argv:out='No active instrumentation'
             elif 'install' in argv:out='Success'
             elif 'resolve-activity' in argv:out=PACKAGE+'/.MainActivity'
+            elif 'get-role-holders' in argv:out=PACKAGE+'\n'
             elif 'screencap' in argv:out=b'\x89PNG\r\n\x1a\nowned-fixture'
             elif argv[3:5]==['logcat','-d']:out='10-26 14:00:00.000 D/E2E_DUMP( 42): picker texts: [Gmail, Photos]\n'
             else:out=''
@@ -64,6 +65,7 @@ class EmulatorTests(unittest.TestCase):
             self.assertIn('300000',argv);kwargs['stdout'].write(FAILED);return Child()
         self.patch=patch('strata_board_harness.emulator.process_stamp',return_value=self.config['emulator_stamp'])
         self.patch.start();self.addCleanup(self.patch.stop)
+        sleeper=patch('strata_board_harness.emulator.time.sleep');sleeper.start();self.addCleanup(sleeper.stop)
         self.runtime=EmulatorRuntime(self.config,self.root/'receipts',runner=runner,popen=popen)
 
     def test_failed_instrumentation_is_not_passed_for_zero_adb_exit_and_rollback_is_returned(self):
@@ -115,6 +117,20 @@ class EmulatorTests(unittest.TestCase):
         self.assertIn('SIGSEGV',text);self.assertIn('am_kill',text);self.assertIn('has died',text)
         self.assertNotIn('com.other',text)
         self.assertEqual(process_deaths(lambda *a,**k:SimpleNamespace(returncode=0,stdout=''),PACKAGE),'')
+
+    def test_role_settles_only_when_held_and_permissions_stop_changing(self):
+        from strata_board_harness.emulator import settle_role
+        dumps=iter(['READ_CONTACTS: granted=false','READ_CONTACTS: granted=true','READ_CONTACTS: granted=true',
+                    'READ_CONTACTS: granted=true']+['READ_CONTACTS: granted=true']*10)
+        holders=iter(['','com.other']+[PACKAGE]*20)
+        def call(*args,timeout=15):
+            if 'get-role-holders' in args:return SimpleNamespace(returncode=0,stdout=next(holders))
+            return SimpleNamespace(returncode=0,stdout='    android.permission.'+next(dumps)+'\n')
+        now=[0.0]
+        self.assertTrue(settle_role(call,'android.app.role.DIALER',PACKAGE,lambda:now[0],lambda s:now.__setitem__(0,now[0]+s)))
+        self.assertGreaterEqual(now[0],3)
+        never=lambda *a,**k:SimpleNamespace(returncode=0,stdout='com.other')
+        self.assertFalse(settle_role(never,'android.app.role.DIALER',PACKAGE,lambda:now[0],lambda s:now.__setitem__(0,now[0]+s),timeout=5))
 
     def test_failed_rollback_fences_runtime_even_if_test_process_stopped(self):
         self.restore_ok=False

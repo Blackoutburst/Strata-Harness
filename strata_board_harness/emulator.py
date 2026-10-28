@@ -82,6 +82,21 @@ def instrumentation_summary(output):
     return {'counts':counts,'tests':statuses}
 
 
+def settle_role(call, role, package, clock, sleep, timeout=30, stable_reads=3):
+    """True once [package] holds [role] and its permission dump is unchanged for a few reads."""
+    deadline=clock()+timeout;previous=None;same=0
+    while clock()<deadline:
+        holders=call('shell','cmd','role','get-role-holders','--user','0',role,timeout=15)
+        dump=call('shell','dumpsys','package',package,timeout=30)
+        if holders.returncode==0 and package in (holders.stdout or '').split() and dump.returncode==0:
+            state=sorted(line.strip() for line in (dump.stdout or '').splitlines()
+                         if 'granted=' in line and 'permission' in line)
+            same=same+1 if state==previous else 0;previous=state
+            if same>=stable_reads-1:return True
+        sleep(1)
+    return False
+
+
 def process_deaths(call, package):
     """This run's crash buffer and ActivityManager kill/death records for [package]."""
     lines=[]
@@ -250,6 +265,12 @@ class EmulatorRuntime:
             if self.target['role']:
                 role=self.call('shell','cmd','role','add-role-holder','--user','0',self.target['role'],PACKAGE,timeout=30)
                 if role.returncode:raise RuntimeError('Selected role fixture failed')
+                # The role controller grants and adjusts the holder's permissions asynchronously;
+                # a change landing after instrumentation starts kills the test process
+                # ("permissions revoked"). Start only once the role is held and the
+                # permission state has stopped changing.
+                if not settle_role(self.call,self.target['role'],PACKAGE,self.clock,time.sleep):
+                    raise RuntimeError('Role holder permissions did not settle')
             permission_fixture={}
             if scenario=='denied':
                 if not self.target['denied_permissions']:raise ValueError('Selected target has no denied-permission fixture')
