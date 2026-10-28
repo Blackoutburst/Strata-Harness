@@ -63,8 +63,11 @@ def connect(agent):
 def next_ticket(agent, session):
     work = session.tool('get_work', view='full')
     projects = agent.config['board'].get('project_ids')
+    # The board lets work start once a dependency is in review; an agent waits until it is merged
+    # (done), because its checkout starts from the main branch.
     mine = [t for t in work.get('ready') or [] if t.get('assignee_agent_id') == session.profile_id
-            and (not projects or t.get('project_id') in projects)]
+            and (not projects or t.get('project_id') in projects)
+            and all(d.get('status') == 'done' for d in t.get('dependencies') or [])]
     if mine:
         mine.sort(key=lambda t: (PRIORITY.get(t.get('priority'), 2), t.get('created_at', 0)))
         ticket = mine[0]

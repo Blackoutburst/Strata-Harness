@@ -192,5 +192,23 @@ class RunnerTests(unittest.TestCase):
             self.assertIn(expected, prompt)
 
 
+class DispatchTests(unittest.TestCase):
+    def test_agent_takes_only_its_own_tickets_whose_dependencies_are_done(self):
+        from strata_board_harness.local.daemon import next_ticket
+        session = mock.Mock(profile_id='me')
+        session.tool.side_effect = lambda name, **kw: (
+            {'ready': [
+                {'id': 'other', 'assignee_agent_id': 'someone', 'version': 1},
+                {'id': 'waiting', 'assignee_agent_id': 'me', 'version': 1, 'priority': 'urgent',
+                 'dependencies': [{'id': 'x', 'status': 'review'}]},
+                {'id': 'low', 'assignee_agent_id': 'me', 'version': 1, 'priority': 'low', 'created_at': 1},
+                {'id': 'high', 'assignee_agent_id': 'me', 'version': 2, 'priority': 'high', 'created_at': 2,
+                 'dependencies': [{'id': 'y', 'status': 'done'}]}]}
+            if name == 'get_work' else {'claimed': kw['ticket_id']})
+        agent = mock.Mock(config={'board': {}, 'take_unassigned': False})
+        self.assertEqual(next_ticket(agent, session), {'claimed': 'high'})
+        session.tool.assert_called_with('claim_ticket', ticket_id='high', expected_version=2, view='full')
+
+
 if __name__ == '__main__':
     unittest.main()
