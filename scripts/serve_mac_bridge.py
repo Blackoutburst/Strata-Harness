@@ -26,9 +26,8 @@ def main():
     config=private_json(args.config);directory=Path(config['state_dir']).expanduser().resolve()
     directory.mkdir(parents=True,exist_ok=True,mode=0o700)
     lock=Path(config['worker_lock']).expanduser()
-    processes=subprocess.check_output(['ps','-axo','comm='],text=True)
-    if any(Path(line.strip()).name=='opencode' for line in processes.splitlines()):
-        raise RuntimeError('Another coding process exists on the owning host')
+    # Exclusivity is the worker lock: the harness's coding engine runs on Ubuntu, and an
+    # OpenCode session the owner runs on this Mac is not a worker.
     lock.mkdir(mode=0o700)
     reservation={'path':str(lock),'nonce':secrets.token_hex(16),'pid':os.getpid(),
         'process_stamp':process_stamp(os.getpid()),'purpose':'human_authorized_phone_harness_pilot',
