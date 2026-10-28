@@ -2,7 +2,7 @@
 
     harness agent add glm --model mistral/zai-glm-5-3-flash     # any provider/model your OpenCode knows
     harness agent add local --base-url http://127.0.0.1:8080/v1 --model qwen3-coder   # any compatible server
-    harness agent list | show NAME | remove NAME
+    harness agent list | show NAME | set NAME ... | remove NAME
     harness serve                      # run every agent (what autostart runs)
     harness run NAME --ticket ID       # one ticket now, in the foreground
     harness autostart install          # start agents at login (macOS, Linux, Windows)
@@ -53,10 +53,8 @@ def agent_add(args):
                          not args.no_push, args.project or None, text_or_file(args.instructions))
     try:
         agent.config['take_unassigned'] = args.take_unassigned
-        agent.config['env'] = dict(item.split('=', 1) for item in args.env or [])
-        agent.config['deny'] = list(args.deny or [])
-        for pattern in agent.config['deny']:
-            re.compile(pattern)
+        agent.config['env'], agent.config['deny'] = {}, []
+        apply_settings(agent, args)
         owner.enable_agents()
         from .agents import write_private
         write_private(agent.dir / 'board.private.json', owner.pair(agent.config['display_name']))
@@ -77,6 +75,48 @@ def agent_add(args):
         agent.remove()
         raise
     print('Assign tickets to it on the board; `harness serve` (or autostart) will pick them up.')
+
+
+def emulator_config(spec, sdk):
+    """SERIAL:AVD[:AVD_HOME] -> the agent's own emulator for `harness-tool test`."""
+    serial, avd, *rest = spec.split(':')
+    sdk = Path(sdk or os.environ.get('ANDROID_HOME') or Path.home() / 'Library/Android/sdk').expanduser()
+    tools = sorted((sdk / 'build-tools').glob('*/aapt2'))
+    if not tools:
+        raise ValueError(f'No aapt2 under {sdk}/build-tools')
+    home = Path(rest[0] if rest else Path.home() / '.android/avd').expanduser()
+    return {'serial': serial, 'avd': avd, 'avd_home': str(home), 'adb': str(sdk / 'platform-tools/adb'),
+            'aapt2': str(tools[-1])}
+
+
+def apply_settings(agent, args):
+    config = agent.config
+    if getattr(args, 'playbook', None):
+        config['playbooks'] = [str(Path(p).expanduser().resolve()) for p in args.playbook]
+    if getattr(args, 'emulator', None):
+        config.setdefault('tools', {})['emulator'] = emulator_config(args.emulator, (config.get('env') or {}).get('ANDROID_HOME'))
+    if getattr(args, 'build_tools', False):
+        config.setdefault('tools', {})
+    if getattr(args, 'max_minutes', None):
+        config['max_minutes'] = args.max_minutes
+    if getattr(args, 'instructions', None):
+        config['instructions'] = text_or_file(args.instructions)
+    for item in getattr(args, 'env', None) or []:
+        key, value = item.split('=', 1)
+        config.setdefault('env', {})[key] = value
+    for pattern in getattr(args, 'deny', None) or []:
+        re.compile(pattern)
+        if pattern not in config.setdefault('deny', []):
+            config['deny'].append(pattern)
+    if getattr(args, 'enabled', None) is not None:
+        config['enabled'] = args.enabled == 'yes'
+
+
+def agent_set(args):
+    agent = Agent.load(args.name)
+    apply_settings(agent, args)
+    agent.save()
+    print(f'Updated {agent.name}; restart `harness serve` for running agents to pick it up.')
 
 
 def agent_list(args):
@@ -181,6 +221,20 @@ def main(argv=None):
     add.add_argument('--deny', action='append', metavar='REGEX',
                      help='refuse shell commands matching this pattern, e.g. "\\badb\\b" (repeatable)')
     add.set_defaults(func=agent_add)
+    add.add_argument('--playbook', action='append', help='standing playbook file added to every prompt (repeatable)')
+    add.add_argument('--emulator', help='SERIAL:AVD[:AVD_HOME] of this agent\'s own emulator for `harness-tool test`')
+    add.add_argument('--build-tools', action='store_true', help='give the agent `harness-tool build` (no emulator)')
+    change = agents.add_parser('set', help='change an existing agent')
+    change.add_argument('name')
+    change.add_argument('--playbook', action='append')
+    change.add_argument('--emulator')
+    change.add_argument('--build-tools', action='store_true')
+    change.add_argument('--max-minutes', type=int)
+    change.add_argument('--instructions')
+    change.add_argument('--env', action='append', metavar='KEY=VALUE')
+    change.add_argument('--deny', action='append', metavar='REGEX')
+    change.add_argument('--enabled', choices=['yes', 'no'])
+    change.set_defaults(func=agent_set)
     agents.add_parser('list').set_defaults(func=agent_list)
     show = agents.add_parser('show')
     show.add_argument('name')

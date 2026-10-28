@@ -96,6 +96,21 @@ def build_prompt(agent, project, ticket, branch, feedback, base='origin/main'):
         parts.append('\n## Discussion on this task (oldest first; includes manager review feedback)\n\n' + '\n'.join(feedback))
     if agent.config.get('instructions'):
         parts.append('\n## Your standing instructions\n\n' + agent.config['instructions'])
+    if agent.config.get('tools'):
+        parts.append('''
+## Build and test tools
+
+- `harness-tool build` runs `./gradlew assembleDebug assembleDebugAndroidTest testDebugUnitTest` and prints a digest.
+- `harness-tool test` builds and runs the full instrumented suite on your own emulator (a snapshot is restored
+  afterwards). `harness-tool test denied` runs the tests annotated as needing denied permissions, and
+  `harness-tool test class:<fully.qualified.Class>` runs one class. The digest shows failures and this run's logcat.
+- `harness-tool logs <job_id>:<page>` pages through a full log. Direct adb, emulator and Gradle device tasks are refused.
+Run the tests yourself and iterate on real failures before you finish.''')
+    for playbook in agent.config.get('playbooks') or []:
+        try:
+            parts.append('\n## Playbook\n\n' + Path(playbook).expanduser().read_text())
+        except OSError:
+            pass
     parts.append('''
 ## Rules
 
@@ -158,15 +173,24 @@ def stop_process(process):
     process.wait()
 
 
-def run_opencode(agent, workspace, prompt, run_dir, deadline_seconds):
+def run_opencode(agent, workspace, prompt, run_dir, deadline_seconds, session_id=None):
     key = resolve_key(agent.config)
     proxy = RunProxy(agent.config['base_url'], key, run_dir / 'proxy.jsonl')
     proxy_url = proxy.start()
+    tools = None
     try:
         model = write_engine_config(agent, proxy_url, proxy.token)
         env = engine_env(agent)
+        if agent.config.get('tools'):
+            from .tools import LocalTools
+            tools = LocalTools(agent, workspace, run_dir, dict(env))
+            env.update(tools.start(run_dir / 'bin'))
+            env['PATH'] = str(run_dir / 'bin') + os.pathsep + env.get('PATH', '')
         command = [agent.config.get('opencode') or shutil.which('opencode') or 'opencode', 'run', '--format', 'json',
-                   '--auto', '--model', model, '--dir', str(workspace), '--title', run_dir.name, prompt]
+                   '--auto', '--model', model, '--dir', str(workspace), '--title', run_dir.name]
+        if session_id:
+            command += ['--session', session_id]
+        command.append(prompt)
         with open(run_dir / 'events.jsonl', 'w') as events, open(run_dir / 'opencode.log', 'w') as log:
             process = subprocess.Popen(command, cwd=workspace, env=env, stdout=events, stderr=log,
                                        start_new_session=(os.name != 'nt'))
@@ -180,7 +204,21 @@ def run_opencode(agent, workspace, prompt, run_dir, deadline_seconds):
                 stop_process(process)
                 raise
     finally:
+        if tools:
+            tools.stop()
         proxy.close()
+
+
+def session_of(path):
+    """The OpenCode session a run used, from its events."""
+    for line in path.read_text(errors='replace').splitlines() if path.exists() else []:
+        try:
+            value = json.loads(line).get('sessionID')
+        except ValueError:
+            continue
+        if value:
+            return value
+    return None
 
 
 class Renewer(threading.Thread):
@@ -212,12 +250,31 @@ def run_ticket(agent, session, ticket, log=print):
     try:
         workspace, branch, default = prepare_checkout(agent, project, ticket)
         base = git(workspace, 'rev-parse', 'HEAD')
-        prompt = build_prompt(agent, project, ticket, branch, thread_feedback(session, ticket), default)
+        sessions_path = agent.dir / 'sessions.json'
+        sessions = json.loads(sessions_path.read_text()) if sessions_path.exists() else {}
+        previous = sessions.get(ticket['id']) if agent.config.get('continue_sessions', True) else None
+        feedback = thread_feedback(session, ticket)
+        if previous:
+            # Same OpenCode session: the agent keeps its context; send only what is new.
+            prompt = ('## New discussion on this task (latest last)\n\n' + '\n'.join(feedback[-6:]) +
+                      '\n\nContinue the same task in this checkout on branch `' + branch + '`. Same rules as before; '
+                      'finish with a report whose first line is `RESULT: done` or `RESULT: blocked`.')
+        else:
+            prompt = build_prompt(agent, project, ticket, branch, feedback, default)
         (run_dir / 'prompt.md').write_text(prompt)
         log(f'[{agent.name}] ticket #{ticket.get("number")} {ticket["title"]!r} on {branch}')
         deadline = int(agent.config.get('max_minutes', 60)) * 60
-        code, timed_out = run_opencode(agent, workspace, prompt, run_dir, deadline)
+        code, timed_out = run_opencode(agent, workspace, prompt, run_dir, deadline, previous)
         events = read_events(run_dir / 'events.jsonl')
+        if previous and code != 0 and not any(events['tokens'].values()):
+            # The saved session is gone (engine data reset): start fresh with the full brief.
+            previous = None
+            prompt = build_prompt(agent, project, ticket, branch, feedback, default)
+            code, timed_out = run_opencode(agent, workspace, prompt, run_dir, deadline)
+            events = read_events(run_dir / 'events.jsonl')
+        if session_of(run_dir / 'events.jsonl'):
+            sessions[ticket['id']] = session_of(run_dir / 'events.jsonl')
+            write_private(sessions_path, sessions)
         if cold_start_failure(code, timed_out, events):
             # A first-run provider package install can be left half-written; reinstall once.
             shutil.rmtree(agent.dir / 'engine' / 'cache' / 'opencode' / 'packages', ignore_errors=True)

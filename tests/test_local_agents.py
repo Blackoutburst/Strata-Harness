@@ -122,6 +122,25 @@ class SandboxTests(Home):
             Agent.create('Bad Name', 'x', {}, 'http://127.0.0.1:9140')
 
 
+class ToolTests(Home):
+    def test_application_id_and_targets(self):
+        from strata_board_harness.local.tools import application_id, targets
+        self.write('ws/app/build.gradle.kts', 'android {\n  defaultConfig {\n    applicationId = "tech.primal.attentive_os.phone"\n  }\n}')
+        self.assertEqual(application_id(self.root / 'ws'), 'tech.primal.attentive_os.phone')
+        self.write('harness/targets.json', {'tech.primal.attentive_os.phone': {'role': 'android.app.role.DIALER'}})
+        self.assertEqual(targets()['tech.primal.attentive_os.phone']['role'], 'android.app.role.DIALER')
+
+    def test_prompt_lists_tools_and_playbooks_only_when_configured(self):
+        agent = mock.Mock(name='agent')
+        self.write('playbook.md', 'Never force-stop the app.')
+        agent.name, agent.config = 'coder', {'tools': {'emulator': {}}, 'playbooks': [str(self.root / 'playbook.md')]}
+        prompt = build_prompt(agent, {}, {'title': 'T'}, 'agent/coder/1-t', [])
+        self.assertIn('harness-tool test', prompt)
+        self.assertIn('Never force-stop the app.', prompt)
+        agent.config = {}
+        self.assertNotIn('harness-tool', build_prompt(agent, {}, {'title': 'T'}, 'b', []))
+
+
 class ProxyTests(unittest.TestCase):
     def setUp(self):
         seen = self.seen = []
