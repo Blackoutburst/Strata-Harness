@@ -272,6 +272,22 @@ def run_ticket(agent, session, ticket, log=print):
             prompt = build_prompt(agent, project, ticket, branch, feedback, default)
             code, timed_out = run_opencode(agent, workspace, prompt, run_dir, deadline)
             events = read_events(run_dir / 'events.jsonl')
+        for attempt in range(2):
+            # The engine stopped on a provider/stream error mid-task: continue the same session.
+            current = session_of(run_dir / 'events.jsonl')
+            remaining = deadline - (time.time() - result['started_at'])
+            if timed_out or code == 0 or not events['errors'] or not current or remaining < 300:
+                break
+            log(f'[{agent.name}] engine stopped on "{events["errors"][-1][:80]}"; continuing the session')
+            (run_dir / f'events-{attempt}.jsonl').write_bytes((run_dir / 'events.jsonl').read_bytes())
+            code, timed_out = run_opencode(agent, workspace, 'The previous model request failed with a provider '
+                                           'error. Continue the task from where you were.', run_dir, int(remaining),
+                                           current)
+            merged = read_events(run_dir / 'events.jsonl')
+            for name, value in merged['tokens'].items():
+                events['tokens'][name] += value
+            events['cost_usd'] = round(events['cost_usd'] + merged['cost_usd'], 4)
+            events['report'], events['errors'] = merged['report'] or events['report'], merged['errors']
         if session_of(run_dir / 'events.jsonl'):
             sessions[ticket['id']] = session_of(run_dir / 'events.jsonl')
             write_private(sessions_path, sessions)
