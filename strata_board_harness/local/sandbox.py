@@ -57,7 +57,7 @@ def write_engine_config(agent, proxy_url, proxy_token):
         'model': f'{PROVIDER_ID}/{model}', 'small_model': f'{PROVIDER_ID}/{model}',
         'provider': {PROVIDER_ID: {
             'name': agent.config.get('display_name') or agent.name, 'npm': agent.config['npm'],
-            'options': {'baseURL': proxy_url, 'apiKey': proxy_token},
+            'options': {**(agent.config.get('provider_options') or {}), 'baseURL': proxy_url, 'apiKey': proxy_token},
             'models': {model: agent.config['model_settings']}}},
         'permission': {'edit': 'allow', 'bash': 'allow', 'webfetch': 'allow'},
     }

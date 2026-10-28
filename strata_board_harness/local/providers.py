@@ -108,10 +108,13 @@ def from_opencode(reference):
     key_env = _env_reference(options.get('apiKey')) or next(iter(catalogue.get('env') or []), None)
     keep = ('name', 'reasoning', 'tool_call', 'attachment', 'temperature', 'limit', 'cost', 'options',
             'modalities', 'variants', 'headers')
-    return describe(base_url, model, npm=configured.get('npm') or catalogue.get('npm') or DEFAULT_NPM,
-                    key_env=key_env, opencode_auth=provider_id,
-                    model_settings={k: v for k, v in settings.items() if k in keep},
-                    source='opencode:' + reference)
+    described = describe(base_url, model, npm=configured.get('npm') or catalogue.get('npm') or DEFAULT_NPM,
+                         key_env=key_env, opencode_auth=provider_id,
+                         model_settings={k: v for k, v in settings.items() if k in keep},
+                         source='opencode:' + reference)
+    # Keep the user's provider options (e.g. prompt-cache keys); the endpoint and key are the harness's.
+    described['provider_options'] = {k: v for k, v in options.items() if k not in ('baseURL', 'apiKey')}
+    return described
 
 
 def describe(base_url, model, npm=DEFAULT_NPM, key_env=None, opencode_auth=None, model_settings=None,

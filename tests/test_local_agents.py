@@ -41,12 +41,13 @@ class ProviderTests(Home):
         self.write('config/opencode/opencode.jsonc', '''{
           // a private provider OpenCode itself does not list
           "provider": {"acme": {"npm": "@ai-sdk/openai-compatible",
-            "options": {"baseURL": "https://llm.acme.test/v1", "apiKey": "{env:ACME_KEY}"},
+            "options": {"baseURL": "https://llm.acme.test/v1", "apiKey": "{env:ACME_KEY}", "setCacheKey": true},
             "models": {"coder": {"limit": {"context": 64000, "output": 8000}}}}}}''')
         model = providers.from_opencode('acme/coder')
         self.assertEqual((model['base_url'], model['npm'], model['key_env']),
                          ('https://llm.acme.test/v1', '@ai-sdk/openai-compatible', 'ACME_KEY'))
         self.assertEqual(model['model_settings']['limit'], {'context': 64000, 'output': 8000})
+        self.assertEqual(model['provider_options'], {'setCacheKey': True})
 
     def test_catalogue_provider_needs_a_base_url(self):
         self.write('cache/opencode/models.json', {'cloud': {'npm': '@ai-sdk/cloud', 'env': ['CLOUD_KEY'],
