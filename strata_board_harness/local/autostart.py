@@ -34,7 +34,7 @@ def install():
             environment['HARNESS_HOME'] = os.environ['HARNESS_HOME']
         with open(path, 'wb') as stream:
             plistlib.dump({'Label': NAME, 'ProgramArguments': command(), 'WorkingDirectory': str(REPO),
-                           'EnvironmentVariables': environment, 'RunAtLoad': True,
+                           'EnvironmentVariables': environment, 'RunAtLoad': True, 'ExitTimeOut': 90,
                            'KeepAlive': {'SuccessfulExit': False},
                            'StandardOutPath': str(log), 'StandardErrorPath': str(log)}, stream)
         domain = f'gui/{os.getuid()}'
