@@ -223,11 +223,13 @@ def run_ticket(agent, session, ticket, log=print):
             shutil.rmtree(agent.dir / 'engine' / 'cache' / 'opencode' / 'packages', ignore_errors=True)
             code, timed_out = run_opencode(agent, workspace, prompt, run_dir, deadline)
             events = read_events(run_dir / 'events.jsonl')
-        if git(workspace, 'diff', 'HEAD', '--name-only'):
-            # Finish edits to tracked files the agent forgot to commit; new files stay its decision.
-            git(workspace, 'commit', '--quiet', '-a', '-m', f'{agent.name}: uncommitted changes at end of run',
+        # Deliver what the agent left uncommitted (build output is excluded), and say so in the report.
+        leftovers = git(workspace, 'status', '--porcelain').splitlines()
+        if leftovers:
+            git(workspace, 'add', '-A')
+            git(workspace, 'commit', '--quiet', '-m', f'{agent.name}: uncommitted changes at end of run',
                 env=engine_env(agent))
-        untracked = git(workspace, 'ls-files', '--others', '--exclude-standard').splitlines()
+        untracked = [line[3:] for line in leftovers]
         new_commits = int(git(workspace, 'rev-list', '--count', f'{base}..HEAD'))
         ahead = int(git(workspace, 'rev-list', '--count', f'{default}..HEAD'))
         pushed = False
@@ -280,7 +282,7 @@ def report_to_board(session, ticket, result):
     if result.get('timed_out'):
         lines.append('Stopped at the time limit.')
     if result.get('untracked'):
-        lines.append('Not committed (new files left in the checkout): ' + ', '.join(result['untracked'][:20]))
+        lines.append('Committed by the harness (left uncommitted by the agent): ' + ', '.join(result['untracked'][:20]))
     if result.get('error') or result.get('errors'):
         lines.append('Errors: ' + '; '.join(filter(None, [result.get('error'), *result.get('errors', [])]))[:1500])
     summary = '\n'.join(lines)
