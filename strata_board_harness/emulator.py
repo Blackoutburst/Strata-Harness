@@ -82,6 +82,18 @@ def instrumentation_summary(output):
     return {'counts':counts,'tests':statuses}
 
 
+# Per-run folders hold logs and failure screenshots; older ones are pruned.
+KEEP_RUNS=20
+
+
+def prune_runs(directory,keep):
+    """Delete all but the [keep] most recent run-* folders under [directory]."""
+    import shutil
+    runs=sorted((path for path in Path(directory).iterdir() if path.is_dir() and path.name.startswith('run-')),
+                key=lambda path:path.stat().st_mtime,reverse=True)
+    for run in runs[keep:]:shutil.rmtree(run,ignore_errors=True)
+
+
 def settle_role(call, role, package, clock, sleep, timeout=30, stable_reads=3):
     """True once [package] holds [role] and its permission dump is unchanged for a few reads."""
     deadline=clock()+timeout;previous=None;same=0
@@ -238,6 +250,7 @@ class EmulatorRuntime:
             raise ValueError('Unselected test filter')
         deadline=time.monotonic()+1500
         self.verify()
+        prune_runs(self.directory,keep=KEEP_RUNS)
         root=self.directory/('run-'+secrets.token_hex(12));root.mkdir(mode=0o700)
         self._snapshot();log=root/'instrumentation.log';code=1;output='';result={}
         try:

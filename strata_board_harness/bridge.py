@@ -19,6 +19,20 @@ from .managed_engine import write_private
 from .supervisor import NoRedirect
 
 
+# Uploaded APKs (60-110 MB per run) are only needed while their request runs; request.json
+# and the job receipts stay for reconciliation.
+KEEP_ARTIFACT_REQUESTS=3
+
+
+def prune_artifacts(directory,keep):
+    """Delete the APKs of all but the [keep] most recent request folders."""
+    folders=sorted((path for path in Path(directory).iterdir()
+                    if path.is_dir() and re.fullmatch('[0-9a-f]{64}',path.name)),
+                   key=lambda path:path.stat().st_mtime,reverse=True)
+    for folder in folders[keep:]:
+        for name in ('app.apk','test.apk'):(folder/name).unlink(missing_ok=True)
+
+
 class MacBridge:
     def __init__(self, runtime, directory, reservation, token=None):
         self.runtime,self.directory,self.reservation=runtime,Path(directory).resolve(),reservation
@@ -69,6 +83,7 @@ class MacBridge:
                 if saved['hashes']!=admission['hashes'] or saved.get('scenario','normal')!=scenario:raise RuntimeError('Changed request identity')
                 return self.lookup(identifier)
             if not self.guard() or not self.gateway.clean():raise RuntimeError('Exclusivity or cleanup not verified')
+            prune_artifacts(self.directory,keep=KEEP_ARTIFACT_REQUESTS)
             folder.mkdir(mode=0o700)
             for name,data in artifacts.items():
                 p=folder/(name+'.apk');p.write_bytes(data);p.chmod(0o600)

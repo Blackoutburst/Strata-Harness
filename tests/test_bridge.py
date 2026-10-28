@@ -77,4 +77,23 @@ class UploadTimeoutTests(unittest.TestCase):
         self.assertGreaterEqual(upload_timeout(146 * 1024 * 1024), 600)
 
 
+class PruneTests(unittest.TestCase):
+    def test_only_the_newest_requests_keep_their_apks_and_old_runs_are_removed(self):
+        import os,tempfile
+        from strata_board_harness.bridge import prune_artifacts
+        from strata_board_harness.emulator import prune_runs
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);folders=[]
+            for index in range(5):
+                folder=root/('%064x'%index);folder.mkdir()
+                for name in ('app.apk','test.apk','request.json'):(folder/name).write_text('x')
+                os.utime(folder,(1000+index,1000+index));folders.append(folder)
+                run=root/('run-%d'%index);run.mkdir();os.utime(run,(1000+index,1000+index))
+            prune_artifacts(root,keep=2)
+            self.assertTrue((folders[4]/'app.apk').exists());self.assertTrue((folders[3]/'test.apk').exists())
+            self.assertFalse((folders[0]/'app.apk').exists());self.assertTrue((folders[0]/'request.json').exists())
+            prune_runs(root,keep=3)
+            self.assertEqual(sorted(p.name for p in root.glob('run-*')),['run-2','run-3','run-4'])
+
+
 if __name__=='__main__':unittest.main()
