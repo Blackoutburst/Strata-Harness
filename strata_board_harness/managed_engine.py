@@ -21,6 +21,7 @@ from .engine import Binding, EngineError, EngineHTTP, SelectedSession, command_r
 
 
 HISTORY_PAGE_BYTES = 16 * 1024 * 1024
+HISTORY_MAX_PAGES = 12
 
 
 def process_stamp(pid):
@@ -252,7 +253,9 @@ class ManagedEngine:
         # with a bounded 16 MiB ceiling per page instead of the 1 MiB control limit.
         suffix = self.session._path('/message') + '&limit=8'
         pages = []
-        for _ in range(3):
+        # A slow tick (a long board call, a busy host) can let dozens of messages pile up;
+        # read further back before declaring the history unreconcilable.
+        for _ in range(HISTORY_MAX_PAGES):
             status, messages = self.client.request('GET', suffix, max_bytes=HISTORY_PAGE_BYTES)
             if status != 200 or not isinstance(messages, list): raise EngineError('invalid_history')
             pages.extend(messages)
