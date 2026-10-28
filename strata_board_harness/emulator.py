@@ -109,6 +109,11 @@ def settle_role(call, role, package, clock, sleep, timeout=30, stable_reads=3):
     return False
 
 
+# Silent, isolated test emulators the harness may drive (serial -> AVD). Physical devices
+# and any other emulator are never authorized.
+ISOLATED_EMULATORS={'emulator-5556':'caregiver35','emulator-5558':'caregiver35b'}
+
+
 def process_deaths(call, package):
     """This run's crash buffer and ActivityManager kill/death records for [package]."""
     lines=[]
@@ -130,17 +135,20 @@ def process_deaths(call, package):
 
 class EmulatorRuntime:
     def __init__(self, configuration, receipts, runner=subprocess.run, popen=subprocess.Popen, clock=time.time):
-        if configuration.get('serial')!='emulator-5556' or configuration.get('avd')!='caregiver35':
-            raise ValueError('Only the selected isolated emulator is authorized')
+        if ISOLATED_EMULATORS.get(configuration.get('serial'))!=configuration.get('avd'):
+            raise ValueError('Only a selected isolated emulator is authorized')
         self.config,self.runner,self.popen,self.clock=configuration,runner,popen,clock
         self.directory=Path(receipts).resolve();self.directory.mkdir(parents=True,exist_ok=True,mode=0o700)
         self.adb=str(Path(configuration['adb']).resolve(strict=True))
-        self.serial='emulator-5556';self.child=None;self.lock=threading.Lock()
+        self.serial=configuration['serial'];self.avd=configuration['avd'];self.child=None;self.lock=threading.Lock()
         self.target=selected_target(configuration)
         self.package,self.test_package=self.target['package'],self.target['test_package']
         self.state_file=self.directory/'runtime.json'
         self.state=json.loads(self.state_file.read_text()) if self.state_file.exists() else {'phase':'idle','cleanup_verified':True}
         if self.state.get('phase')!='idle':raise RuntimeError('Prior emulator effects require exact reconciliation')
+
+    @property
+    def console_port(self):return int(self.serial.rsplit('-',1)[1])
 
     def call(self,*args,timeout=15,binary=False):
         return self.runner([self.adb,'-s',self.serial,*args],capture_output=True,text=not binary,timeout=timeout)
@@ -148,7 +156,7 @@ class EmulatorRuntime:
     def verify(self):
         pid=self.config['emulator_pid'];stamp=process_stamp(pid)
         if stamp!=self.config['emulator_stamp'] or not all(x in stamp for x in
-            ('-avd caregiver35','-ports 5556,5557','-no-window','-no-audio','-no-snapshot')):
+            ('-avd '+self.avd+' ','-ports %d,%d'%(self.console_port,self.console_port+1),'-no-window','-no-audio','-no-snapshot')):
             raise RuntimeError('Owned silent emulator process identity changed')
         avd_home=Path(self.config['avd_home']).expanduser().resolve()
         files=self.runner(['lsof','-p',str(pid),'-Fn'],capture_output=True,text=True,timeout=10)
@@ -156,7 +164,8 @@ class EmulatorRuntime:
             raise RuntimeError('Emulator is not using the owned AVD directory')
         current=self.call('emu','avd','name')
         users=self.call('shell','dumpsys','user')
-        if current.returncode or not current.stdout.startswith('caregiver35') or 'RUNNING_UNLOCKED' not in users.stdout:
+        if (current.returncode or current.stdout.splitlines()[:1]!=[self.avd]
+                or 'RUNNING_UNLOCKED' not in users.stdout):
             raise RuntimeError('Selected emulator is not running unlocked')
         instrumentation=self.call('shell','dumpsys','activity','instrumentation')
         if instrumentation.returncode or re.search(r'ActiveInstrumentation\{|mActiveInstrumentation=InstrumentationRecord',instrumentation.stdout):

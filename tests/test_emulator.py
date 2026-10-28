@@ -134,6 +134,15 @@ class EmulatorTests(unittest.TestCase):
         never=lambda *a,**k:SimpleNamespace(returncode=0,stdout='com.other')
         self.assertFalse(settle_role(never,'android.app.role.DIALER',PACKAGE,lambda:now[0],lambda s:now.__setitem__(0,now[0]+s),timeout=5))
 
+    def test_only_listed_isolated_emulators_are_authorized(self):
+        for serial,avd in (('emulator-5558','caregiver35'),('emulator-5556','caregiver35b'),
+                           ('47081JEKB09462','caregiver35'),('emulator-5560','caregiver35c')):
+            with self.assertRaises(ValueError):
+                EmulatorRuntime(dict(self.config,serial=serial,avd=avd),self.root/('r-'+serial),runner=lambda *a,**k:None)
+        second=EmulatorRuntime(dict(self.config,serial='emulator-5558',avd='caregiver35b'),self.root/'second',
+                               runner=lambda *a,**k:None)
+        self.assertEqual((second.serial,second.avd,second.console_port),('emulator-5558','caregiver35b',5558))
+
     def test_failed_rollback_fences_runtime_even_if_test_process_stopped(self):
         self.restore_ok=False
         result=self.runtime.test_apks(self.root/'app.apk',self.root/'test.apk',threading.Event())
