@@ -88,8 +88,10 @@ class GatewayTests(unittest.TestCase):
         gateway=JobGateway(self.directory/'commit',{'commit':lambda *_:{'exit_code':0,'output':'','cleanup_verified':True}})
         with self.assertRaises(ValueError):gateway.submit('commit')
         with self.assertRaises(ValueError):gateway.submit('commit','')
+        with self.assertRaises(ValueError):gateway.submit('commit','--help')
+        with self.assertRaises(ValueError):gateway.submit('commit','fix')
         self.assertEqual(gateway.status()['jobs'],[])
-        job=gateway.submit('commit','Add_tests');gateway.threads[job['id']].join(1)
+        job=gateway.submit('commit','Add_hosted_widget_tests');gateway.threads[job['id']].join(1)
         self.assertEqual(gateway.status(job['id'])['state'],'completed')
 
     def test_cancel_waits_for_owned_job_cleanup_and_does_not_count_as_pass(self):

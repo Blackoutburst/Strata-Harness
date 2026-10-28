@@ -37,8 +37,10 @@ class JobGateway:
         if operation not in self.handlers: raise ValueError('Operation outside selected scope')
         test_argument = (operation == 'test' and isinstance(argument,str) and (argument=='denied' or
             __import__('re').fullmatch(r'class:tech\.primal\.attentive_os\.[a-z][a-z0-9_]*\.[A-Za-z0-9_.]+',argument)))
-        if operation == 'commit' and not (isinstance(argument, str) and 1 <= len(argument) <= 2048):
-            raise ValueError('commit requires a message argument')
+        if operation == 'commit' and not (isinstance(argument, str) and 10 <= len(argument) <= 2048
+                                          and not argument.startswith('-')):
+            # A flag such as --help is not a message; it once became a commit subject.
+            raise ValueError('commit requires a descriptive message (10+ characters, not an option)')
         if argument is not None and not test_argument and operation != 'commit':
             raise ValueError('Unexpected operation argument')
         with self.lock:
