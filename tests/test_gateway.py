@@ -84,6 +84,14 @@ class GatewayTests(unittest.TestCase):
         self.assertEqual(saved['handler_id'],'job-remote');self.assertFalse((directory/'job-remote.json').exists())
         self.assertEqual(JobGateway(directory,{'test':lambda *_:None}).status(job['id'])['exit_code'],1)
 
+    def test_commit_without_a_message_is_rejected_before_any_job(self):
+        gateway=JobGateway(self.directory/'commit',{'commit':lambda *_:{'exit_code':0,'output':'','cleanup_verified':True}})
+        with self.assertRaises(ValueError):gateway.submit('commit')
+        with self.assertRaises(ValueError):gateway.submit('commit','')
+        self.assertEqual(gateway.status()['jobs'],[])
+        job=gateway.submit('commit','Add_tests');gateway.threads[job['id']].join(1)
+        self.assertEqual(gateway.status(job['id'])['state'],'completed')
+
     def test_cancel_waits_for_owned_job_cleanup_and_does_not_count_as_pass(self):
         job = self.gateway.submit('build');self.assertTrue(self.started.wait(1))
         self.assertTrue(self.gateway.stop())
