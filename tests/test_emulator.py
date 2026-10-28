@@ -80,7 +80,7 @@ class EmulatorTests(unittest.TestCase):
     def test_run_output_carries_this_runs_logcat_diagnostics(self):
         result=self.runtime.test_apks(self.root/'app.apk',self.root/'test.apk',threading.Event())
         self.assertIn('picker texts: [Gmail, Photos]',result['output'])
-        clear=next(i for i,a in enumerate(self.calls) if a[3:5]==['logcat','-c'])
+        clear=next(i for i,a in enumerate(self.calls) if a[3:7]==['logcat','-b','all','-c'])
         launch=next(i for i,a in enumerate(self.calls) if 'instrument' in a)
         self.assertLess(clear,launch)
         self.assertEqual(result['instrumentation']['counts']['failed'],1)
@@ -101,6 +101,20 @@ class EmulatorTests(unittest.TestCase):
         self.runtime.child=Stuck()
         with patch('strata_board_harness.emulator.os.killpg',side_effect=PermissionError(1,'Operation not permitted')):
             with self.assertRaises(RuntimeError):self.runtime.cancel()
+
+    def test_process_deaths_report_crash_buffer_and_kills_for_the_target_only(self):
+        from strata_board_harness.emulator import process_deaths
+        def call(*args,timeout=15):
+            if args[:4]==('logcat','-d','-b','crash'):
+                return SimpleNamespace(returncode=0,stdout='F/libc ( 42): Fatal signal 11 (SIGSEGV) in '+PACKAGE+'\n')
+            if args[:4]==('logcat','-d','-b','events'):
+                return SimpleNamespace(returncode=0,stdout=('I/am_kill ( 1): [0,42,'+PACKAGE+',900,stop]\n'
+                                                            'I/am_kill ( 1): [0,43,com.other,900,stop]\n'))
+            return SimpleNamespace(returncode=0,stdout='I/ActivityManager( 1): Process '+PACKAGE+' (pid 42) has died\n')
+        text=process_deaths(call,PACKAGE)
+        self.assertIn('SIGSEGV',text);self.assertIn('am_kill',text);self.assertIn('has died',text)
+        self.assertNotIn('com.other',text)
+        self.assertEqual(process_deaths(lambda *a,**k:SimpleNamespace(returncode=0,stdout=''),PACKAGE),'')
 
     def test_failed_rollback_fences_runtime_even_if_test_process_stopped(self):
         self.restore_ok=False

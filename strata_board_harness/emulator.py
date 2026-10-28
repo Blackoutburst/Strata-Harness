@@ -82,6 +82,25 @@ def instrumentation_summary(output):
     return {'counts':counts,'tests':statuses}
 
 
+def process_deaths(call, package):
+    """This run's crash buffer and ActivityManager kill/death records for [package]."""
+    lines=[]
+    try:
+        crash=call('logcat','-d','-b','crash','-v','time',timeout=30)
+        if crash.returncode==0:lines+=[line for line in (crash.stdout or '').splitlines() if line.strip()][-120:]
+        events=call('logcat','-d','-b','events','-v','time',timeout=30)
+        if events.returncode==0:
+            lines+=[line for line in (events.stdout or '').splitlines()
+                    if re.search(r'am_(kill|proc_died|crash|anr|wtf)',line) and package in line][-40:]
+        system=call('logcat','-d','-b','system','-v','time','-s','ActivityManager:I',timeout=30)
+        if system.returncode==0:
+            lines+=[line for line in (system.stdout or '').splitlines()
+                    if package in line and re.search(r'Killing|has died|crash|ANR|Force',line)][-40:]
+    except (OSError,subprocess.TimeoutExpired):pass
+    if not lines:return ''
+    return '\n--- process deaths and crashes (this run, '+package+') ---\n'+'\n'.join(lines)[-LOGCAT_MAX_CHARS:]+'\n'
+
+
 class EmulatorRuntime:
     def __init__(self, configuration, receipts, runner=subprocess.run, popen=subprocess.Popen, clock=time.time):
         if configuration.get('serial')!='emulator-5556' or configuration.get('avd')!='caregiver35':
@@ -260,7 +279,7 @@ class EmulatorRuntime:
             filter_args=['-e','annotation',marker] if scenario=='denied' else (
                 ['-e','class',scenario[len('class:'):]] if scenario.startswith('class:') else (['-e','notAnnotation',marker] if marker_present else []))
             self.state['phase']='instrumenting';self._save()
-            self.call('logcat','-c',timeout=15)  # so the dump below holds only this run's evidence
+            self.call('logcat','-b','all','-c',timeout=15)  # so the dumps below hold only this run's evidence
             with log.open('w') as stream:
                 log.chmod(0o600)
                 child=self.popen([self.adb,'-s',self.serial,'shell','am','instrument','-w','-r',
@@ -280,6 +299,9 @@ class EmulatorRuntime:
                 logcat=self.call('logcat','-d','-v','time','-s',*LOGCAT_TAGS,timeout=30)
                 logcat_text=(logcat.stdout or '')[-LOGCAT_MAX_CHARS:] if logcat.returncode==0 else ''
             except (OSError,subprocess.TimeoutExpired):logcat_text=''
+            # A killed or natively crashed test process leaves no AndroidRuntime stack: add the
+            # crash buffer and the system's process-death records for the target package.
+            logcat_text+=process_deaths(self.call,PACKAGE)
             if logcat_text.strip():
                 (root/'logcat.txt').write_text(logcat_text);(root/'logcat.txt').chmod(0o600)
                 output+='\n--- logcat (this run; tags '+' '.join(LOGCAT_TAGS)+') ---\n'+logcat_text
