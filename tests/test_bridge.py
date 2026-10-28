@@ -68,4 +68,13 @@ class BridgeTests(unittest.TestCase):
         self.assertFalse(self.client.guard())
 
 
+
+
+class UploadTimeoutTests(unittest.TestCase):
+    def test_upload_timeout_scales_with_the_artifacts(self):
+        from strata_board_harness.bridge import upload_timeout
+        self.assertEqual(upload_timeout(10 * 1024 * 1024), 120)
+        self.assertGreaterEqual(upload_timeout(146 * 1024 * 1024), 600)
+
+
 if __name__=='__main__':unittest.main()

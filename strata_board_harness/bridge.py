@@ -141,6 +141,11 @@ class MacBridge:
         return self.runtime.clean() and self.gateway.clean()
 
 
+def upload_timeout(payload_bytes):
+    """Seconds allowed for one artifact upload through the tunnel."""
+    return max(120, 60 + payload_bytes // (256 * 1024))
+
+
 class EmulatorClient:
     def __init__(self,config,receipts):
         parsed=urlsplit(config['endpoint'])
@@ -201,7 +206,11 @@ class EmulatorClient:
             if saved and saved.get('request_id')==identifier:
                 raise RuntimeError('Previous test admission uncertain; do not resubmit')
             self.current={'request_id':identifier,'state':'prepared'};write_private(saved_path,self.current)
-            result=self._request('POST','/run',{'request_id':identifier,'scenario':scenario,**artifacts},timeout=120)
+            payload={'request_id':identifier,'scenario':scenario,**artifacts}
+            # Base64 APKs cross the SSH tunnel: a 100 MB debug APK is ~140 MB on the wire, far
+            # beyond a fixed 120 s. Budget a conservative 256 KiB/s with the old floor.
+            upload=sum(len(item['base64']) for item in artifacts.values())
+            result=self._request('POST','/run',payload,timeout=upload_timeout(upload))
             self.current['state']='admitted';write_private(saved_path,self.current)
         else:result=observed
         deadline=time.monotonic()+1600
