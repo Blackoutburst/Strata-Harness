@@ -143,6 +143,16 @@ class EmulatorTests(unittest.TestCase):
                                runner=lambda *a,**k:None)
         self.assertEqual((second.serial,second.avd,second.console_port),('emulator-5558','caregiver35b',5558))
 
+    def test_denied_listing_yields_each_annotated_test_once(self):
+        from strata_board_harness.emulator import denied_tests
+        listing=('INSTRUMENTATION_STATUS: class=p.e2e.PermTest\nINSTRUMENTATION_STATUS: test=dialTab\n'
+                 'INSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=p.e2e.PermTest\n'
+                 'INSTRUMENTATION_STATUS: test=dialTab\nINSTRUMENTATION_STATUS_CODE: 0\n'
+                 'INSTRUMENTATION_STATUS: class=p.e2e.PermTest\nINSTRUMENTATION_STATUS: test=callsTab\n'
+                 'INSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=p.e2e.Bad\n'
+                 'INSTRUMENTATION_STATUS: test=x;rm\nINSTRUMENTATION_STATUS_CODE: 1\n')
+        self.assertEqual(denied_tests(listing),['p.e2e.PermTest#dialTab','p.e2e.PermTest#callsTab'])
+
     def test_failed_rollback_fences_runtime_even_if_test_process_stopped(self):
         self.restore_ok=False
         result=self.runtime.test_apks(self.root/'app.apk',self.root/'test.apk',threading.Event())

@@ -56,6 +56,19 @@ def instrumentation_runner(listing,test_package,package):
     return DEFAULT_RUNNER
 
 
+def denied_tests(listing):
+    """Class#method names from a log-only (-e log true) instrumentation listing."""
+    tests=[];bundle={}
+    for line in listing.splitlines():
+        match=re.match(r'INSTRUMENTATION_STATUS: (class|test)=(.*)',line)
+        if match:bundle[match.group(1)]=match.group(2).strip();continue
+        if line.startswith('INSTRUMENTATION_STATUS_CODE: 1') and {'class','test'}<=set(bundle):
+            name=bundle['class']+'#'+bundle['test']
+            if re.fullmatch(r'[A-Za-z0-9_.$]+#[A-Za-z0-9_$]+',name) and name not in tests:tests.append(name)
+        if line.startswith('INSTRUMENTATION_STATUS_CODE:'):bundle={}
+    return tests
+
+
 def instrumentation_summary(output):
     counts={'passed':0,'failed':0,'errors':0,'skipped':0,'started':0}
     statuses=[];bundle={};declared=None
@@ -284,7 +297,8 @@ class EmulatorRuntime:
                                '-c','android.intent.category.LAUNCHER',PACKAGE)
             if ce.returncode or activity.returncode or PACKAGE+'/' not in activity.stdout:
                 raise RuntimeError('CE directory or target launcher activity unavailable after install')
-            if self.target['role']:
+            # A role holder's grants survive a revoke, so the denied scenario runs without the role.
+            if self.target['role'] and scenario!='denied':
                 role=self.call('shell','cmd','role','add-role-holder','--user','0',self.target['role'],PACKAGE,timeout=30)
                 if role.returncode:raise RuntimeError('Selected role fixture failed')
                 # The role controller grants and adjusts the holder's permissions asynchronously;
@@ -294,16 +308,21 @@ class EmulatorRuntime:
                 if not settle_role(self.call,self.target['role'],PACKAGE,self.clock,time.sleep):
                     raise RuntimeError('Role holder permissions did not settle')
             permission_fixture={}
-            if scenario=='denied':
-                if not self.target['denied_permissions']:raise ValueError('Selected target has no denied-permission fixture')
+            def deny():
+                # Revoke from outside the test process and clear user-set/user-fixed, so the
+                # app's own request shows the system prompt again; then observe the state.
                 for permission in self.target['denied_permissions']:
                     revoked=self.call('shell','pm','revoke',PACKAGE,permission)
                     if revoked.returncode:raise RuntimeError('External denied-permission fixture failed')
+                    self.call('shell','pm','clear-permission-flags',PACKAGE,permission,'user-set','user-fixed')
                 dump=self.call('shell','dumpsys','package',PACKAGE)
                 for permission in self.target['denied_permissions']:
                     line=next((line.strip() for line in dump.stdout.splitlines() if line.strip().startswith(permission+':') and 'granted=' in line),'')
                     if 'granted=false' not in line:raise RuntimeError('Denied state not independently observed before host launch')
                     permission_fixture[permission]=line
+            if scenario=='denied':
+                if not self.target['denied_permissions']:raise ValueError('Selected target has no denied-permission fixture')
+                deny()
             listing=self.call('shell','pm','list','instrumentation')
             runner=instrumentation_runner(listing.stdout if listing.returncode==0 else '',TEST_PACKAGE,PACKAGE)
             if not re.fullmatch(r'[A-Za-z0-9_.$]+',runner):raise ValueError('Unexpected instrumentation runner name')
@@ -327,19 +346,39 @@ class EmulatorRuntime:
                 self.call('shell','settings','put','global',scale,'0',timeout=15)
             self.state['phase']='instrumenting';self._save()
             self.call('logcat','-b','all','-c',timeout=15)  # so the dumps below hold only this run's evidence
-            with log.open('w') as stream:
-                log.chmod(0o600)
+            def instrument(args,stream):
                 child=self.popen([self.adb,'-s',self.serial,'shell','am','instrument','-w','-r',
-                    '-e','timeout_msec','300000',*filter_args,TEST_PACKAGE+'/'+runner],
+                    '-e','timeout_msec','300000',*args,TEST_PACKAGE+'/'+runner],
                     stdout=stream,stderr=subprocess.STDOUT,start_new_session=True)
                 with self.lock:self.child=child
-                reason=None
+                stop=None
                 while child.poll() is None:
-                    if cancelled.wait(.1):reason='cancelled';break
-                    if time.monotonic()>=deadline:reason='connected_timeout';break
-                if reason:self.cancel()
-                adb_code=child.wait(timeout=10)
+                    if cancelled.wait(.1):stop='cancelled';break
+                    if time.monotonic()>=deadline:stop='connected_timeout';break
+                if stop:self.cancel()
+                return child.wait(timeout=10),stop
+            with log.open('w') as stream:
+                log.chmod(0o600)
+                if scenario=='denied':
+                    # Each denied test grants its permissions while it recovers, and a test can
+                    # never revoke from inside its own process: every test gets its own
+                    # instrumentation, started from a fresh external denied state.
+                    tests=denied_tests(self.call('shell','am','instrument','-w','-r','-e','log','true',
+                        *filter_args,TEST_PACKAGE+'/'+runner,timeout=120).stdout or '')
+                    adb_code,reason=0,None
+                    for index,test in enumerate(tests):
+                        if index:deny()
+                        stream.flush()
+                        code_one,reason=instrument(['-e','class',test],stream)
+                        adb_code=adb_code or code_one
+                        if reason:break
+                else:
+                    adb_code,reason=instrument(filter_args,stream)
             output=log.read_text(errors='replace');summary=instrumentation_summary(output)
+            if scenario=='denied':
+                counts=summary['counts'];counts['declared_total']=len(tests)
+                completed=sum(counts[k] for k in ('passed','failed','errors','skipped'))
+                counts['unrun']=max(0,len(tests)-completed-counts['started_without_result'])
             # Test-side diagnostics (E2E_DUMP) and crashes only reach logcat; give the worker
             # this run's evidence instead of leaving it to guess from the assertion text.
             try:
