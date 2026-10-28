@@ -63,6 +63,7 @@ WorkingDirectory={REPO}
 Environment="PATH={os.environ.get("PATH", "/usr/bin:/bin")}"
 {extra}Restart=on-failure
 RestartSec=10
+TimeoutStopSec=90
 
 [Install]
 WantedBy=default.target

@@ -12,7 +12,9 @@ Claude can take board tickets and do the work itself.
    `python3 scripts/local_board.py install` there (starts it now and at login, no login page).
 2. Connect yourself (the manager): `python3 <agent-board>/connect.py --client claude-code`.
    Tell the user to restart Claude Code (or run `/mcp`) so the `agent_board` tools load.
-   Register with `register_agent` (agent_kind `claude-code`, a stable identity_key).
+   Register with `register_agent` (agent_kind `claude-code`, a stable identity_key), then run
+   `./harness manager grant` so you may accept or return tickets the agents put in review,
+   and register again.
 3. Check prerequisites: `./harness doctor` (OpenCode and git on PATH, board reachable).
 4. Create each agent the user asks for, one command each:
    - A model the user's OpenCode already knows (any provider they configured or logged into):
@@ -34,10 +36,12 @@ Claude can take board tickets and do the work itself.
 - An agent works on `agent/<name>/<number>-<slug>`, pushes that branch to the
   repository's origin, posts a report on the ticket and moves it to **review**
   (or **blocked** with the reason).
-- Review: fetch the branch, read the diff, run the tests yourself. Then either
-  merge it into the target branch and mark the ticket done, or post concrete feedback
-  on the ticket and set it back to **todo**: the same agent resumes on its branch and
+- Review: fetch the branch, read the diff, run the tests yourself. Then `claim_ticket` it
+  (it stays in review) and either merge the branch into the target branch and set the
+  ticket **done** with outcome/evidence, or post concrete feedback on the ticket and set
+  it back to **todo** with `release_claim`: the same agent resumes on its branch and
   sees the discussion.
+- Agents start a ticket only when its dependencies are **done**, so merge prerequisites first.
 - Agents never push to main, change remotes, or weaken tests; you own merges.
 - Cost and tokens per run are in each report and in `~/.local/share/strata-harness/agents/<name>/runs/`.
 

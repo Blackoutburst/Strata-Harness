@@ -108,9 +108,15 @@ def serve_all(poll_seconds=30, log=print):
     children = {}
 
     def stop(*_):
+        # Each agent hands its ticket back before exiting; wait so a restart finds the locks free.
         for child in children.values():
             if child.poll() is None:
                 child.terminate()
+        for child in children.values():
+            try:
+                child.wait(timeout=60)
+            except subprocess.TimeoutExpired:
+                child.kill()
         raise SystemExit(0)
 
     signal.signal(signal.SIGTERM, stop)

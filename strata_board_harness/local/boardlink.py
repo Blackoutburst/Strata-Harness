@@ -91,6 +91,31 @@ class LocalOwner:
         return self.call('PATCH', f'/agent-profiles/{profile_id}', {'expected_version': profile['version'], **changes})
 
 
+    def profiles(self):
+        result = self.call('GET', '/agent-profiles')
+        return result if isinstance(result, list) else result.get('profiles') or result.get('items') or []
+
+    def grant_review(self, profile_id):
+        """Let one agent (the manager) take assigned tickets in review to accept or return them."""
+        settings = self.call('GET', '/settings')
+        policy = settings.get('policy') or {}
+        if 'ticket.review' not in (policy.get('actions') or []):
+            self.call('PUT', '/settings/policy', {
+                'enabled': True, 'allow_read': True, 'allow_reply': True, 'allow_requests': True,
+                'actions': [*(policy.get('actions') or []), 'ticket.review'], 'resources': policy.get('resources') or []})
+        profile = self.call('GET', f'/agent-profiles/{profile_id}')
+        profile = profile.get('profile', profile)
+        current = profile['policy']
+        actions = [a for a in current.get('actions') or [] if a != '*']
+        if 'ticket.review' in actions and current.get('autonomy') == 'queue':
+            return profile
+        changed = {'allow_read': True, 'allow_messages': True, 'allow_requests': True,
+                   'actions': [*actions, 'ticket.review'] if 'ticket.review' not in actions else actions,
+                   'resources': [r for r in current.get('resources') or [] if r != '*'], 'autonomy': 'queue'}
+        return self.call('PATCH', f'/agent-profiles/{profile_id}', {'expected_version': profile['version'],
+                                                                    'policy': changed})
+
+
 class AgentSession:
     """One registered MCP session for a paired agent identity."""
 

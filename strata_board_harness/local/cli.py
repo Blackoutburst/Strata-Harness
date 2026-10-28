@@ -6,6 +6,7 @@
     harness serve                      # run every agent (what autostart runs)
     harness run NAME --ticket ID       # one ticket now, in the foreground
     harness autostart install          # start agents at login (macOS, Linux, Windows)
+    harness manager grant              # let the Claude Code manager accept/return reviewed tickets
     harness doctor
 """
 
@@ -112,6 +113,22 @@ def serve(args):
         serve_all(poll_seconds=args.poll)
 
 
+def manager_grant(args):
+    owner = LocalOwner(board_url(args.board))
+    profiles = owner.profiles()
+    harness_ids = {agent.config['board'].get('profile_id') for agent in Agent.all()}
+    if args.name:
+        matches = [p for p in profiles if p.get('name') == args.name or p.get('id') == args.name]
+    else:
+        matches = [p for p in profiles if (p.get('name') or '').startswith('Claude Code') and p['id'] not in harness_ids]
+    if len(matches) != 1:
+        names = ', '.join(repr(p.get('name')) for p in profiles if p['id'] not in harness_ids) or 'none'
+        raise SystemExit(f'Name the manager agent exactly (agent profiles on the board: {names})')
+    profile = owner.grant_review(matches[0]['id'])
+    print(f'{profile.get("name")} may now accept or return tickets in review. '
+          'It must register again (register_agent) for the new permission to apply.')
+
+
 def doctor(args):
     ok = True
     opencode = shutil.which('opencode')
@@ -179,6 +196,12 @@ def main(argv=None):
     auto.add_argument('action', choices=['install', 'uninstall'])
     auto.set_defaults(func=lambda a: print(autostart.install() if a.action == 'install'
                                            else autostart.uninstall() or 'Removed autostart.'))
+
+    manager = commands.add_parser('manager', help='set up the manager (Claude Code) on the board')
+    manager.add_argument('action', choices=['grant'], help='grant: let it accept or return reviewed tickets')
+    manager.add_argument('name', nargs='?', help='its board name (default: the one Claude Code agent)')
+    manager.add_argument('--board', default=os.environ.get('BOARD_URL', DEFAULT_BOARD))
+    manager.set_defaults(func=manager_grant)
 
     check = commands.add_parser('doctor', help='check prerequisites')
     check.add_argument('--board', default=os.environ.get('BOARD_URL', DEFAULT_BOARD))
