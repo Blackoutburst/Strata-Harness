@@ -20,6 +20,23 @@ PASS_HEADERS = ('content-type', 'accept', 'anthropic-version', 'anthropic-beta',
 LIMIT = 64 * 1024 * 1024
 
 
+def without_history_thinking(body):
+    """The request without assistant reasoning parts in its history, or None if it has none."""
+    try:
+        data = json.loads(body or b'')
+    except ValueError:
+        return None
+    changed = False
+    for message in data.get('messages') or [] if isinstance(data, dict) else []:
+        content = message.get('content') if isinstance(message, dict) and message.get('role') == 'assistant' else None
+        if isinstance(content, list):
+            kept = [part for part in content if not (isinstance(part, dict) and part.get('type') in ('thinking', 'reasoning'))]
+            if len(kept) != len(content):
+                message['content'] = kept or ''
+                changed = True
+    return json.dumps(data).encode() if changed else None
+
+
 class _NoRedirect(HTTPRedirectHandler):
     def redirect_request(self, *args, **kwargs):
         return None
@@ -35,6 +52,9 @@ class RunProxy:
         self.lock = threading.Lock()
         self.opener = build_opener(_NoRedirect())
         self.server = None
+        # Some endpoints reject the reasoning ("thinking") parts an SDK echoes back in the history.
+        # Learned per run: after one such 5xx is cured by removing them, they are always removed.
+        self.strip_thinking = False
 
     def _record(self, value):
         with self.lock, open(self.log_path, 'a') as stream:
@@ -69,12 +89,28 @@ class RunProxy:
                     headers[header] = self.headers[header].replace(owner.token, owner.key)
                 target = owner.upstream + self.path[len(owner.prefix):]
                 record['request_bytes'] = size
+                stripped = without_history_thinking(body)
+                if owner.strip_thinking and stripped is not None:
+                    body, stripped, record['stripped_thinking'] = stripped, None, True
+
+                def send(data):
+                    try:
+                        answer = owner.opener.open(Request(target, data=data, method=self.command, headers=headers),
+                                                   timeout=300)
+                        return answer, answer.status
+                    except HTTPError as error:
+                        return error, error.code
+
                 try:
-                    response = owner.opener.open(Request(target, data=body, method=self.command, headers=headers),
-                                                 timeout=300)
-                    status = response.status
-                except HTTPError as error:
-                    response, status = error, error.code
+                    response, status = send(body)
+                    if status >= 500 and stripped is not None:
+                        retry, retry_status = send(stripped)
+                        if retry_status < 500:
+                            response.close()
+                            response, status = retry, retry_status
+                            owner.strip_thinking = record['stripped_thinking'] = True
+                        else:
+                            retry.close()
                 except (URLError, OSError) as error:
                     record.update(status=502, error=type(error).__name__, seconds=round(time.time() - started, 2))
                     owner._record(record)

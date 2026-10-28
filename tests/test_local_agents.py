@@ -164,6 +164,14 @@ class ProxyTests(unittest.TestCase):
         self.assertNotIn('real-key', log)
         self.assertNotIn(self.proxy.token, log)
 
+    def test_history_thinking_is_stripped_only_when_it_cures_a_server_error(self):
+        from strata_board_harness.local.proxy import without_history_thinking
+        body = json.dumps({'messages': [{'role': 'assistant', 'content': [
+            {'type': 'text', 'text': 'hi'}, {'type': 'thinking', 'thinking': [{'type': 'text', 'text': ''}]}]}]}).encode()
+        self.assertEqual(json.loads(without_history_thinking(body))['messages'][0]['content'],
+                         [{'type': 'text', 'text': 'hi'}])
+        self.assertIsNone(without_history_thinking(b'{"messages": [{"role": "user", "content": "x"}]}'))
+
     def test_requests_without_the_run_token_are_refused(self):
         from urllib.error import HTTPError
         with self.assertRaises(HTTPError) as caught:
