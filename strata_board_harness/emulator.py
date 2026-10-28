@@ -312,6 +312,10 @@ class EmulatorRuntime:
                 return result
             filter_args=['-e','annotation',marker] if scenario=='denied' else (
                 ['-e','class',scenario[len('class:'):]] if scenario.startswith('class:') else (['-e','notAnnotation',marker] if marker_present else []))
+            # Standard E2E practice: no system animations during the run, so UI checks never
+            # measure a node mid-transition. The pre-run snapshot restores the scales.
+            for scale in ('window_animation_scale','transition_animation_scale','animator_duration_scale'):
+                self.call('shell','settings','put','global',scale,'0',timeout=15)
             self.state['phase']='instrumenting';self._save()
             self.call('logcat','-b','all','-c',timeout=15)  # so the dumps below hold only this run's evidence
             with log.open('w') as stream:

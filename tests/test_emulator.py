@@ -83,8 +83,10 @@ class EmulatorTests(unittest.TestCase):
         result=self.runtime.test_apks(self.root/'app.apk',self.root/'test.apk',threading.Event())
         self.assertIn('picker texts: [Gmail, Photos]',result['output'])
         clear=next(i for i,a in enumerate(self.calls) if a[3:7]==['logcat','-b','all','-c'])
+        scales=[i for i,a in enumerate(self.calls) if a[3:6]==['shell','settings','put'] and a[-1]=='0']
+        self.assertEqual(len(scales),3)
         launch=next(i for i,a in enumerate(self.calls) if 'instrument' in a)
-        self.assertLess(clear,launch)
+        self.assertLess(clear,launch);self.assertLess(max(scales),launch)
         self.assertEqual(result['instrumentation']['counts']['failed'],1)
 
     def test_cancel_tolerates_a_child_that_exits_before_the_group_signal(self):
