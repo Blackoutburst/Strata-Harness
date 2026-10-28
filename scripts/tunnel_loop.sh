@@ -11,10 +11,11 @@ while true; do
   [ -n "$PORT" ] && FWD+=(-R "127.0.0.1:19145:127.0.0.1:$PORT")
   echo "$(date '+%F %T') connect bridge_port=${PORT:-none}"
   # The remote side runs a named marker process instead of -N, so a stale session of OURS
-  # can be told apart from any other sshd session and ended (see below).
+  # can be told apart from any other sshd session and ended (see below). The marker exits
+  # once its sshd session is gone, so killed connections leave nothing behind.
   /usr/bin/ssh -o BatchMode=yes -o ExitOnForwardFailure=yes -o ServerAliveInterval=20 \
     -o ServerAliveCountMax=3 -o ConnectTimeout=15 "${FWD[@]}" "$HOST" \
-    'exec bash -c "exec -a strata-tunnel-hold sleep infinity"' </dev/null
+    'exec -a strata-tunnel-hold bash -c "while kill -0 \$PPID 2>/dev/null; do sleep 20; done"' </dev/null
   echo "$(date '+%F %T') ssh exited $?; reconnecting in 10s"
   # If our Mac side dropped without a FIN, Ubuntu's sshd keeps the dead session and its
   # listeners, and every reconnect fails ("remote port forwarding failed"). When the board
