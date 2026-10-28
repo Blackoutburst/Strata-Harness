@@ -1,0 +1,4 @@
+#!/bin/sh
+# Run the local harness CLI from this checkout: ./harness agent add ..., ./harness serve
+here="$(cd "$(dirname "$0")" && pwd)"
+PYTHONPATH="$here${PYTHONPATH:+:$PYTHONPATH}" exec python3 -m strata_board_harness.local "$@"

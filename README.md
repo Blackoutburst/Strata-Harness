@@ -1,12 +1,66 @@
-# Strata Board Harness
+# Strata Harness
 
-A Python 3.10+ standard-library supervisor for a selected development worker using
-Strata and the Blackoutburst Board. The Ubuntu daemon owns coordination and durable
-state; the personal PC supplies inference and may be stopped independently.
-This directory is a separate project. Git initialization and publication are left
-to the human.
+Permanent local coding agents for an [Agent Board](https://github.com/Blackoutburst/agent-board).
+Each agent is OpenCode plus any model: whatever provider your OpenCode already knows
+(hosted, custom, or a model server on your own machine), or any OpenAI-compatible
+endpoint. Claude Code acts as manager: it assigns tickets, reviews the agents'
+branches and merges them.
 
-## Implemented and verified
+The harness is optional. A board plus Claude Code alone can already work
+autonomously; the harness adds third-party sub-agents.
+
+## Quickstart
+
+Needs Python 3.10+, Git and [OpenCode](https://opencode.ai), and a running local board
+(`python3 scripts/local_board.py install` in the agent-board repository).
+
+```sh
+git clone git@github.com:Blackoutburst/Strata-Harness.git && cd Strata-Harness
+./harness doctor
+./harness agent add glm --model <provider>/<model> --display-name "GLM 5.3 Flash"
+./harness agent add local --base-url http://127.0.0.1:8080/v1 --model <id>   # any compatible server
+./harness autostart install          # run all agents now and at every login
+```
+
+(`harness.cmd` on Windows.) Or simply ask Claude Code in this directory to set it up:
+[CLAUDE.md](CLAUDE.md) has the steps it follows and the manager workflow.
+
+`agent add` takes the endpoint, AI SDK package, model limits/costs and key location
+from your OpenCode configuration (`--model provider/model`, see `opencode models`), or
+from flags (`--base-url`, `--model`, `--npm`, `--key-env`). Nothing about any provider
+is built in. It pairs the agent with the board, grants it worker permission and runs
+one live check through the agent's sandbox.
+
+### How an agent works
+
+- It takes tickets assigned to it (`assignee_agent_id`), one at a time, and keeps the
+  claim alive while working.
+- It clones the project repository (HTTPS/SSH URL or local path) into its own
+  checkout and works on `agent/<name>/<number>-<slug>`.
+- OpenCode runs with the agent's own HOME and XDG config/data/cache/state, so several
+  agents run at once without sharing sessions, databases or settings. A loopback
+  proxy holds the real API key; the coding process only sees a throwaway token and no
+  other credentials from your environment. A plugin keeps file tools inside the
+  checkout and reserves push, remote and branch changes to the harness. This
+  isolates agents from each other and from your files; it is not an OS security sandbox.
+- At the end the harness pushes the branch to origin, posts the agent's report with
+  tokens and cost on the ticket, and moves it to review (or blocked with the reason).
+  Feedback on the ticket plus status todo sends it back to the same agent and branch.
+
+```sh
+./harness agent list | show NAME | remove NAME
+./harness run NAME --ticket ID      # one ticket in the foreground
+./harness serve [--agent NAME]      # what autostart runs
+```
+
+Agent data lives in `~/.local/share/strata-harness/agents/<name>/` (`HARNESS_HOME` to change).
+
+## Earlier Ubuntu pilot
+
+The rest of this repository is the earlier single-worker pilot: an Ubuntu daemon with a
+Strata model server, network-isolated Android builds and a Mac emulator bridge.
+
+### Implemented and verified
 
 - systemd user supervisor with offline backoff, SQLite receipts, status, graceful
   shutdown and an OS-held supervisor lock.

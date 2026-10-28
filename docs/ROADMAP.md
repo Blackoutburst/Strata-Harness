@@ -42,7 +42,24 @@ Mac. Pieces already moving toward the target:
 - Emulator allowlist for several isolated emulators (`emulator-5556`, `emulator-5558`).
 - Per-slot worker lock paths and state directories are configurable.
 
-Next steps toward the target:
+Done (2026-10-28, `strata_board_harness/local/`, `./harness`):
+
+- Agents (slots) with their own OpenCode home/config/data/cache, checkout per ticket,
+  per-run proxy and lock; any number run at once.
+- Local mode: board, agents and engines on one device, no tunnel.
+- `harness agent add` creates an agent from the user's OpenCode provider setup or an
+  explicit endpoint, pairs it with the board, grants worker permission and checks the model.
+- Board-driven dispatch: agents take tickets assigned to them; review feedback returns
+  a ticket to the same agent and branch. Autostart on macOS, Linux and Windows.
+- Task-agnostic prompts (task, criteria, project context, discussion, standing instructions).
+
+Remaining:
+
+- OS-level sandboxing (bubblewrap on Linux, sandbox-exec on macOS) on top of the
+  per-agent directory isolation.
+- Per-task-type playbooks and optional runtime targets (emulators) for local agents.
+
+Original next steps:
 
 1. **Slots.** A slot (a, b, c, …) is a named, fully separate instance: config, state,
    service unit, Board identity, lock, ports, emulator. Dispatch takes `--slot`.

@@ -66,9 +66,21 @@ class Board:
         self.url, self.request = url.rstrip('/'), urllib.request
         self.opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
         self.csrf = None
-        session = self.call('POST', '/api/login', {'username': 'blackoutburst',
+        me = self._local_me()
+        if me is not None:  # A local board without login acts as its owner.
+            self.csrf = me['csrf_token']
+            return
+        session = self.call('POST', '/api/login', {'username': os.environ.get('HARNESS_BOARD_USER', 'local'),
                             'password': Path(password_file).expanduser().read_text().strip()})
         self.csrf = session.get('csrf_token') or session.get('csrf')
+
+    def _local_me(self):
+        try:
+            with self.opener.open(self.request.Request(self.url + '/api/me'), timeout=30) as response:
+                me = json.loads(response.read())
+        except Exception:
+            return None
+        return me if me.get('login_required') is False else None
 
     def call(self, method, path, body=None):
         headers = {'Origin': self.url, 'Content-Type': 'application/json'}
@@ -176,7 +188,7 @@ def main():
     p.add_argument('--continuation', default='', help='one paragraph describing prior state when resuming earlier work')
     p.add_argument('--steps', type=int, default=400)
     p.add_argument('--minutes', type=int, default=90)
-    p.add_argument('--host', default='ubuntu@blackoutburst.com')
+    p.add_argument('--host', default=os.environ.get('HARNESS_REMOTE_HOST'), required='HARNESS_REMOTE_HOST' not in os.environ)
     p.add_argument('--board-url', default='http://127.0.0.1:9140')
     p.add_argument('--board-password-file', default='~/.local/share/board-local/dev-password.txt')
     p.add_argument('--harness-agent-id', required=True)

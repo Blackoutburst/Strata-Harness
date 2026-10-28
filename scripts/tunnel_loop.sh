@@ -3,7 +3,7 @@
 #   Ubuntu 127.0.0.1:19140 -> Mac Board 127.0.0.1:9140
 #   Ubuntu 127.0.0.1:19145 -> current Mac emulator bridge (port re-read on every reconnect)
 # dispatch_task.py ends the current ssh after restarting the bridge so the new port is picked up.
-HOST=${1:-ubuntu@blackoutburst.com}
+HOST=${1:-${HARNESS_REMOTE_HOST:?usage: tunnel_loop.sh user@ubuntu-host (or set HARNESS_REMOTE_HOST)}}
 PORT_FILE=~/.local/state/strata-board-harness-bridge/tunnel-port
 while true; do
   PORT=$(/usr/bin/python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["port"])' "$PORT_FILE" 2>/dev/null)
