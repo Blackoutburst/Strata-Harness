@@ -191,6 +191,13 @@ class ProxyTests(unittest.TestCase):
                          [{'type': 'text', 'text': 'hi'}])
         self.assertIsNone(without_history_thinking(b'{"messages": [{"role": "user", "content": "x"}]}'))
 
+    def test_null_content_parts_are_dropped(self):
+        from strata_board_harness.local.proxy import without_null_parts
+        body = json.dumps({'messages': [{'role': 'user', 'content': [{'type': 'text', 'text': 'media:'}, None]}]}).encode()
+        self.assertEqual(json.loads(without_null_parts(body))['messages'][0]['content'], [{'type': 'text', 'text': 'media:'}])
+        same = b'{"messages": [{"role": "user", "content": "x"}]}'
+        self.assertIs(without_null_parts(same), same)
+
     def test_requests_without_the_run_token_are_refused(self):
         from urllib.error import HTTPError
         with self.assertRaises(HTTPError) as caught:

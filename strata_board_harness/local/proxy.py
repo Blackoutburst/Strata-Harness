@@ -20,6 +20,23 @@ PASS_HEADERS = ('content-type', 'accept', 'anthropic-version', 'anthropic-beta',
 LIMIT = 64 * 1024 * 1024
 
 
+def without_null_parts(body):
+    """Drop null entries from message content lists (an unreadable tool attachment), which APIs reject."""
+    if not body or b'null' not in body:
+        return body
+    try:
+        data = json.loads(body)
+    except ValueError:
+        return body
+    changed = False
+    for message in data.get('messages') or [] if isinstance(data, dict) else []:
+        content = message.get('content') if isinstance(message, dict) else None
+        if isinstance(content, list) and None in content:
+            message['content'] = [part for part in content if part is not None] or ''
+            changed = True
+    return json.dumps(data).encode() if changed else body
+
+
 def without_history_thinking(body):
     """The request without assistant reasoning parts in its history, or None if it has none."""
     try:
@@ -89,6 +106,7 @@ class RunProxy:
                     headers[header] = self.headers[header].replace(owner.token, owner.key)
                 target = owner.upstream + self.path[len(owner.prefix):]
                 record['request_bytes'] = size
+                body = without_null_parts(body)
                 stripped = without_history_thinking(body)
                 if owner.strip_thinking and stripped is not None:
                     body, stripped, record['stripped_thinking'] = stripped, None, True
