@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import signal
 import subprocess
 import time
@@ -21,6 +22,7 @@ from ..managed_engine import process_stamp
 from .agents import harness_home
 
 REPO = Path(__file__).resolve().parents[2]
+MIN_FREE_BYTES = 15 * 2**30
 GRADLE_TASKS = ['assembleDebug', 'assembleDebugAndroidTest', 'testDebugUnitTest']
 
 
@@ -98,6 +100,12 @@ class LocalTools:
         return self.gradle(GRADLE_TASKS, cancelled)
 
     def test(self, argument, cancelled):
+        free = shutil.disk_usage(Path.home()).free
+        if free < MIN_FREE_BYTES:
+            # Emulator snapshots and builds need room; a full disk also breaks the Board's database.
+            return {'exit_code': 75, 'cleanup_verified': True,
+                    'output': f'Refused: only {free // 2**30} GB free on disk (needs {MIN_FREE_BYTES // 2**30} GB). '
+                              'The manager must free space; retry later.'}
         built = self.gradle(['assembleDebug', 'assembleDebugAndroidTest'], cancelled)
         if built['exit_code']:
             built['output'] = 'Build failed before the test run.\n' + built['output']

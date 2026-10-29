@@ -224,18 +224,30 @@ def session_of(path):
 class Renewer(threading.Thread):
     """Keeps the Board claim alive while the agent works."""
 
-    def __init__(self, session, ticket):
+    def __init__(self, session, ticket, log=print):
         super().__init__(daemon=True)
-        self.session, self.ticket, self.stop = session, ticket, threading.Event()
+        self.session, self.ticket, self.stop, self.log = session, ticket, threading.Event(), log
+        self.failures = 0
+
+    def renew(self):
+        renewed = self.session.tool('renew_ticket', ticket_id=self.ticket['id'],
+                                    expected_version=self.ticket['version'], progress='Agent is working', view='full')
+        self.ticket = renewed.get('ticket', renewed) if 'version' not in renewed else renewed
 
     def run(self):
         while not self.stop.wait(RENEW_SECONDS):
             try:
-                self.ticket = self.session.tool('renew_ticket', ticket_id=self.ticket['id'],
-                                                expected_version=self.ticket['version'],
-                                                progress='Agent is working', view='full')
-            except BoardError:
-                pass
+                try:
+                    self.renew()
+                except BoardError:
+                    # Usually a version change (a message, an edit): reread and renew once more.
+                    current = self.session.tool('get_ticket', ticket_id=self.ticket['id'], view='full')
+                    self.ticket = current.get('ticket', current)
+                    self.renew()
+                self.failures = 0
+            except Exception as error:  # Never let the claim lapse silently.
+                self.failures += 1
+                self.log(f'claim renewal failed ({self.failures}): {type(error).__name__}: {str(error)[:300]}')
 
 
 def run_ticket(agent, session, ticket, log=print):
@@ -244,7 +256,7 @@ def run_ticket(agent, session, ticket, log=print):
     project = project.get('project', project)
     run_dir = agent.dir / 'runs' / (time.strftime('%Y%m%d-%H%M%S-') + ticket['id'][:8])
     run_dir.mkdir(parents=True, mode=0o700)
-    renewer = Renewer(session, ticket)
+    renewer = Renewer(session, ticket, log)
     renewer.start()
     result = {'ticket_id': ticket['id'], 'agent': agent.name, 'started_at': time.time()}
     try:
