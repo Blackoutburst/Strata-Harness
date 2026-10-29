@@ -117,7 +117,7 @@ class LocalTools:
             'serial': emulator['serial'], 'avd': emulator['avd'], 'emulator_pid': pid,
             'emulator_stamp': process_stamp(pid), 'avd_home': emulator['avd_home'],
             'adb': emulator['adb'], 'aapt2': emulator['aapt2'],
-            'target': {'package': package, **targets().get(package, {})}}, self.agent.dir / 'emulator')
+            'target': {'package': package, **targets().get(package, {})}}, self.agent.dir / 'emulator' / emulator['serial'])
         apks = self.workspace / 'app/build/outputs/apk'
         return runtime.test_apks(apks / 'debug/app-debug.apk', apks / 'androidTest/debug/app-debug-androidTest.apk',
                                  cancelled, argument or 'normal')
