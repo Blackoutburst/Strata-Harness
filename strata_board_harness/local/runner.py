@@ -58,6 +58,8 @@ def prepare_checkout(agent, project, ticket):
         remote = git(workspace, 'ls-remote', '--heads', 'origin', branch, check=False)
         start = 'origin/' + branch if remote else default
         git(workspace, 'checkout', '--quiet', '-B', branch, start)
+    if (workspace / '.gitmodules').exists():
+        git(workspace, 'submodule', 'update', '--init', '--recursive', '--quiet', timeout=1800)
     # Local only (never committed): keep build output out of the agent's commits.
     exclude = workspace / '.git' / 'info' / 'exclude'
     exclude.parent.mkdir(exist_ok=True)
