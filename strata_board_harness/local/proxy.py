@@ -132,7 +132,10 @@ class RunProxy:
                 except (URLError, OSError) as error:
                     record.update(status=502, error=type(error).__name__, seconds=round(time.time() - started, 2))
                     owner._record(record)
-                    self.send_error(502)
+                    try:
+                        self.send_error(502)
+                    except OSError:
+                        pass  # The client already gave up waiting.
                     return
                 with response:
                     self.send_response(status)
@@ -151,6 +154,9 @@ class RunProxy:
                         self.wfile.write(b'0\r\n\r\n')
                     except (BrokenPipeError, ConnectionResetError):
                         record['client_disconnected'] = True
+                    except OSError as error:  # Upstream stalled mid-stream; the client sees a cut stream and retries.
+                        record['upstream_error'] = type(error).__name__
+                        self.close_connection = True
                 record.update(status=status, response_bytes=total, seconds=round(time.time() - started, 2))
                 owner._record(record)
                 self.close_connection = True
