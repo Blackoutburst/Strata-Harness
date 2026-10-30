@@ -222,6 +222,16 @@ class RunnerTests(unittest.TestCase):
         self.assertFalse(cold_start_failure(1, False, events))
         self.assertTrue(cold_start_failure(1, False, {'tokens': {'input': 0, 'output': 0}}))
 
+    def test_events_report_the_last_finish_reason(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'events.jsonl'
+            path.write_text('\n'.join(json.dumps(e) for e in [
+                {'type': 'step_finish', 'part': {'reason': 'tool-calls', 'tokens': {'output': 84}}},
+                {'type': 'step_finish', 'part': {'reason': 'length', 'tokens': {'output': 32000}}}]))
+            self.assertEqual(read_events(path)['finish'], 'length')
+            path.write_text('')
+            self.assertEqual(read_events(path)['finish'], '')
+
     def test_provider_outages_are_not_the_agents_fault(self):
         from strata_board_harness.local.runner import provider_outage
         self.assertTrue(provider_outage(['Service unavailable.', 'Rate limit exceeded']))

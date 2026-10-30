@@ -128,6 +128,7 @@ Run the tests yourself and iterate on real failures before you finish.''')
 
 def read_events(path):
     texts, tokens, cost, errors = [], {'input': 0, 'output': 0, 'reasoning': 0, 'cache_read': 0}, 0.0, []
+    finish = ''
     for line in path.read_text(errors='replace').splitlines() if path.exists() else []:
         try:
             event = json.loads(line)
@@ -142,10 +143,16 @@ def read_events(path):
                 tokens[name] += int(used.get(name) or 0)
             tokens['cache_read'] += int((used.get('cache') or {}).get('read') or 0)
             cost += float(part.get('cost') or 0)
+            finish = part.get('reason') or ''
         elif event.get('type') == 'error':
             errors.append(((event.get('error') or {}).get('data') or {}).get('message') or 'error')
     return {'report': texts[-1].strip() if texts else '', 'tokens': tokens, 'cost_usd': round(cost, 4),
-            'errors': errors}
+            'errors': errors, 'finish': finish}
+
+
+TRUNCATED = ('Your previous reply hit the output token limit and was cut off before it finished, so nothing in '
+             'it was applied. Continue the task from where you were. Write large files in several smaller '
+             'edits (a few hundred lines each), not in one reply.')
 
 
 OUTAGE = re.compile(r'service unavailable|overloaded|rate.?limit|too many requests|bad gateway|gateway timeout|'
@@ -286,22 +293,28 @@ def run_ticket(agent, session, ticket, log=print):
             prompt = build_prompt(agent, project, ticket, branch, feedback, default)
             code, timed_out = run_opencode(agent, workspace, prompt, run_dir, deadline)
             events = read_events(run_dir / 'events.jsonl')
-        for attempt in range(2):
-            # The engine stopped on a provider/stream error mid-task: continue the same session.
+        for attempt in range(4):
+            # The engine stopped on a provider/stream error, or a reply was cut off at the output limit: continue the same session.
             current = session_of(run_dir / 'events.jsonl')
             remaining = deadline - (time.time() - result['started_at'])
-            if timed_out or code == 0 or not events['errors'] or not current or remaining < 300:
+            truncated = events['finish'] == 'length'
+            failed = code != 0 and events['errors']
+            if timed_out or not (failed or truncated) or not current or remaining < 300:
                 break
-            log(f'[{agent.name}] engine stopped on "{events["errors"][-1][:80]}"; continuing the session')
+            if truncated:
+                log(f'[{agent.name}] reply cut off at the output token limit; continuing the session')
+                nudge = TRUNCATED
+            else:
+                log(f'[{agent.name}] engine stopped on "{events["errors"][-1][:80]}"; continuing the session')
+                nudge = 'The previous model request failed with a provider error. Continue the task from where you were.'
             (run_dir / f'events-{attempt}.jsonl').write_bytes((run_dir / 'events.jsonl').read_bytes())
-            code, timed_out = run_opencode(agent, workspace, 'The previous model request failed with a provider '
-                                           'error. Continue the task from where you were.', run_dir, int(remaining),
-                                           current)
+            code, timed_out = run_opencode(agent, workspace, nudge, run_dir, int(remaining), current)
             merged = read_events(run_dir / 'events.jsonl')
             for name, value in merged['tokens'].items():
                 events['tokens'][name] += value
             events['cost_usd'] = round(events['cost_usd'] + merged['cost_usd'], 4)
             events['report'], events['errors'] = merged['report'] or events['report'], merged['errors']
+            events['finish'] = merged['finish']
         if session_of(run_dir / 'events.jsonl'):
             sessions[ticket['id']] = session_of(run_dir / 'events.jsonl')
             write_private(sessions_path, sessions)
