@@ -1,0 +1,12 @@
+--- AttentiveOS iOS E2E playbook (the manager keeps it current) ---
+Environment: Xcode 27, your own simulator "RC-E2E iPhone 16 Pro" (iOS 27), UDID 98658F77-65C7-41AA-8E9F-5DD8DCB164DE. Never use another simulator or a device. Do not boot, erase or delete simulators yourself: `xcodebuild test` boots yours when it needs to.
+- Build: `xcodebuild -project RemoteControl.xcodeproj -scheme RemoteControl -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath build/DD CODE_SIGNING_ALLOWED=NO build`
+- Test: `xcodebuild -project RemoteControl.xcodeproj -scheme RemoteControl -destination 'platform=iOS Simulator,id=98658F77-65C7-41AA-8E9F-5DD8DCB164DE' -derivedDataPath build/DD CODE_SIGNING_ALLOWED=NO test 2>&1 | tail -80`. Add `-only-testing:<Target>/<Class>[/<test>]` while iterating. Always run the FULL suite once before handing in, and paste its summary line (Executed N tests, with F failures).
+- Keep tool output short: pipe through `tail`/`grep`, never dump whole build logs. xcresult details: `xcrun xcresulttool get test-results summary --path <xcresult>`.
+- UI tests run in a separate runner process. The app under test only learns test settings through `launchArguments`/`launchEnvironment`, read in `#if DEBUG` code only. Release behaviour must not change.
+- Identify UI elements with `accessibilityIdentifier`, not visible text (text is localized). Adding identifiers to production views is fine.
+- Waits: `waitForExistence(timeout:)` or XCTNSPredicateExpectation. Never `sleep()` as synchronization.
+- Each test launches a fresh app (`XCUIApplication().launch()` in setUp) and resets its own fake server state. Never rely on test order.
+- Failure triage: test bug (fix the test), environment limit (prove it with the exact log/xcresult line), APP bug (keep the test red and fix the app minimally). Never weaken or skip an assertion to get green. Production code must not gain diagnostic-only logging.
+- Editing project.pbxproj: change only what a new target needs, keep IDs unique, and rebuild right after. If xcodebuild cannot parse the project, revert that edit (`git checkout -- RemoteControl.xcodeproj`) and retry smaller.
+- Commit a checkpoint whenever a test class turns green. Never commit build/ or *.xcresult.
