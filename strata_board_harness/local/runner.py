@@ -329,11 +329,14 @@ def run_ticket(agent, session, ticket, log=print):
             code, timed_out = run_opencode(agent, workspace, prompt, run_dir, deadline)
             events = read_events(run_dir / 'events.jsonl')
         # Deliver what the agent left uncommitted (build output is excluded), and say so in the report.
-        leftovers = git(workspace, 'status', '--porcelain').splitlines()
+        # Build output inside a submodule (e.g. a vendored native library) dirties it without being
+        # anything the agent can commit here, so submodule working trees are not leftovers.
+        leftovers = git(workspace, 'status', '--porcelain', '--ignore-submodules=dirty').splitlines()
         if leftovers:
             git(workspace, 'add', '-A')
-            git(workspace, 'commit', '--quiet', '-m', f'{agent.name}: uncommitted changes at end of run',
-                env=engine_env(agent))
+            if subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=workspace).returncode:
+                git(workspace, 'commit', '--quiet', '-m', f'{agent.name}: uncommitted changes at end of run',
+                    env=engine_env(agent))
         untracked = [line[3:] for line in leftovers]
         new_commits = int(git(workspace, 'rev-list', '--count', f'{base}..HEAD'))
         ahead = int(git(workspace, 'rev-list', '--count', f'{default}..HEAD'))
