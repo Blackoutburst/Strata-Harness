@@ -125,7 +125,7 @@ def settle_role(call, role, package, clock, sleep, timeout=30, stable_reads=3):
 # Silent, isolated test emulators the harness may drive (serial -> AVD). Physical devices
 # and any other emulator are never authorized.
 ISOLATED_EMULATORS={'emulator-5556':'caregiver35','emulator-5558':'caregiver35b',
-                    'emulator-5560':'attentiveos35','emulator-5562':'attentiveos35b'}
+                    'emulator-5560':'attentiveos35','emulator-5562':'attentiveos35b','emulator-5564':'attentiveos35c'}
 
 
 def process_deaths(call, package):
