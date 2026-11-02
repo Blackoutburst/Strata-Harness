@@ -53,7 +53,12 @@ def prepare_checkout(agent, project, ticket):
         subprocess.run(['git', 'clone', '--quiet', repository, str(workspace)], check=True,
                        capture_output=True, text=True, timeout=1800)
     git(workspace, 'fetch', '--quiet', 'origin')
-    default = git(workspace, 'symbolic-ref', '--short', 'refs/remotes/origin/HEAD', check=False) or 'origin/main'
+    # A local clone's HEAD is whatever its owner has checked out (often a work-in-progress branch),
+    # so a `development` integration branch wins over origin/HEAD when the repository has one.
+    if git(workspace, 'rev-parse', '--verify', '--quiet', 'refs/remotes/origin/development', check=False):
+        default = 'origin/development'
+    else:
+        default = git(workspace, 'symbolic-ref', '--short', 'refs/remotes/origin/HEAD', check=False) or 'origin/main'
     if git(workspace, 'rev-parse', '--abbrev-ref', 'HEAD') != branch:
         remote = git(workspace, 'ls-remote', '--heads', 'origin', branch, check=False)
         start = 'origin/' + branch if remote else default
