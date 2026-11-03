@@ -46,7 +46,10 @@ def emulator_process(avd):
     rows = subprocess.run(['ps', '-axo', 'pid=,command='], capture_output=True, text=True, timeout=5).stdout
     for row in rows.splitlines():
         pid, _, command = row.strip().partition(' ')
-        if 'qemu-system' in command and f'-avd {avd} ' in command + ' ':
+        # Match on the executable itself: any other process whose arguments merely mention
+        # "qemu-system ... -avd <name>" (a shell watcher, a grep) must never be taken for it.
+        program = command.split(' ', 1)[0]
+        if 'qemu-system' in Path(program).name and f'-avd {avd} ' in command + ' ':
             return int(pid)
     raise RuntimeError(f'Emulator {avd} is not running')
 
