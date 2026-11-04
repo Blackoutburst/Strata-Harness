@@ -95,9 +95,11 @@ def simulator_config(spec):
     config = {'udid': udid}
     for pair in pairs:
         key, _, value = pair.partition('=')
-        if key not in ('project', 'scheme', 'helper_start', 'helper_stop', 'max_test_seconds', 'run_cap_seconds'):
+        if key not in ('project', 'scheme', 'helper_start', 'helper_stop', 'max_test_seconds', 'run_cap_seconds',
+                       'unsigned'):
             raise ValueError(f'Unknown simulator setting {key!r}')
-        config[key] = int(value) if key.endswith('seconds') else value
+        config[key] = int(value) if key.endswith('seconds') else (value in ('1', 'yes', 'true')
+                                                                  if key == 'unsigned' else value)
     if not re.fullmatch(r'[0-9A-F-]{36}', udid) or 'project' not in config or 'scheme' not in config:
         raise ValueError('--simulator needs UDID,project=...,scheme=...')
     return config

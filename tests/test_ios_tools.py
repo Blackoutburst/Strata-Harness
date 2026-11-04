@@ -56,6 +56,7 @@ class IosToolsTests(unittest.TestCase):
                                   'scheme': 'App', 'helper_start': 'scripts/a.sh', 'max_test_seconds': 240})
         with self.assertRaises(ValueError):
             simulator_config('not-a-udid,project=A,scheme=B')
+        self.assertTrue(simulator_config('9B9C2B7A-28FF-4C17-BE0F-A7D57AC05C9F,project=A,scheme=B,unsigned=1')['unsigned'])
 
 
 if __name__ == '__main__':

@@ -107,7 +107,8 @@ def build_prompt(agent, project, ticket, branch, feedback, base='origin/main'):
         parts.append('''
 ## Build and test tools (iOS)
 
-- `harness-tool build` runs `xcodebuild build-for-testing` for the app's scheme and prints a digest.
+- `harness-tool build` runs `xcodebuild build-for-testing` for the app's scheme (ad-hoc simulator signing, so
+  entitlements such as keychain groups are kept) and prints a digest.
 - `harness-tool test` erases and boots your own simulator, starts the project's host helper if it has one (and
   always stops it), runs the whole UI-test suite with per-test time limits, and prints FAIL/SKIP lines with their
   messages plus a summary line. `harness-tool test class:<Target>/<Class>` or `class:<Target>/<Class>/<test>` runs

@@ -82,7 +82,13 @@ class IosTools:
     def xcodebuild(self, action, extra=()):
         return ['xcodebuild', '-project', self.config['project'], '-scheme', self.config['scheme'],
                 '-destination', f"platform=iOS Simulator,id={self.config['udid']}",
-                '-derivedDataPath', str(self.derived), 'CODE_SIGNING_ALLOWED=NO', *extra, action]
+                '-derivedDataPath', str(self.derived), *self.signing(), *extra, action]
+
+    def signing(self):
+        # Simulator builds sign ad hoc by default (no certificate, no account), which keeps the app's
+        # entitlements: keychain access groups, app groups, extensions. Stripping signing breaks any
+        # app that uses its keychain, so it is an explicit per-project opt-out.
+        return ['CODE_SIGNING_ALLOWED=NO'] if self.config.get('unsigned') else []
 
     def run(self, command, cancelled, cap, env=None):
         log = []
