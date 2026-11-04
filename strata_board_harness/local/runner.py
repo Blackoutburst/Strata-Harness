@@ -412,8 +412,20 @@ def report_to_board(session, ticket, result):
         changes.update(status='review', evidence=summary[:20000])
     else:
         changes.update(status='blocked', blocked_reason=(result.get('error') or report)[:2000] or 'Agent run failed')
-    session.tool('update_ticket', ticket_id=current['id'], expected_version=current['version'], changes=changes,
-                 view='full')
+    try:
+        session.tool('update_ticket', ticket_id=current['id'], expected_version=current['version'], changes=changes,
+                     view='full')
+    except BoardError as error:
+        if 'claim expired' not in str(error).lower():
+            raise
+        # The lease lapsed during the run (e.g. the machine slept and the renewer could not reach the
+        # board). The run's own result is the evidence of what happened: re-claim, then report it.
+        current = session.tool('claim_ticket', ticket_id=current['id'], expected_version=current['version'],
+                               recovery_evidence=f'Run {result.get("started_at")} finished ({result["status"]}); '
+                                                 'its claim expired before the result was recorded.')
+        current = current.get('ticket', current)
+        session.tool('update_ticket', ticket_id=current['id'], expected_version=current['version'], changes=changes,
+                     view='full')
 
 
 def smoke_test(agent):
