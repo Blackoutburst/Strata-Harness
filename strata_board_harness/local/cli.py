@@ -89,12 +89,28 @@ def emulator_config(spec, sdk):
             'aapt2': str(tools[-1])}
 
 
+def simulator_config(spec):
+    """UDID,project=X.xcodeproj,scheme=S[,helper_start=script,helper_stop=script,max_test_seconds=N]"""
+    udid, *pairs = spec.split(',')
+    config = {'udid': udid}
+    for pair in pairs:
+        key, _, value = pair.partition('=')
+        if key not in ('project', 'scheme', 'helper_start', 'helper_stop', 'max_test_seconds', 'run_cap_seconds'):
+            raise ValueError(f'Unknown simulator setting {key!r}')
+        config[key] = int(value) if key.endswith('seconds') else value
+    if not re.fullmatch(r'[0-9A-F-]{36}', udid) or 'project' not in config or 'scheme' not in config:
+        raise ValueError('--simulator needs UDID,project=...,scheme=...')
+    return config
+
+
 def apply_settings(agent, args):
     config = agent.config
     if getattr(args, 'playbook', None):
         config['playbooks'] = [str(Path(p).expanduser().resolve()) for p in args.playbook]
     if getattr(args, 'emulator', None):
         config.setdefault('tools', {})['emulator'] = emulator_config(args.emulator, (config.get('env') or {}).get('ANDROID_HOME'))
+    if getattr(args, 'simulator', None):
+        config.setdefault('tools', {})['simulator'] = simulator_config(args.simulator)
     if getattr(args, 'build_tools', False):
         config.setdefault('tools', {})
     if getattr(args, 'max_minutes', None):
@@ -224,11 +240,14 @@ def main(argv=None):
     add.add_argument('--playbook', action='append', help='standing playbook file added to every prompt (repeatable)')
     add.add_argument('--emulator', help='SERIAL:AVD[:AVD_HOME] of this agent\'s own emulator for `harness-tool test`')
     add.add_argument('--build-tools', action='store_true', help='give the agent `harness-tool build` (no emulator)')
+    add.add_argument('--simulator', help='UDID,project=...,scheme=...[,helper_start=...,helper_stop=...]: '
+                                       'this agent\'s own iOS simulator for `harness-tool build/test`')
     change = agents.add_parser('set', help='change an existing agent')
     change.add_argument('name')
     change.add_argument('--playbook', action='append')
     change.add_argument('--emulator')
     change.add_argument('--build-tools', action='store_true')
+    change.add_argument('--simulator')
     change.add_argument('--max-minutes', type=int)
     change.add_argument('--instructions')
     change.add_argument('--env', action='append', metavar='KEY=VALUE')

@@ -1,0 +1,12 @@
+--- AttentiveOS iOS E2E playbook (the manager keeps it current) ---
+Environment: Xcode 27 and your own simulator, which the harness owns. Never use another simulator or a device. Direct xcodebuild, simctl and the uitest-agent scripts are refused.
+- Build: `harness-tool build` (build-for-testing, short digest).
+- Test: `harness-tool test class:<Target>/<Class>` (or `.../<test>`) while iterating, and `harness-tool test` for the full suite once before handing in. Each run erases and boots the simulator (clean state: keychain, app group, AutoFill enablement all reset), starts the project helper from its scripts and stops it afterwards, and limits every test to 5 minutes (a hang shows as "exceeded execution time allowance"). The digest lists FAIL/SKIP lines with their messages and a summary line; `harness-tool logs <job>:<page>` pages the full log.
+- Keep tool output short: pipe through `tail`/`grep`, never dump whole build logs. xcresult details: `xcrun xcresulttool get test-results summary --path <xcresult>`.
+- UI tests run in a separate runner process. The app under test only learns test settings through `launchArguments`/`launchEnvironment`, read in `#if DEBUG` code only. Release behaviour must not change.
+- Identify UI elements with `accessibilityIdentifier`, not visible text (text is localized). Adding identifiers to production views is fine.
+- Waits: `waitForExistence(timeout:)` or XCTNSPredicateExpectation. Never `sleep()` as synchronization.
+- Each test launches a fresh app (`XCUIApplication().launch()` in setUp) and resets its own fake server state. Never rely on test order.
+- Failure triage: test bug (fix the test), environment limit (prove it with the exact log/xcresult line), APP bug (keep the test red and fix the app minimally). Never weaken or skip an assertion to get green. Production code must not gain diagnostic-only logging.
+- Editing project.pbxproj: change only what a new target needs, keep IDs unique, and rebuild right after. If xcodebuild cannot parse the project, revert that edit (`git checkout -- RemoteControl.xcodeproj`) and retry smaller.
+- Commit a checkpoint whenever a test class turns green. Never commit build/ or *.xcresult.

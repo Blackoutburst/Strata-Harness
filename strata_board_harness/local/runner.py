@@ -103,7 +103,19 @@ def build_prompt(agent, project, ticket, branch, feedback, base='origin/main'):
         parts.append('\n## Discussion on this task (oldest first; includes manager review feedback)\n\n' + '\n'.join(feedback))
     if agent.config.get('instructions'):
         parts.append('\n## Your standing instructions\n\n' + agent.config['instructions'])
-    if agent.config.get('tools'):
+    if (agent.config.get('tools') or {}).get('simulator'):
+        parts.append('''
+## Build and test tools (iOS)
+
+- `harness-tool build` runs `xcodebuild build-for-testing` for the app's scheme and prints a digest.
+- `harness-tool test` erases and boots your own simulator, starts the project's host helper if it has one (and
+  always stops it), runs the whole UI-test suite with per-test time limits, and prints FAIL/SKIP lines with their
+  messages plus a summary line. `harness-tool test class:<Target>/<Class>` or `class:<Target>/<Class>/<test>` runs
+  only that class or test: iterate with it, then run the full suite once before you hand in.
+- `harness-tool logs <job_id>:<page>` pages through the full xcodebuild log. Direct xcodebuild, simctl and the
+  helper scripts are refused: the harness owns the simulator.
+Run the tests yourself and iterate on real failures before you finish.''')
+    elif agent.config.get('tools'):
         parts.append('''
 ## Build and test tools
 

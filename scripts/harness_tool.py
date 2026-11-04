@@ -32,7 +32,8 @@ def digest(result):
             if line.startswith('INSTRUMENTATION_STATUS: stack='):
                 picked += lines[index:index + 6]
         picked += [line for line in lines if 'E2E_DUMP' in line or 'AndroidRuntime' in line][-60:]
-        picked += [line for line in lines if line.startswith(('Tests run:', 'OK (', 'FAILURES'))]
+        picked += [line for line in lines if line.startswith(('Tests run:', 'OK (', 'FAILURES', 'FAIL ', 'SKIP ',
+                                                               'Run stopped:', '[helper_', 'No test results'))]
     else:
         picked += [line for line in lines if line.startswith(('e: ', 'w: file')) or 'error:' in line
                    or 'What went wrong' in line or 'FAILED' in line][:80]

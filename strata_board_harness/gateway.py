@@ -36,7 +36,8 @@ class JobGateway:
     def submit(self, operation, argument=None):
         if operation not in self.handlers: raise ValueError('Operation outside selected scope')
         test_argument = (operation == 'test' and isinstance(argument,str) and (argument=='denied' or
-            __import__('re').fullmatch(r'class:tech\.primal\.attentive_os\.[a-z][a-z0-9_]*\.[A-Za-z0-9_.]+',argument)))
+            __import__('re').fullmatch(r'class:tech\.primal\.attentive_os\.[a-z][a-z0-9_]*\.[A-Za-z0-9_.]+',argument)
+            or __import__('re').fullmatch(r'class:[A-Za-z0-9_]+/[A-Za-z0-9_]+(?:/[A-Za-z0-9_]+(?:\(\))?)?',argument)))
         if operation == 'commit' and not (isinstance(argument, str) and 10 <= len(argument) <= 2048
                                           and not argument.startswith('-')):
             # A flag such as --help is not a message; it once became a commit subject.

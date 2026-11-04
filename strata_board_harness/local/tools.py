@@ -61,6 +61,9 @@ class LocalTools:
         handlers = {'build': self.build}
         if self.config.get('emulator'):
             handlers['test'] = self.test
+        if self.config.get('simulator'):
+            from .ios_tools import IosTools
+            handlers = IosTools(agent, workspace, run_dir, env).handlers()
         self.gateway = JobGateway(Path(run_dir) / 'jobs', handlers)
 
     def start(self, bin_dir):
