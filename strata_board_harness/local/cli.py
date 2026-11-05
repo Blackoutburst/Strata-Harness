@@ -114,7 +114,8 @@ def apply_settings(agent, args):
     if getattr(args, 'simulator', None):
         config.setdefault('tools', {})['simulator'] = simulator_config(args.simulator)
     if getattr(args, 'build_tools', False):
-        config.setdefault('tools', {})
+        # A non-empty block: an empty one reads as "no tools" and the agent never got `harness-tool build`.
+        config.setdefault('tools', {})['build'] = True
     if getattr(args, 'max_minutes', None):
         config['max_minutes'] = args.max_minutes
     if getattr(args, 'instructions', None):
